@@ -26,8 +26,8 @@ namespace QLDSV_HTC.Forms
             this.txtTenDangNhap = new System.Windows.Forms.TextBox();
             this.lblMatKhau = new System.Windows.Forms.Label();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
-            this.btnDangNhap = new System.Windows.Forms.Button();
-            this.btnThoat = new System.Windows.Forms.Button();
+            this.btnDangNhap = new QLDSV_HTC.UI.ModernButton();
+            this.btnThoat = new QLDSV_HTC.UI.ModernButton();
             this.lblGoiY = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -90,7 +90,6 @@ namespace QLDSV_HTC.Forms
             this.btnDangNhap.Size = new System.Drawing.Size(129, 49);
             this.btnDangNhap.TabIndex = 4;
             this.btnDangNhap.Text = "Đăng nhập";
-            this.btnDangNhap.UseVisualStyleBackColor = true;
             this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click);
             // 
             // btnThoat
@@ -101,7 +100,6 @@ namespace QLDSV_HTC.Forms
             this.btnThoat.Size = new System.Drawing.Size(129, 49);
             this.btnThoat.TabIndex = 5;
             this.btnThoat.Text = "Thoát";
-            this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // lblGoiY
@@ -149,8 +147,8 @@ namespace QLDSV_HTC.Forms
         private System.Windows.Forms.TextBox txtTenDangNhap;
         private System.Windows.Forms.Label lblMatKhau;
         private System.Windows.Forms.TextBox txtMatKhau;
-        private System.Windows.Forms.Button btnDangNhap;
-        private System.Windows.Forms.Button btnThoat;
+        private QLDSV_HTC.UI.ModernButton btnDangNhap;
+        private QLDSV_HTC.UI.ModernButton btnThoat;
         private System.Windows.Forms.Label lblGoiY;
     }
 }

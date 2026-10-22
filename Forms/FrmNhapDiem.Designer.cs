@@ -34,8 +34,8 @@ namespace QLDSV_HTC.Forms
             this.colCK = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTongKet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.btnLuu = new System.Windows.Forms.Button();
-            this.btnHuy = new System.Windows.Forms.Button();
+            this.btnLuu = new QLDSV_HTC.UI.ModernButton();
+            this.btnHuy = new QLDSV_HTC.UI.ModernButton();
             this.lblHuongDan = new System.Windows.Forms.Label();
             this.lblThongTin = new System.Windows.Forms.Label();
             this.pnlTop = new System.Windows.Forms.Panel();
@@ -45,7 +45,7 @@ namespace QLDSV_HTC.Forms
             this.cboHocKy = new System.Windows.Forms.ComboBox();
             this.lblLopTinChi = new System.Windows.Forms.Label();
             this.cboLopTinChi = new System.Windows.Forms.ComboBox();
-            this.btnTai = new System.Windows.Forms.Button();
+            this.btnTai = new QLDSV_HTC.UI.ModernButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.pnlBottom.SuspendLayout();
             this.pnlTop.SuspendLayout();
@@ -132,7 +132,6 @@ namespace QLDSV_HTC.Forms
             this.btnLuu.Size = new System.Drawing.Size(100, 32);
             this.btnLuu.Text = "Lưu điểm";
             this.btnLuu.TabIndex = 7;
-            this.btnLuu.UseVisualStyleBackColor = true;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // btnHuy
             this.btnHuy.Name = "btnHuy";
@@ -140,7 +139,6 @@ namespace QLDSV_HTC.Forms
             this.btnHuy.Size = new System.Drawing.Size(120, 32);
             this.btnHuy.Text = "Hủy thay đổi";
             this.btnHuy.TabIndex = 8;
-            this.btnHuy.UseVisualStyleBackColor = true;
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // lblHuongDan
             this.lblHuongDan.Name = "lblHuongDan";
@@ -207,7 +205,6 @@ namespace QLDSV_HTC.Forms
             this.btnTai.Size = new System.Drawing.Size(130, 32);
             this.btnTai.Text = "Tải danh sách";
             this.btnTai.TabIndex = 6;
-            this.btnTai.UseVisualStyleBackColor = true;
             this.btnTai.Click += new System.EventHandler(this.btnTai_Click);
             // this
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -258,8 +255,8 @@ namespace QLDSV_HTC.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn colCK;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTongKet;
         private System.Windows.Forms.Panel pnlBottom;
-        private System.Windows.Forms.Button btnLuu;
-        private System.Windows.Forms.Button btnHuy;
+        private QLDSV_HTC.UI.ModernButton btnLuu;
+        private QLDSV_HTC.UI.ModernButton btnHuy;
         private System.Windows.Forms.Label lblHuongDan;
         private System.Windows.Forms.Label lblThongTin;
         private System.Windows.Forms.Panel pnlTop;
@@ -269,6 +266,6 @@ namespace QLDSV_HTC.Forms
         private System.Windows.Forms.ComboBox cboHocKy;
         private System.Windows.Forms.Label lblLopTinChi;
         private System.Windows.Forms.ComboBox cboLopTinChi;
-        private System.Windows.Forms.Button btnTai;
+        private QLDSV_HTC.UI.ModernButton btnTai;
     }
 }

@@ -32,13 +32,13 @@ namespace QLDSV_HTC.Forms
             this.pnlTim = new System.Windows.Forms.Panel();
             this.lblTim = new System.Windows.Forms.Label();
             this.txtTim = new System.Windows.Forms.TextBox();
-            this.btnTim = new System.Windows.Forms.Button();
+            this.btnTim = new QLDSV_HTC.UI.ModernButton();
             this.pnlNut = new System.Windows.Forms.Panel();
-            this.btnNhapMoi = new System.Windows.Forms.Button();
-            this.btnThem = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
-            this.btnTaiLai = new System.Windows.Forms.Button();
+            this.btnNhapMoi = new QLDSV_HTC.UI.ModernButton();
+            this.btnThem = new QLDSV_HTC.UI.ModernButton();
+            this.btnSua = new QLDSV_HTC.UI.ModernButton();
+            this.btnXoa = new QLDSV_HTC.UI.ModernButton();
+            this.btnTaiLai = new QLDSV_HTC.UI.ModernButton();
             this.pnlNhap = new System.Windows.Forms.Panel();
             this.lblMaMH = new System.Windows.Forms.Label();
             this.txtMaMH = new System.Windows.Forms.TextBox();
@@ -131,7 +131,6 @@ namespace QLDSV_HTC.Forms
             this.btnTim.Size = new System.Drawing.Size(100, 32);
             this.btnTim.Text = "Tìm";
             this.btnTim.TabIndex = 15;
-            this.btnTim.UseVisualStyleBackColor = true;
             this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
             // pnlNut
             this.pnlNut.Name = "pnlNut";
@@ -144,7 +143,6 @@ namespace QLDSV_HTC.Forms
             this.btnNhapMoi.Size = new System.Drawing.Size(100, 32);
             this.btnNhapMoi.Text = "Nhập mới";
             this.btnNhapMoi.TabIndex = 8;
-            this.btnNhapMoi.UseVisualStyleBackColor = true;
             this.btnNhapMoi.Click += new System.EventHandler(this.btnNhapMoi_Click);
             // btnThem
             this.btnThem.Name = "btnThem";
@@ -152,7 +150,6 @@ namespace QLDSV_HTC.Forms
             this.btnThem.Size = new System.Drawing.Size(100, 32);
             this.btnThem.Text = "Thêm";
             this.btnThem.TabIndex = 9;
-            this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // btnSua
             this.btnSua.Name = "btnSua";
@@ -160,7 +157,6 @@ namespace QLDSV_HTC.Forms
             this.btnSua.Size = new System.Drawing.Size(100, 32);
             this.btnSua.Text = "Sửa";
             this.btnSua.TabIndex = 10;
-            this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // btnXoa
             this.btnXoa.Name = "btnXoa";
@@ -168,7 +164,6 @@ namespace QLDSV_HTC.Forms
             this.btnXoa.Size = new System.Drawing.Size(100, 32);
             this.btnXoa.Text = "Xóa";
             this.btnXoa.TabIndex = 11;
-            this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // btnTaiLai
             this.btnTaiLai.Name = "btnTaiLai";
@@ -176,7 +171,6 @@ namespace QLDSV_HTC.Forms
             this.btnTaiLai.Size = new System.Drawing.Size(100, 32);
             this.btnTaiLai.Text = "Tải lại";
             this.btnTaiLai.TabIndex = 12;
-            this.btnTaiLai.UseVisualStyleBackColor = true;
             this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
             // pnlNhap
             this.pnlNhap.Name = "pnlNhap";
@@ -295,13 +289,13 @@ namespace QLDSV_HTC.Forms
         private System.Windows.Forms.Panel pnlTim;
         private System.Windows.Forms.Label lblTim;
         private System.Windows.Forms.TextBox txtTim;
-        private System.Windows.Forms.Button btnTim;
+        private QLDSV_HTC.UI.ModernButton btnTim;
         private System.Windows.Forms.Panel pnlNut;
-        private System.Windows.Forms.Button btnNhapMoi;
-        private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.Button btnSua;
-        private System.Windows.Forms.Button btnXoa;
-        private System.Windows.Forms.Button btnTaiLai;
+        private QLDSV_HTC.UI.ModernButton btnNhapMoi;
+        private QLDSV_HTC.UI.ModernButton btnThem;
+        private QLDSV_HTC.UI.ModernButton btnSua;
+        private QLDSV_HTC.UI.ModernButton btnXoa;
+        private QLDSV_HTC.UI.ModernButton btnTaiLai;
         private System.Windows.Forms.Panel pnlNhap;
         private System.Windows.Forms.Label lblMaMH;
         private System.Windows.Forms.TextBox txtMaMH;

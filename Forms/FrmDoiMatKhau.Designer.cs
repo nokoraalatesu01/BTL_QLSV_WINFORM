@@ -27,8 +27,8 @@ namespace QLDSV_HTC.Forms
             this.txtMoi = new System.Windows.Forms.TextBox();
             this.lblXacNhan = new System.Windows.Forms.Label();
             this.txtXacNhan = new System.Windows.Forms.TextBox();
-            this.btnDoi = new System.Windows.Forms.Button();
-            this.btnHuy = new System.Windows.Forms.Button();
+            this.btnDoi = new QLDSV_HTC.UI.ModernButton();
+            this.btnHuy = new QLDSV_HTC.UI.ModernButton();
             this.SuspendLayout();
             // lblCu
             this.lblCu.Name = "lblCu";
@@ -75,7 +75,6 @@ namespace QLDSV_HTC.Forms
             this.btnDoi.Size = new System.Drawing.Size(110, 32);
             this.btnDoi.Text = "Đổi mật khẩu";
             this.btnDoi.TabIndex = 6;
-            this.btnDoi.UseVisualStyleBackColor = true;
             this.btnDoi.Click += new System.EventHandler(this.btnDoi_Click);
             // btnHuy
             this.btnHuy.Name = "btnHuy";
@@ -83,7 +82,6 @@ namespace QLDSV_HTC.Forms
             this.btnHuy.Size = new System.Drawing.Size(100, 32);
             this.btnHuy.Text = "Hủy";
             this.btnHuy.TabIndex = 7;
-            this.btnHuy.UseVisualStyleBackColor = true;
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // this
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -117,7 +115,7 @@ namespace QLDSV_HTC.Forms
         private System.Windows.Forms.TextBox txtMoi;
         private System.Windows.Forms.Label lblXacNhan;
         private System.Windows.Forms.TextBox txtXacNhan;
-        private System.Windows.Forms.Button btnDoi;
-        private System.Windows.Forms.Button btnHuy;
+        private QLDSV_HTC.UI.ModernButton btnDoi;
+        private QLDSV_HTC.UI.ModernButton btnHuy;
     }
 }

@@ -1,25 +1,31 @@
 using Microsoft.Data.SqlClient;
+using QLDSV_HTC.UI;
 
 namespace QLDSV_HTC.Helpers;
 
 /// <summary>Tiện ích giao diện WinForms dùng chung.</summary>
 public static class UiHelper
 {
-    public static DataGridView CreateGrid() => new()
+    public static DataGridView CreateGrid()
     {
-        Dock = DockStyle.Fill,
-        ReadOnly = true,
-        AllowUserToAddRows = false,
-        AllowUserToDeleteRows = false,
-        AllowUserToResizeRows = false,
-        AutoGenerateColumns = false,
-        MultiSelect = false,
-        SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-        AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-        RowHeadersVisible = false,
-        BackgroundColor = Color.White,
-        BorderStyle = BorderStyle.None,
-    };
+        var grid = new DataGridView
+        {
+            Dock = DockStyle.Fill,
+            ReadOnly = true,
+            AllowUserToAddRows = false,
+            AllowUserToDeleteRows = false,
+            AllowUserToResizeRows = false,
+            AutoGenerateColumns = false,
+            MultiSelect = false,
+            SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+            RowHeadersVisible = false,
+            BackgroundColor = Palette.Surface,
+            BorderStyle = BorderStyle.None,
+        };
+        Theme.StyleGrid(grid);
+        return grid;
+    }
 
     public static DataGridViewTextBoxColumn AddColumn(
         DataGridView grid, string property, string header, float fillWeight = 100, string? format = null)
@@ -42,7 +48,7 @@ public static class UiHelper
     {
         Text = text,
         AutoSize = true,
-        MinimumSize = new Size(96, 32),
+        MinimumSize = new Size(96, 34),
         Margin = new Padding(4),
     };
 
@@ -52,6 +58,7 @@ public static class UiHelper
         combo.DisplayMember = displayMember;
         combo.ValueMember = valueMember;
         combo.DataSource = dataSource;
+        combo.ForeColor = Palette.Text;
     }
 
     public static void SetNumeric(NumericUpDown numeric, int value) =>
@@ -74,14 +81,23 @@ public static class UiHelper
         return item;
     }
 
+    // ------------------------------------------------------------------
+    // Hộp thoại theo phong cách riêng
+    // ------------------------------------------------------------------
+
+    private static Form? Owner => Form.ActiveForm is { IsDisposed: false } f ? f : null;
+
     public static void ShowInfo(string message) =>
-        MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        FrmThongBao.Show("Thông báo", message, ThongBaoKieu.Info, Owner);
+
+    public static void ShowSuccess(string message) =>
+        FrmThongBao.Show("Thành công", message, ThongBaoKieu.Success, Owner);
 
     public static void ShowWarning(string message) =>
-        MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        FrmThongBao.Show("Cảnh báo", message, ThongBaoKieu.Warning, Owner);
 
     public static bool Confirm(string message) =>
-        MessageBox.Show(message, "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+        FrmThongBao.Confirm("Xác nhận", message, Owner);
 
     /// <summary>Hiển thị lỗi thân thiện theo loại ngoại lệ.</summary>
     public static void ShowError(Exception ex)
@@ -89,21 +105,22 @@ public static class UiHelper
         switch (ex)
         {
             case BusinessException:
-                MessageBox.Show(ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                FrmThongBao.Show("Thông báo", ex.Message, ThongBaoKieu.Warning, Owner);
                 break;
             case UnauthorizedAccessException:
-                MessageBox.Show(ex.Message, "Không đủ quyền", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                FrmThongBao.Show("Không đủ quyền", ex.Message, ThongBaoKieu.Error, Owner);
                 break;
             case SqlException sql:
-                MessageBox.Show(
-                    $"Lỗi cơ sở dữ liệu (mã {sql.Number}): {sql.Message}\n\n" +
+                FrmThongBao.Show(
+                    "Lỗi cơ sở dữ liệu",
+                    $"Mã lỗi {sql.Number}: {sql.Message}\n\n" +
                     "Kiểm tra SQL Server đã chạy, chuỗi kết nối trong appsettings.json, " +
                     "và đã chạy file Database/QLDSV_HTC.sql.",
-                    "Lỗi cơ sở dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ThongBaoKieu.Error, Owner);
                 break;
             default:
-                MessageBox.Show("Đã xảy ra lỗi không mong muốn: " + ex.Message,
-                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FrmThongBao.Show("Lỗi", "Đã xảy ra lỗi không mong muốn: " + ex.Message,
+                    ThongBaoKieu.Error, Owner);
                 break;
         }
     }

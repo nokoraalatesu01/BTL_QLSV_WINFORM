@@ -480,3 +480,7 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Local database connection config
+Helpers/DataBaseProcess.cs
+**/DataBaseProcess.cs

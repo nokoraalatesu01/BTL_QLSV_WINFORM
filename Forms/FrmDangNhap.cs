@@ -8,48 +8,45 @@ namespace QLDSV_HTC.Forms;
 
 public partial class FrmDangNhap : BaseForm
 {
-    public partial class FrmDangNhap : Form
+    public FrmDangNhap()
     {
-        public FrmDangNhap()
+        InitializeComponent();
+    }
+
+    private void btnDangNhap_Click(object sender, EventArgs e)
+    {
+        try
         {
-            InitializeComponent();
+            if (string.IsNullOrWhiteSpace(this.txtTenDangNhap.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên đăng nhập!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.txtTenDangNhap.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(this.txtMatKhau.Text))
+            {
+                MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.txtMatKhau.Focus();
+                return;
+            }
+
+            AuthBLL.DangNhap(this.txtTenDangNhap.Text.Trim(), this.txtMatKhau.Text);
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
-
-        private void btnDangNhap_Click(object sender, EventArgs e)
+        catch (Exception ex)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(this.txtTenDangNhap.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập tên đăng nhập!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    this.txtTenDangNhap.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(this.txtMatKhau.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    this.txtMatKhau.Focus();
-                    return;
-                }
-
-                AuthBLL.DangNhap(this.txtTenDangNhap.Text.Trim(), this.txtMatKhau.Text);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            MessageBox.Show(ex.Message, "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    }
 
-        private void btnThoat_Click(object sender, EventArgs e)
+    private void btnThoat_Click(object sender, EventArgs e)
+    {
+        if (MessageBox.Show("Bạn có muốn thoát chương trình không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
         {
-            if (MessageBox.Show("Bạn có muốn thoát chương trình không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                this.DialogResult = DialogResult.Cancel;
-                this.Close();
-            }
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

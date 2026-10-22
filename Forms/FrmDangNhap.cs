@@ -11,6 +11,15 @@ public partial class FrmDangNhap : BaseForm
     public FrmDangNhap()
     {
         InitializeComponent();
+        try
+        {
+            var logoPath = System.IO.Path.Combine(AppContext.BaseDirectory, "GUIMage", "LogoUTC.png");
+            if (System.IO.File.Exists(logoPath))
+                this.picLogo.Image = System.Drawing.Image.FromFile(logoPath);
+        }
+        catch
+        {
+        }
     }
 
     private void btnDangNhap_Click(object sender, EventArgs e)

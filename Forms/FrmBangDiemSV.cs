@@ -3,8 +3,13 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using QLDSV_HTC.BLL;
+using QLDSV_HTC.Helpers;
+using QLDSV_HTC.UI;
 
-namespace QLDSV_HTC.Forms
+namespace QLDSV_HTC.Forms;
+
+/// <summary>Sinh viên xem thông tin và bảng điểm của chính mình (chỉ đọc).</summary>
+public partial class FrmBangDiemSV : BaseForm
 {
     /// <summary>Sinh viên xem thông tin và bảng điểm của chính mình (chỉ đọc).</summary>
     public partial class FrmBangDiemSV : Form

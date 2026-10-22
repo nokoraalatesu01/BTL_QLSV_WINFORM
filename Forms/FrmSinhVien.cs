@@ -4,8 +4,11 @@ using System.Windows.Forms;
 using QLDSV_HTC.BLL;
 using QLDSV_HTC.Helpers;
 using QLDSV_HTC.Models;
+using QLDSV_HTC.UI;
 
-namespace QLDSV_HTC.Forms
+namespace QLDSV_HTC.Forms;
+
+public partial class FrmSinhVien : BaseForm
 {
     public partial class FrmSinhVien : Form
     {

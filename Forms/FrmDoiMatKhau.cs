@@ -1,8 +1,12 @@
 using System;
 using System.Windows.Forms;
 using QLDSV_HTC.BLL;
+using QLDSV_HTC.Helpers;
+using QLDSV_HTC.UI;
 
-namespace QLDSV_HTC.Forms
+namespace QLDSV_HTC.Forms;
+
+public partial class FrmDoiMatKhau : BaseForm
 {
     public partial class FrmDoiMatKhau : Form
     {

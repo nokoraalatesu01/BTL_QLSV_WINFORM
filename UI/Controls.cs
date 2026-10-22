@@ -259,7 +259,8 @@ public enum NavIcon
     NhapDiem,
     BangDiem,
     DoiMatKhau,
-    Logout
+    Logout,
+    DangXuat = Logout
 }
 
 /// <summary>Nút điều hướng trên sidebar UTC: icon vector + nhãn + trạng thái active (navy/blue).</summary>

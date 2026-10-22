@@ -62,10 +62,9 @@ namespace QLDSV_HTC.Forms
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.AllowUserToResizeRows = false;
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv.BackgroundColor = System.Drawing.Color.White;
-            this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.ColumnHeadersHeight = 29;
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.dgv.Location = new System.Drawing.Point(0, 370);
             this.dgv.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgv.MultiSelect = false;
@@ -144,6 +143,8 @@ namespace QLDSV_HTC.Forms
             this.pnlNut.Controls.Add(this.btnXoa);
             this.pnlNut.Controls.Add(this.btnTaiLai);
             this.pnlNut.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNut.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            this.pnlNut.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.pnlNut.Location = new System.Drawing.Point(0, 236);
             this.pnlNut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlNut.Name = "pnlNut";
@@ -217,6 +218,8 @@ namespace QLDSV_HTC.Forms
             this.pnlNhap.Controls.Add(this.lblChuyenMon);
             this.pnlNhap.Controls.Add(this.txtChuyenMon);
             this.pnlNhap.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNhap.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            this.pnlNhap.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.pnlNhap.Location = new System.Drawing.Point(0, 0);
             this.pnlNhap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlNhap.Name = "pnlNhap";

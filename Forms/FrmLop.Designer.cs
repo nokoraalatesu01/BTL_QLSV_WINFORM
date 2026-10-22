@@ -59,9 +59,8 @@ namespace QLDSV_HTC.Forms
             this.dgv.AllowUserToResizeRows = false;
             this.dgv.AutoGenerateColumns = false;
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv.BackgroundColor = System.Drawing.Color.White;
-            this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.dgv.MultiSelect = false;
             this.dgv.ReadOnly = true;
             this.dgv.RowHeadersVisible = false;
@@ -126,6 +125,8 @@ namespace QLDSV_HTC.Forms
             // pnlNut
             this.pnlNut.Name = "pnlNut";
             this.pnlNut.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNut.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            this.pnlNut.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.pnlNut.Size = new System.Drawing.Size(1034, 44);
             this.pnlNut.TabIndex = 1;
             // btnNhapMoi
@@ -166,6 +167,8 @@ namespace QLDSV_HTC.Forms
             // pnlNhap
             this.pnlNhap.Name = "pnlNhap";
             this.pnlNhap.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNhap.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            this.pnlNhap.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.pnlNhap.Size = new System.Drawing.Size(1034, 86);
             this.pnlNhap.TabIndex = 0;
             // lblMaLop
@@ -224,6 +227,7 @@ namespace QLDSV_HTC.Forms
             this.MinimumSize = new System.Drawing.Size(860, 520);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Quản lý lớp";
+            this.Padding = new System.Windows.Forms.Padding(16);
             this.Name = "FrmLop";
             this.Load += new System.EventHandler(this.FrmLop_Load);
             this.Shown += new System.EventHandler(this.FrmLop_Shown);

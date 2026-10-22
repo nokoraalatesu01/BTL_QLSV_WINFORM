@@ -1,17 +1,32 @@
-namespace BTL_QLSV_WINFORM
+using QLDSV_HTC.Forms;
+using QLDSV_HTC.Helpers;
+
+namespace QLDSV_HTC;
+
+internal static class Program
 {
-    internal static class Program
+    [STAThread]
+    private static void Main()
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        ApplicationConfiguration.Initialize();
+
+        // Lỗi không lường trước trên giao diện: báo cho người dùng thay vì làm sập chương trình.
+        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+        Application.ThreadException += (_, e) => UiHelper.ShowError(e.Exception);
+
+        while (true)
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            using (var dangNhap = new FrmDangNhap())
+            {
+                if (dangNhap.ShowDialog() != DialogResult.OK)
+                    return;
+            }
+
+            using var main = new FrmMain();
+            Application.Run(main);
+
+            if (!main.DangXuat)
+                return;
         }
     }
 }

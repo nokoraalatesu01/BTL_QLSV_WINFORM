@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using QLDSV_HTC.BLL;
+using QLDSV_HTC.Helpers;
 
 namespace QLDSV_HTC.Forms
 {
@@ -17,6 +18,14 @@ namespace QLDSV_HTC.Forms
         {
             this.TaiHinhAnhGiaoDien();
             this.CanGiuaGiaoDien();
+        }
+
+        /// <summary>Enter ở ô tên đăng nhập → nhảy sang ô mật khẩu; Enter ở ô mật khẩu → đăng nhập (AcceptButton).</summary>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (EnterNavigation.TryMoveNext(this, keyData))
+                return true;
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void FrmDangNhap_Resize(object sender, EventArgs e)
@@ -145,7 +154,7 @@ namespace QLDSV_HTC.Forms
                 "• pgv : Phòng giáo vụ / Quản trị viên\n" +
                 "• khoa_cntt : Giảng viên Khoa CNTT\n" +
                 "• khoa_vt : Giảng viên Khoa Vận tải\n" +
-                "• N21CN001 : Sinh viên\n\n" +
+                "• 241230001 : Sinh viên\n\n" +
                 "Nếu gặp vấn đề trong quá trình đăng nhập, xin vui lòng liên hệ bộ phận hỗ trợ kỹ thuật.",
                 "Hướng dẫn & Trợ giúp",
                 MessageBoxButtons.OK,

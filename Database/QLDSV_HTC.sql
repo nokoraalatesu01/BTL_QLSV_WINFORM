@@ -198,7 +198,7 @@ GO
      khoa_cntt  -> Khoa CNTT (KHOA)
      khoa_vt    -> Khoa VT   (KHOA)
      GV001 ... GV005 (mã giảng viên) -> Giảng viên (GV)
-     N21CN001, N21VT001, ... (mã sinh viên) -> Sinh viên (SV)
+     241230001, 241230008, ... (mã sinh viên) -> Sinh viên (SV)
    ===================================================================== */
 USE QLDSV_HTC;
 GO
@@ -224,20 +224,20 @@ INSERT INTO Lop (MALOP, TENLOP, KHOAHOC, MAKHOA) VALUES
 /* -------------------------- SINHVIEN -------------------------- */
 -- GIOITINH: N'Nam' hoặc N'Nữ'
 INSERT INTO Sinhvien (MASV, HO, TEN, MALOP, GIOITINH, DIACHI, NGAYSINH, DANGHIHOC) VALUES
-(N'N21CN001', N'Nguyễn Văn', N'An',     N'D21CNPM1', N'Nam', N'Hà Nội',     '2003-02-14', 0),
-(N'N21CN002', N'Trần Thị',   N'Bình',   N'D21CNPM1', N'Nữ', N'Hải Phòng',  '2003-05-21', 0),
-(N'N21CN003', N'Lê Hoàng',   N'Cường',  N'D21CNPM1', N'Nam', N'Nam Định',   '2003-09-03', 0),
-(N'N21CN004', N'Phạm Minh',  N'Dũng',   N'D21HTTT1', N'Nam', N'Thái Bình',  '2003-11-30', 0),
-(N'N21CN005', N'Hoàng Thị',  N'Hà',     N'D21HTTT1', N'Nữ', N'Hà Nam',     '2003-01-17', 0),
-(N'N22CN001', N'Vũ Đức',     N'Huy',    N'D22CNPM1', N'Nam', N'Bắc Ninh',   '2004-04-08', 0),
-(N'N22CN002', N'Đặng Thu',   N'Hương',  N'D22CNPM1', N'Nữ', N'Hưng Yên',   '2004-07-25', 0),
-(N'N21VT001', N'Bùi Quang',  N'Khải',   N'D21VT01',  N'Nam', N'Hà Nội',     '2003-03-12', 0),
-(N'N21VT002', N'Đỗ Thị',     N'Lan',    N'D21VT01',  N'Nữ', N'Vĩnh Phúc',  '2003-06-19', 0),
-(N'N21VT003', N'Ngô Văn',    N'Long',   N'D21VT01',  N'Nam', N'Thanh Hóa',  '2003-10-05', 0),
-(N'N22VT001', N'Phan Thanh', N'Mai',    N'D22VT01',  N'Nữ', N'Nghệ An',    '2004-02-28', 0),
-(N'N22VT002', N'Lý Gia',     N'Nam',    N'D22VT01',  N'Nam', N'Quảng Ninh', '2004-08-16', 0),
-(N'N22VT003', N'Trương Hải', N'Phong',  N'D22DTVT1', N'Nam', N'Hà Tĩnh',    '2004-12-01', 0),
-(N'N22VT004', N'Dương Thị',  N'Quỳnh',  N'D22DTVT1', N'Nữ', N'Hà Nội',     '2004-09-09', 0);
+(N'241230001', N'Nguyễn Văn', N'An',     N'D21CNPM1', N'Nam', N'Hà Nội',     '2003-02-14', 0),
+(N'241230002', N'Trần Thị',   N'Bình',   N'D21CNPM1', N'Nữ', N'Hải Phòng',  '2003-05-21', 0),
+(N'241230003', N'Lê Hoàng',   N'Cường',  N'D21CNPM1', N'Nam', N'Nam Định',   '2003-09-03', 0),
+(N'241230004', N'Phạm Minh',  N'Dũng',   N'D21HTTT1', N'Nam', N'Thái Bình',  '2003-11-30', 0),
+(N'241230005', N'Hoàng Thị',  N'Hà',     N'D21HTTT1', N'Nữ', N'Hà Nam',     '2003-01-17', 0),
+(N'241230006', N'Vũ Đức',     N'Huy',    N'D22CNPM1', N'Nam', N'Bắc Ninh',   '2004-04-08', 0),
+(N'241230007', N'Đặng Thu',   N'Hương',  N'D22CNPM1', N'Nữ', N'Hưng Yên',   '2004-07-25', 0),
+(N'241230008', N'Bùi Quang',  N'Khải',   N'D21VT01',  N'Nam', N'Hà Nội',     '2003-03-12', 0),
+(N'241230009', N'Đỗ Thị',     N'Lan',    N'D21VT01',  N'Nữ', N'Vĩnh Phúc',  '2003-06-19', 0),
+(N'241230010', N'Ngô Văn',    N'Long',   N'D21VT01',  N'Nam', N'Thanh Hóa',  '2003-10-05', 0),
+(N'241230011', N'Phan Thanh', N'Mai',    N'D22VT01',  N'Nữ', N'Nghệ An',    '2004-02-28', 0),
+(N'241230012', N'Lý Gia',     N'Nam',    N'D22VT01',  N'Nam', N'Quảng Ninh', '2004-08-16', 0),
+(N'241230013', N'Trương Hải', N'Phong',  N'D22DTVT1', N'Nam', N'Hà Tĩnh',    '2004-12-01', 0),
+(N'241230014', N'Dương Thị',  N'Quỳnh',  N'D22DTVT1', N'Nữ', N'Hà Nội',     '2004-09-09', 0);
 
 /* -------------------------- MONHOC ---------------------------- */
 INSERT INTO Monhoc (MAMH, TENMH, SOTIET_LT, SOTIET_TH) VALUES
@@ -273,27 +273,27 @@ SET IDENTITY_INSERT LOPTINCHI OFF;
 -- DIEM_TK là cột tính tự động nên không insert.
 -- Một số dòng để NULL để mô phỏng chưa nhập điểm.
 INSERT INTO DANGKY (MALTC, MASV, DIEM_CC, DIEM_GK, DIEM_CK) VALUES
-(1, N'N21CN001',  9, 8.0, 8.5),
-(1, N'N21CN002', 10, 9.0, 9.5),
-(1, N'N21CN003',  8, 7.0, 6.5),
-(1, N'N21CN004',  7, 6.5, 7.0),
-(1, N'N21CN005',  9, 8.5, NULL),
-(2, N'N21CN001', 10, 8.5, 9.0),
-(2, N'N21CN002',  9, 7.5, 8.0),
-(2, N'N21CN004',  8, 7.0, 7.5),
-(3, N'N21CN003',  9, 8.0, 7.5),
-(3, N'N22CN001', 10, 9.5, 9.0),
-(3, N'N22CN002', NULL, NULL, NULL),
-(4, N'N21CN001',  8, 7.5, 8.0),
-(4, N'N22CN001',  9, 8.0, 8.5),
-(5, N'N21VT001',  9, 8.0, 8.0),
-(5, N'N21VT002', 10, 9.0, 9.0),
-(5, N'N21VT003',  7, 6.0, 6.5),
-(6, N'N22VT001',  9, 8.5, 9.0),
-(6, N'N22VT002',  8, 7.0, 7.5),
-(6, N'N22VT003', NULL, NULL, NULL),
-(7, N'N21VT001', 10, 9.0, 9.5),
-(7, N'N22VT004',  8, 7.5, 7.0);
+(1, N'241230001',  9, 8.0, 8.5),
+(1, N'241230002', 10, 9.0, 9.5),
+(1, N'241230003',  8, 7.0, 6.5),
+(1, N'241230004',  7, 6.5, 7.0),
+(1, N'241230005',  9, 8.5, NULL),
+(2, N'241230001', 10, 8.5, 9.0),
+(2, N'241230002',  9, 7.5, 8.0),
+(2, N'241230004',  8, 7.0, 7.5),
+(3, N'241230003',  9, 8.0, 7.5),
+(3, N'241230006', 10, 9.5, 9.0),
+(3, N'241230007', NULL, NULL, NULL),
+(4, N'241230001',  8, 7.5, 8.0),
+(4, N'241230006',  9, 8.0, 8.5),
+(5, N'241230008',  9, 8.0, 8.0),
+(5, N'241230009', 10, 9.0, 9.0),
+(5, N'241230010',  7, 6.0, 6.5),
+(6, N'241230011',  9, 8.5, 9.0),
+(6, N'241230012',  8, 7.0, 7.5),
+(6, N'241230013', NULL, NULL, NULL),
+(7, N'241230008', 10, 9.0, 9.5),
+(7, N'241230014',  8, 7.5, 7.0);
 
 /* ------------------------- TAIKHOAN --------------------------- */
 -- Bước 1: tạo tài khoản với salt ngẫu nhiên (mỗi dòng 1 salt riêng)

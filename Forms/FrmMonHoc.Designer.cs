@@ -48,14 +48,17 @@ namespace QLDSV_HTC.Forms
             this.numSoTietLT = new System.Windows.Forms.NumericUpDown();
             this.lblSoTietTH = new System.Windows.Forms.Label();
             this.numSoTietTH = new System.Windows.Forms.NumericUpDown();
+
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSoTietLT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSoTietTH)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.pnlTim.SuspendLayout();
             this.pnlNut.SuspendLayout();
             this.pnlNhap.SuspendLayout();
             this.SuspendLayout();
-            // dgv
+
+            // ---- dgv ----
             this.dgv.Name = "dgv";
             this.dgv.AllowUserToAddRows = false;
             this.dgv.AllowUserToDeleteRows = false;
@@ -63,205 +66,171 @@ namespace QLDSV_HTC.Forms
             this.dgv.AutoGenerateColumns = false;
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.dgv.MultiSelect = false;
             this.dgv.ReadOnly = true;
             this.dgv.RowHeadersVisible = false;
             this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv.TabIndex = 3;
             this.dgv.SelectionChanged += new System.EventHandler(this.dgv_SelectionChanged);
+            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+                this.colMaMH,
+                this.colTenMH,
+                this.colSoTietLT,
+                this.colSoTietTH,
+                this.colTongSoTiet
+            });
+
             // colMaMH
             this.colMaMH.Name = "colMaMH";
             this.colMaMH.DataPropertyName = "MaMH";
             this.colMaMH.HeaderText = "Mã môn học";
-            this.colMaMH.FillWeight = 15F;
+            this.colMaMH.FillWeight = 16F;
+            this.colMaMH.MinimumWidth = 100;
             this.colMaMH.ReadOnly = true;
+
             // colTenMH
             this.colTenMH.Name = "colTenMH";
             this.colTenMH.DataPropertyName = "TenMH";
             this.colTenMH.HeaderText = "Tên môn học";
-            this.colTenMH.FillWeight = 45F;
+            this.colTenMH.FillWeight = 48F;
+            this.colTenMH.MinimumWidth = 250;
             this.colTenMH.ReadOnly = true;
+
             // colSoTietLT
             this.colSoTietLT.Name = "colSoTietLT";
             this.colSoTietLT.DataPropertyName = "SoTietLT";
             this.colSoTietLT.HeaderText = "Số tiết LT";
-            this.colSoTietLT.FillWeight = 13F;
+            this.colSoTietLT.FillWeight = 12F;
+            this.colSoTietLT.MinimumWidth = 85;
             this.colSoTietLT.ReadOnly = true;
+
             // colSoTietTH
             this.colSoTietTH.Name = "colSoTietTH";
             this.colSoTietTH.DataPropertyName = "SoTietTH";
             this.colSoTietTH.HeaderText = "Số tiết TH";
-            this.colSoTietTH.FillWeight = 13F;
+            this.colSoTietTH.FillWeight = 12F;
+            this.colSoTietTH.MinimumWidth = 85;
             this.colSoTietTH.ReadOnly = true;
+
             // colTongSoTiet
             this.colTongSoTiet.Name = "colTongSoTiet";
             this.colTongSoTiet.DataPropertyName = "TongSoTiet";
             this.colTongSoTiet.HeaderText = "Tổng số tiết";
-            this.colTongSoTiet.FillWeight = 14F;
+            this.colTongSoTiet.FillWeight = 12F;
+            this.colTongSoTiet.MinimumWidth = 95;
             this.colTongSoTiet.ReadOnly = true;
-            // statusStrip
+
+            // ---- statusStrip ----
             this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.statusStrip.TabIndex = 4;
+            this.statusStrip.Items.Add(this.lblTrangThai);
+
             // lblTrangThai
             this.lblTrangThai.Name = "lblTrangThai";
             this.lblTrangThai.Text = "Sẵn sàng.";
-            // pnlTim
+
+            // ---- pnlTim ----
             this.pnlTim.Name = "pnlTim";
             this.pnlTim.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTim.Size = new System.Drawing.Size(1034, 44);
+            this.pnlTim.Height = 48;
             this.pnlTim.TabIndex = 2;
-            // lblTim
-            this.lblTim.Name = "lblTim";
-            this.lblTim.AutoSize = true;
-            this.lblTim.Location = new System.Drawing.Point(10, 13);
-            this.lblTim.Text = "Tìm kiếm:";
-            this.lblTim.TabIndex = 13;
-            // txtTim
-            this.txtTim.Name = "txtTim";
-            this.txtTim.Location = new System.Drawing.Point(90, 10);
-            this.txtTim.TabIndex = 14;
-            this.txtTim.Size = new System.Drawing.Size(240, 23);
-            this.txtTim.MaxLength = 100;
-            this.txtTim.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTim_KeyDown);
-            // btnTim
-            this.btnTim.Name = "btnTim";
-            this.btnTim.Location = new System.Drawing.Point(344, 6);
-            this.btnTim.Size = new System.Drawing.Size(100, 32);
-            this.btnTim.Text = "Tìm";
-            this.btnTim.TabIndex = 15;
-            this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
-            // pnlNut
-            this.pnlNut.Name = "pnlNut";
-            this.pnlNut.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNut.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.pnlNut.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
-            this.pnlNut.Size = new System.Drawing.Size(1034, 44);
-            this.pnlNut.TabIndex = 1;
-            // btnNhapMoi
-            this.btnNhapMoi.Name = "btnNhapMoi";
-            this.btnNhapMoi.Location = new System.Drawing.Point(10, 6);
-            this.btnNhapMoi.Size = new System.Drawing.Size(100, 32);
-            this.btnNhapMoi.Text = "Nhập mới";
-            this.btnNhapMoi.TabIndex = 8;
-            this.btnNhapMoi.Click += new System.EventHandler(this.btnNhapMoi_Click);
-            // btnThem
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Location = new System.Drawing.Point(118, 6);
-            this.btnThem.Size = new System.Drawing.Size(100, 32);
-            this.btnThem.Text = "Thêm";
-            this.btnThem.TabIndex = 9;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-            // btnSua
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Location = new System.Drawing.Point(226, 6);
-            this.btnSua.Size = new System.Drawing.Size(100, 32);
-            this.btnSua.Text = "Sửa";
-            this.btnSua.TabIndex = 10;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
-            // btnXoa
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Location = new System.Drawing.Point(334, 6);
-            this.btnXoa.Size = new System.Drawing.Size(100, 32);
-            this.btnXoa.Text = "Xóa";
-            this.btnXoa.TabIndex = 11;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
-            // btnTaiLai
-            this.btnTaiLai.Name = "btnTaiLai";
-            this.btnTaiLai.Location = new System.Drawing.Point(442, 6);
-            this.btnTaiLai.Size = new System.Drawing.Size(100, 32);
-            this.btnTaiLai.Text = "Tải lại";
-            this.btnTaiLai.TabIndex = 12;
-            this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
-            // pnlNhap
-            this.pnlNhap.Name = "pnlNhap";
-            this.pnlNhap.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNhap.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.pnlNhap.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
-            this.pnlNhap.Size = new System.Drawing.Size(1034, 86);
-            this.pnlNhap.TabIndex = 0;
-            // lblMaMH
-            this.lblMaMH.Name = "lblMaMH";
-            this.lblMaMH.AutoSize = true;
-            this.lblMaMH.Location = new System.Drawing.Point(10, 15);
-            this.lblMaMH.Text = "Mã môn học:";
-            this.lblMaMH.TabIndex = 0;
-            // txtMaMH
-            this.txtMaMH.Name = "txtMaMH";
-            this.txtMaMH.Location = new System.Drawing.Point(140, 12);
-            this.txtMaMH.TabIndex = 1;
-            this.txtMaMH.Size = new System.Drawing.Size(260, 23);
-            this.txtMaMH.MaxLength = 10;
-            // lblTenMH
-            this.lblTenMH.Name = "lblTenMH";
-            this.lblTenMH.AutoSize = true;
-            this.lblTenMH.Location = new System.Drawing.Point(440, 15);
-            this.lblTenMH.Text = "Tên môn học:";
-            this.lblTenMH.TabIndex = 2;
-            // txtTenMH
-            this.txtTenMH.Name = "txtTenMH";
-            this.txtTenMH.Location = new System.Drawing.Point(570, 12);
-            this.txtTenMH.TabIndex = 3;
-            this.txtTenMH.Size = new System.Drawing.Size(300, 23);
-            this.txtTenMH.MaxLength = 50;
-            // lblSoTietLT
-            this.lblSoTietLT.Name = "lblSoTietLT";
-            this.lblSoTietLT.AutoSize = true;
-            this.lblSoTietLT.Location = new System.Drawing.Point(10, 49);
-            this.lblSoTietLT.Text = "Số tiết lý thuyết:";
-            this.lblSoTietLT.TabIndex = 4;
-            // numSoTietLT
-            this.numSoTietLT.Name = "numSoTietLT";
-            this.numSoTietLT.Location = new System.Drawing.Point(140, 46);
-            this.numSoTietLT.TabIndex = 5;
-            this.numSoTietLT.Size = new System.Drawing.Size(100, 23);
-            this.numSoTietLT.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
-            this.numSoTietLT.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
-            this.numSoTietLT.Value = new decimal(new int[] { 0, 0, 0, 0 });
-            // lblSoTietTH
-            this.lblSoTietTH.Name = "lblSoTietTH";
-            this.lblSoTietTH.AutoSize = true;
-            this.lblSoTietTH.Location = new System.Drawing.Point(440, 49);
-            this.lblSoTietTH.Text = "Số tiết thực hành:";
-            this.lblSoTietTH.TabIndex = 6;
-            // numSoTietTH
-            this.numSoTietTH.Name = "numSoTietTH";
-            this.numSoTietTH.Location = new System.Drawing.Point(570, 46);
-            this.numSoTietTH.TabIndex = 7;
-            this.numSoTietTH.Size = new System.Drawing.Size(100, 23);
-            this.numSoTietTH.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
-            this.numSoTietTH.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
-            this.numSoTietTH.Value = new decimal(new int[] { 0, 0, 0, 0 });
-            // this
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 621);
-            this.MinimumSize = new System.Drawing.Size(860, 520);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Quản lý môn học";
-            this.Padding = new System.Windows.Forms.Padding(16);
-            this.Name = "FrmMonHoc";
-            this.Load += new System.EventHandler(this.FrmMonHoc_Load);
-            this.Shown += new System.EventHandler(this.FrmMonHoc_Shown);
-            this.Controls.Add(this.dgv);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.pnlTim);
-            this.Controls.Add(this.pnlNut);
-            this.Controls.Add(this.pnlNhap);
-            this.dgv.Columns.Add(this.colMaMH);
-            this.dgv.Columns.Add(this.colTenMH);
-            this.dgv.Columns.Add(this.colSoTietLT);
-            this.dgv.Columns.Add(this.colSoTietTH);
-            this.dgv.Columns.Add(this.colTongSoTiet);
-            this.statusStrip.Items.Add(this.lblTrangThai);
+            this.pnlTim.BackColor = QLDSV_HTC.UI.Palette.Surface;
+            this.pnlTim.Padding = new System.Windows.Forms.Padding(8);
             this.pnlTim.Controls.Add(this.lblTim);
             this.pnlTim.Controls.Add(this.txtTim);
             this.pnlTim.Controls.Add(this.btnTim);
+
+            // lblTim
+            this.lblTim.Name = "lblTim";
+            this.lblTim.AutoSize = true;
+            this.lblTim.Location = new System.Drawing.Point(12, 15);
+            this.lblTim.Text = "Tìm kiếm:";
+            this.lblTim.TabIndex = 0;
+
+            // txtTim
+            this.txtTim.Name = "txtTim";
+            this.txtTim.Location = new System.Drawing.Point(82, 12);
+            this.txtTim.Size = new System.Drawing.Size(260, 23);
+            this.txtTim.MaxLength = 100;
+            this.txtTim.TabIndex = 1;
+            this.txtTim.PlaceholderText = "Nhập mã môn học hoặc tên môn học...";
+            this.txtTim.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTim_KeyDown);
+
+            // btnTim
+            this.btnTim.Name = "btnTim";
+            this.btnTim.Location = new System.Drawing.Point(352, 8);
+            this.btnTim.Size = new System.Drawing.Size(95, 32);
+            this.btnTim.TabIndex = 2;
+            this.btnTim.Text = "Tìm kiếm";
+            this.btnTim.Variant = QLDSV_HTC.UI.ButtonVariant.Soft;
+            this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
+
+            // ---- pnlNut ----
+            this.pnlNut.Name = "pnlNut";
+            this.pnlNut.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNut.Height = 48;
+            this.pnlNut.TabIndex = 1;
+            this.pnlNut.BackColor = QLDSV_HTC.UI.Palette.Surface;
             this.pnlNut.Controls.Add(this.btnNhapMoi);
             this.pnlNut.Controls.Add(this.btnThem);
             this.pnlNut.Controls.Add(this.btnSua);
             this.pnlNut.Controls.Add(this.btnXoa);
             this.pnlNut.Controls.Add(this.btnTaiLai);
+
+            // btnNhapMoi
+            this.btnNhapMoi.Name = "btnNhapMoi";
+            this.btnNhapMoi.Location = new System.Drawing.Point(8, 7);
+            this.btnNhapMoi.Size = new System.Drawing.Size(105, 34);
+            this.btnNhapMoi.TabIndex = 0;
+            this.btnNhapMoi.Text = "Nhập mới";
+            this.btnNhapMoi.Variant = QLDSV_HTC.UI.ButtonVariant.Secondary;
+            this.btnNhapMoi.Click += new System.EventHandler(this.btnNhapMoi_Click);
+
+            // btnThem
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Location = new System.Drawing.Point(121, 7);
+            this.btnThem.Size = new System.Drawing.Size(105, 34);
+            this.btnThem.TabIndex = 1;
+            this.btnThem.Text = "Thêm";
+            this.btnThem.Variant = QLDSV_HTC.UI.ButtonVariant.Primary;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+
+            // btnSua
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Location = new System.Drawing.Point(234, 7);
+            this.btnSua.Size = new System.Drawing.Size(105, 34);
+            this.btnSua.TabIndex = 2;
+            this.btnSua.Text = "Sửa";
+            this.btnSua.Variant = QLDSV_HTC.UI.ButtonVariant.Primary;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+
+            // btnXoa
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Location = new System.Drawing.Point(347, 7);
+            this.btnXoa.Size = new System.Drawing.Size(105, 34);
+            this.btnXoa.TabIndex = 3;
+            this.btnXoa.Text = "Xóa";
+            this.btnXoa.Variant = QLDSV_HTC.UI.ButtonVariant.Danger;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+
+            // btnTaiLai
+            this.btnTaiLai.Name = "btnTaiLai";
+            this.btnTaiLai.Location = new System.Drawing.Point(460, 7);
+            this.btnTaiLai.Size = new System.Drawing.Size(105, 34);
+            this.btnTaiLai.TabIndex = 4;
+            this.btnTaiLai.Text = "Tải lại";
+            this.btnTaiLai.Variant = QLDSV_HTC.UI.ButtonVariant.Ghost;
+            this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
+
+            // ---- pnlNhap ----
+            this.pnlNhap.Name = "pnlNhap";
+            this.pnlNhap.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNhap.Height = 88;
+            this.pnlNhap.TabIndex = 0;
+            this.pnlNhap.BackColor = QLDSV_HTC.UI.Palette.Surface;
+            this.pnlNhap.Padding = new System.Windows.Forms.Padding(12, 10, 12, 8);
             this.pnlNhap.Controls.Add(this.lblMaMH);
             this.pnlNhap.Controls.Add(this.txtMaMH);
             this.pnlNhap.Controls.Add(this.lblTenMH);
@@ -270,12 +239,88 @@ namespace QLDSV_HTC.Forms
             this.pnlNhap.Controls.Add(this.numSoTietLT);
             this.pnlNhap.Controls.Add(this.lblSoTietTH);
             this.pnlNhap.Controls.Add(this.numSoTietTH);
+
+            // lblMaMH
+            this.lblMaMH.Name = "lblMaMH";
+            this.lblMaMH.AutoSize = true;
+            this.lblMaMH.Location = new System.Drawing.Point(12, 15);
+            this.lblMaMH.Text = "Mã môn học (*):";
+            this.lblMaMH.TabIndex = 0;
+
+            // txtMaMH
+            this.txtMaMH.Name = "txtMaMH";
+            this.txtMaMH.Location = new System.Drawing.Point(120, 12);
+            this.txtMaMH.Size = new System.Drawing.Size(160, 23);
+            this.txtMaMH.MaxLength = 10;
+            this.txtMaMH.TabIndex = 1;
+
+            // lblTenMH
+            this.lblTenMH.Name = "lblTenMH";
+            this.lblTenMH.AutoSize = true;
+            this.lblTenMH.Location = new System.Drawing.Point(310, 15);
+            this.lblTenMH.Text = "Tên môn học (*):";
+            this.lblTenMH.TabIndex = 2;
+
+            // txtTenMH
+            this.txtTenMH.Name = "txtTenMH";
+            this.txtTenMH.Location = new System.Drawing.Point(415, 12);
+            this.txtTenMH.Size = new System.Drawing.Size(320, 23);
+            this.txtTenMH.MaxLength = 100;
+            this.txtTenMH.TabIndex = 3;
+
+            // lblSoTietLT
+            this.lblSoTietLT.Name = "lblSoTietLT";
+            this.lblSoTietLT.AutoSize = true;
+            this.lblSoTietLT.Location = new System.Drawing.Point(12, 51);
+            this.lblSoTietLT.Text = "Số tiết lý thuyết:";
+            this.lblSoTietLT.TabIndex = 4;
+
+            // numSoTietLT
+            this.numSoTietLT.Name = "numSoTietLT";
+            this.numSoTietLT.Location = new System.Drawing.Point(120, 48);
+            this.numSoTietLT.Size = new System.Drawing.Size(160, 23);
+            this.numSoTietLT.Maximum = new decimal(new int[] { 300, 0, 0, 0 });
+            this.numSoTietLT.TabIndex = 5;
+
+            // lblSoTietTH
+            this.lblSoTietTH.Name = "lblSoTietTH";
+            this.lblSoTietTH.AutoSize = true;
+            this.lblSoTietTH.Location = new System.Drawing.Point(310, 51);
+            this.lblSoTietTH.Text = "Số tiết thực hành:";
+            this.lblSoTietTH.TabIndex = 6;
+
+            // numSoTietTH
+            this.numSoTietTH.Name = "numSoTietTH";
+            this.numSoTietTH.Location = new System.Drawing.Point(415, 48);
+            this.numSoTietTH.Size = new System.Drawing.Size(160, 23);
+            this.numSoTietTH.Maximum = new decimal(new int[] { 300, 0, 0, 0 });
+            this.numSoTietTH.TabIndex = 7;
+
+            // ---- FrmMonHoc ----
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.Name = "FrmMonHoc";
+            this.Text = "Quản lý Môn học";
+            this.Load += new System.EventHandler(this.FrmMonHoc_Load);
+            this.Shown += new System.EventHandler(this.FrmMonHoc_Shown);
+
+            this.Controls.Add(this.dgv);
+            this.Controls.Add(this.pnlTim);
+            this.Controls.Add(this.pnlNut);
+            this.Controls.Add(this.pnlNhap);
+            this.Controls.Add(this.statusStrip);
+
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSoTietLT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSoTietTH)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.pnlTim.ResumeLayout(false);
+            this.pnlTim.PerformLayout();
             this.pnlNut.ResumeLayout(false);
             this.pnlNhap.ResumeLayout(false);
+            this.pnlNhap.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }

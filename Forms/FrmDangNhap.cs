@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 using QLDSV_HTC.BLL;
@@ -56,7 +55,7 @@ namespace QLDSV_HTC.Forms
                 }
 
                 // Nạp Logo trường ĐH Giao Thông Vận Tải
-                var logo = LayHinhAnh("logo_login.png");
+                var logo = LayHinhAnh("logo_login.png") ?? LayHinhAnh("LogoUTC.png");
                 if (logo != null)
                 {
                     this.picLogo.Image = logo;
@@ -77,7 +76,11 @@ namespace QLDSV_HTC.Forms
                     Path.Combine(Application.StartupPath, "Resources", "img", tenTep),
                     Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "img", tenTep),
                     Path.Combine(Directory.GetCurrentDirectory(), "Resources", "img", tenTep),
-                    Path.Combine(Application.StartupPath, "..", "..", "..", "Resources", "img", tenTep)
+                    Path.Combine(Application.StartupPath, "..", "..", "..", "Resources", "img", tenTep),
+                    Path.Combine(Application.StartupPath, "GUIMage", tenTep),
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GUIMage", tenTep),
+                    Path.Combine(Directory.GetCurrentDirectory(), "GUIMage", tenTep),
+                    Path.Combine(Application.StartupPath, "..", "..", "..", "GUIMage", tenTep)
                 };
 
                 foreach (var duongDan in cacDuongDan)
@@ -123,15 +126,6 @@ namespace QLDSV_HTC.Forms
             }
         }
 
-        private void btnThoat_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Bạn có muốn thoát chương trình không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                this.DialogResult = DialogResult.Cancel;
-                this.Close();
-            }
-        }
-
         private void btnTogglePass_Click(object sender, EventArgs e)
         {
             this.txtMatKhau.UseSystemPasswordChar = !this.txtMatKhau.UseSystemPasswordChar;
@@ -140,18 +134,35 @@ namespace QLDSV_HTC.Forms
 
         private void lnkQuenMatKhau_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show("Vui lòng liên hệ Văn phòng Khoa hoặc Quản trị viên phòng Đào tạo để được hỗ trợ cấp lại mật khẩu tài khoản.", "Quên mật khẩu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(
+                "Vui lòng liên hệ Phòng Quản lý Đào tạo (P. ĐT) hoặc Quản trị hệ thống UTC để được cấp lại mật khẩu truy cập.",
+                "Quên mật khẩu",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         private void lnkTroGiup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string huongDan = "HƯỚNG DẪN ĐĂNG NHẬP:\n\n" +
-                              "- Quản trị viên: Tên đăng nhập = admin\n" +
-                              "- Khoa: Tên đăng nhập = Mã khoa (VD: CNTT)\n" +
-                              "- Giảng viên: Tên đăng nhập = Mã giảng viên\n" +
-                              "- Sinh viên: Tên đăng nhập = Mã sinh viên\n\n" +
-                              "Mật khẩu mặc định khởi tạo: 123456";
-            MessageBox.Show(huongDan, "Trợ giúp đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(
+                "CỔNG THÔNG TIN QUẢN LÝ SINH VIÊN - TRƯỜNG ĐẠI HỌC GIAO THÔNG VẬN TẢI (UTC)\n\n" +
+                "Tài khoản mẫu thử nghiệm (mật khẩu mặc định: 123456):\n" +
+                "• pgv : Phòng giáo vụ / Quản trị viên\n" +
+                "• khoa_cntt : Giảng viên Khoa CNTT\n" +
+                "• khoa_vt : Giảng viên Khoa Vận tải\n" +
+                "• N21CN001 : Sinh viên\n\n" +
+                "Nếu gặp vấn đề trong quá trình đăng nhập, xin vui lòng liên hệ bộ phận hỗ trợ kỹ thuật.",
+                "Hướng dẫn & Trợ giúp",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Bạn có muốn thoát chương trình không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
         }
     }
 }

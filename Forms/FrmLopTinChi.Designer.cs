@@ -64,15 +64,18 @@ namespace QLDSV_HTC.Forms
             this.numSVToiThieu = new System.Windows.Forms.NumericUpDown();
             this.lblHuyLop = new System.Windows.Forms.Label();
             this.chkHuyLop = new System.Windows.Forms.CheckBox();
+
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHocKy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNhom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSVToiThieu)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.pnlTim.SuspendLayout();
             this.pnlNut.SuspendLayout();
             this.pnlNhap.SuspendLayout();
             this.SuspendLayout();
-            // dgv
+
+            // ---- dgv ----
             this.dgv.Name = "dgv";
             this.dgv.AllowUserToAddRows = false;
             this.dgv.AllowUserToDeleteRows = false;
@@ -80,316 +83,221 @@ namespace QLDSV_HTC.Forms
             this.dgv.AutoGenerateColumns = false;
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.dgv.MultiSelect = false;
             this.dgv.ReadOnly = true;
             this.dgv.RowHeadersVisible = false;
             this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv.TabIndex = 3;
             this.dgv.SelectionChanged += new System.EventHandler(this.dgv_SelectionChanged);
+            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+                this.colMaLTC,
+                this.colNienKhoa,
+                this.colHocKy,
+                this.colTenMH,
+                this.colNhom,
+                this.colTenGV,
+                this.colSoSV,
+                this.colSoSVToiThieu,
+                this.colTrangThai
+            });
+
             // colMaLTC
             this.colMaLTC.Name = "colMaLTC";
             this.colMaLTC.DataPropertyName = "MaLTC";
             this.colMaLTC.HeaderText = "Mã LTC";
-            this.colMaLTC.FillWeight = 7F;
+            this.colMaLTC.FillWeight = 8F;
+            this.colMaLTC.MinimumWidth = 65;
             this.colMaLTC.ReadOnly = true;
+
             // colNienKhoa
             this.colNienKhoa.Name = "colNienKhoa";
             this.colNienKhoa.DataPropertyName = "NienKhoa";
             this.colNienKhoa.HeaderText = "Niên khóa";
-            this.colNienKhoa.FillWeight = 10F;
+            this.colNienKhoa.FillWeight = 11F;
+            this.colNienKhoa.MinimumWidth = 95;
             this.colNienKhoa.ReadOnly = true;
+
             // colHocKy
             this.colHocKy.Name = "colHocKy";
             this.colHocKy.DataPropertyName = "HocKy";
             this.colHocKy.HeaderText = "Học kỳ";
-            this.colHocKy.FillWeight = 7F;
+            this.colHocKy.FillWeight = 8F;
+            this.colHocKy.MinimumWidth = 70;
             this.colHocKy.ReadOnly = true;
+
             // colTenMH
             this.colTenMH.Name = "colTenMH";
             this.colTenMH.DataPropertyName = "TenMH";
             this.colTenMH.HeaderText = "Môn học";
-            this.colTenMH.FillWeight = 24F;
+            this.colTenMH.FillWeight = 23F;
+            this.colTenMH.MinimumWidth = 180;
             this.colTenMH.ReadOnly = true;
+
             // colNhom
             this.colNhom.Name = "colNhom";
             this.colNhom.DataPropertyName = "Nhom";
             this.colNhom.HeaderText = "Nhóm";
-            this.colNhom.FillWeight = 6F;
+            this.colNhom.FillWeight = 7F;
+            this.colNhom.MinimumWidth = 60;
             this.colNhom.ReadOnly = true;
+
             // colTenGV
             this.colTenGV.Name = "colTenGV";
             this.colTenGV.DataPropertyName = "TenGV";
             this.colTenGV.HeaderText = "Giảng viên";
-            this.colTenGV.FillWeight = 20F;
+            this.colTenGV.FillWeight = 19F;
+            this.colTenGV.MinimumWidth = 150;
             this.colTenGV.ReadOnly = true;
+
             // colSoSV
             this.colSoSV.Name = "colSoSV";
             this.colSoSV.DataPropertyName = "SoSV";
             this.colSoSV.HeaderText = "Số SV";
             this.colSoSV.FillWeight = 7F;
+            this.colSoSV.MinimumWidth = 65;
             this.colSoSV.ReadOnly = true;
+
             // colSoSVToiThieu
             this.colSoSVToiThieu.Name = "colSoSVToiThieu";
             this.colSoSVToiThieu.DataPropertyName = "SoSVToiThieu";
             this.colSoSVToiThieu.HeaderText = "SV tối thiểu";
-            this.colSoSVToiThieu.FillWeight = 10F;
+            this.colSoSVToiThieu.FillWeight = 9F;
+            this.colSoSVToiThieu.MinimumWidth = 90;
             this.colSoSVToiThieu.ReadOnly = true;
+
             // colTrangThai
             this.colTrangThai.Name = "colTrangThai";
             this.colTrangThai.DataPropertyName = "TrangThai";
             this.colTrangThai.HeaderText = "Trạng thái";
-            this.colTrangThai.FillWeight = 10F;
+            this.colTrangThai.FillWeight = 8F;
+            this.colTrangThai.MinimumWidth = 80;
             this.colTrangThai.ReadOnly = true;
-            // statusStrip
+
+            // ---- statusStrip ----
             this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.statusStrip.TabIndex = 4;
+            this.statusStrip.Items.Add(this.lblTrangThai);
+
             // lblTrangThai
             this.lblTrangThai.Name = "lblTrangThai";
             this.lblTrangThai.Text = "Sẵn sàng.";
-            // pnlTim
+
+            // ---- pnlTim ----
             this.pnlTim.Name = "pnlTim";
             this.pnlTim.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTim.Size = new System.Drawing.Size(1034, 44);
+            this.pnlTim.Height = 48;
             this.pnlTim.TabIndex = 2;
-            // lblLocNienKhoa
-            this.lblLocNienKhoa.Name = "lblLocNienKhoa";
-            this.lblLocNienKhoa.AutoSize = true;
-            this.lblLocNienKhoa.Location = new System.Drawing.Point(10, 13);
-            this.lblLocNienKhoa.Text = "Niên khóa:";
-            this.lblLocNienKhoa.TabIndex = 23;
-            // cboLocNienKhoa
-            this.cboLocNienKhoa.Name = "cboLocNienKhoa";
-            this.cboLocNienKhoa.Location = new System.Drawing.Point(98, 10);
-            this.cboLocNienKhoa.TabIndex = 24;
-            this.cboLocNienKhoa.Size = new System.Drawing.Size(120, 23);
-            this.cboLocNienKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLocNienKhoa.FormattingEnabled = true;
-            // lblLocHocKy
-            this.lblLocHocKy.Name = "lblLocHocKy";
-            this.lblLocHocKy.AutoSize = true;
-            this.lblLocHocKy.Location = new System.Drawing.Point(232, 13);
-            this.lblLocHocKy.Text = "Học kỳ:";
-            this.lblLocHocKy.TabIndex = 25;
-            // cboLocHocKy
-            this.cboLocHocKy.Name = "cboLocHocKy";
-            this.cboLocHocKy.Location = new System.Drawing.Point(296, 10);
-            this.cboLocHocKy.TabIndex = 26;
-            this.cboLocHocKy.Size = new System.Drawing.Size(90, 23);
-            this.cboLocHocKy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLocHocKy.FormattingEnabled = true;
-            // btnLoc
-            this.btnLoc.Name = "btnLoc";
-            this.btnLoc.Location = new System.Drawing.Point(400, 6);
-            this.btnLoc.Size = new System.Drawing.Size(100, 32);
-            this.btnLoc.Text = "Lọc";
-            this.btnLoc.TabIndex = 27;
-            this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
-            // pnlNut
-            this.pnlNut.Name = "pnlNut";
-            this.pnlNut.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNut.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.pnlNut.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
-            this.pnlNut.Size = new System.Drawing.Size(1034, 44);
-            this.pnlNut.TabIndex = 1;
-            // btnNhapMoi
-            this.btnNhapMoi.Name = "btnNhapMoi";
-            this.btnNhapMoi.Location = new System.Drawing.Point(10, 6);
-            this.btnNhapMoi.Size = new System.Drawing.Size(100, 32);
-            this.btnNhapMoi.Text = "Nhập mới";
-            this.btnNhapMoi.TabIndex = 18;
-            this.btnNhapMoi.Click += new System.EventHandler(this.btnNhapMoi_Click);
-            // btnThem
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Location = new System.Drawing.Point(118, 6);
-            this.btnThem.Size = new System.Drawing.Size(100, 32);
-            this.btnThem.Text = "Thêm";
-            this.btnThem.TabIndex = 19;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-            // btnSua
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Location = new System.Drawing.Point(226, 6);
-            this.btnSua.Size = new System.Drawing.Size(100, 32);
-            this.btnSua.Text = "Sửa";
-            this.btnSua.TabIndex = 20;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
-            // btnXoa
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Location = new System.Drawing.Point(334, 6);
-            this.btnXoa.Size = new System.Drawing.Size(100, 32);
-            this.btnXoa.Text = "Xóa";
-            this.btnXoa.TabIndex = 21;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
-            // btnTaiLai
-            this.btnTaiLai.Name = "btnTaiLai";
-            this.btnTaiLai.Location = new System.Drawing.Point(442, 6);
-            this.btnTaiLai.Size = new System.Drawing.Size(100, 32);
-            this.btnTaiLai.Text = "Tải lại";
-            this.btnTaiLai.TabIndex = 22;
-            this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
-            // pnlNhap
-            this.pnlNhap.Name = "pnlNhap";
-            this.pnlNhap.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNhap.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.pnlNhap.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
-            this.pnlNhap.Size = new System.Drawing.Size(1034, 188);
-            this.pnlNhap.TabIndex = 0;
-            // lblMaLTC
-            this.lblMaLTC.Name = "lblMaLTC";
-            this.lblMaLTC.AutoSize = true;
-            this.lblMaLTC.Location = new System.Drawing.Point(10, 15);
-            this.lblMaLTC.Text = "Mã lớp tín chỉ:";
-            this.lblMaLTC.TabIndex = 0;
-            // txtMaLTC
-            this.txtMaLTC.Name = "txtMaLTC";
-            this.txtMaLTC.Location = new System.Drawing.Point(140, 12);
-            this.txtMaLTC.TabIndex = 1;
-            this.txtMaLTC.Size = new System.Drawing.Size(260, 23);
-            this.txtMaLTC.MaxLength = 10;
-            this.txtMaLTC.ReadOnly = true;
-            // lblNienKhoa
-            this.lblNienKhoa.Name = "lblNienKhoa";
-            this.lblNienKhoa.AutoSize = true;
-            this.lblNienKhoa.Location = new System.Drawing.Point(440, 15);
-            this.lblNienKhoa.Text = "Niên khóa:";
-            this.lblNienKhoa.TabIndex = 2;
-            // txtNienKhoa
-            this.txtNienKhoa.Name = "txtNienKhoa";
-            this.txtNienKhoa.Location = new System.Drawing.Point(570, 12);
-            this.txtNienKhoa.TabIndex = 3;
-            this.txtNienKhoa.Size = new System.Drawing.Size(300, 23);
-            this.txtNienKhoa.MaxLength = 9;
-            this.txtNienKhoa.PlaceholderText = "ví dụ 2023-2024";
-            // lblHocKy
-            this.lblHocKy.Name = "lblHocKy";
-            this.lblHocKy.AutoSize = true;
-            this.lblHocKy.Location = new System.Drawing.Point(10, 49);
-            this.lblHocKy.Text = "Học kỳ:";
-            this.lblHocKy.TabIndex = 4;
-            // numHocKy
-            this.numHocKy.Name = "numHocKy";
-            this.numHocKy.Location = new System.Drawing.Point(140, 46);
-            this.numHocKy.TabIndex = 5;
-            this.numHocKy.Size = new System.Drawing.Size(100, 23);
-            this.numHocKy.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            this.numHocKy.Maximum = new decimal(new int[] { 3, 0, 0, 0 });
-            this.numHocKy.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // lblNhom
-            this.lblNhom.Name = "lblNhom";
-            this.lblNhom.AutoSize = true;
-            this.lblNhom.Location = new System.Drawing.Point(440, 49);
-            this.lblNhom.Text = "Nhóm:";
-            this.lblNhom.TabIndex = 6;
-            // numNhom
-            this.numNhom.Name = "numNhom";
-            this.numNhom.Location = new System.Drawing.Point(570, 46);
-            this.numNhom.TabIndex = 7;
-            this.numNhom.Size = new System.Drawing.Size(100, 23);
-            this.numNhom.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            this.numNhom.Maximum = new decimal(new int[] { 99, 0, 0, 0 });
-            this.numNhom.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // lblMonHoc
-            this.lblMonHoc.Name = "lblMonHoc";
-            this.lblMonHoc.AutoSize = true;
-            this.lblMonHoc.Location = new System.Drawing.Point(10, 83);
-            this.lblMonHoc.Text = "Môn học:";
-            this.lblMonHoc.TabIndex = 8;
-            // cboMonHoc
-            this.cboMonHoc.Name = "cboMonHoc";
-            this.cboMonHoc.Location = new System.Drawing.Point(140, 80);
-            this.cboMonHoc.TabIndex = 9;
-            this.cboMonHoc.Size = new System.Drawing.Size(260, 23);
-            this.cboMonHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMonHoc.FormattingEnabled = true;
-            // lblKhoa
-            this.lblKhoa.Name = "lblKhoa";
-            this.lblKhoa.AutoSize = true;
-            this.lblKhoa.Location = new System.Drawing.Point(440, 83);
-            this.lblKhoa.Text = "Khoa mở lớp:";
-            this.lblKhoa.TabIndex = 10;
-            // cboKhoa
-            this.cboKhoa.Name = "cboKhoa";
-            this.cboKhoa.Location = new System.Drawing.Point(570, 80);
-            this.cboKhoa.TabIndex = 11;
-            this.cboKhoa.Size = new System.Drawing.Size(300, 23);
-            this.cboKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboKhoa.FormattingEnabled = true;
-            this.cboKhoa.SelectedIndexChanged += new System.EventHandler(this.cboKhoa_SelectedIndexChanged);
-            // lblGiangVien
-            this.lblGiangVien.Name = "lblGiangVien";
-            this.lblGiangVien.AutoSize = true;
-            this.lblGiangVien.Location = new System.Drawing.Point(10, 117);
-            this.lblGiangVien.Text = "Giảng viên:";
-            this.lblGiangVien.TabIndex = 12;
-            // cboGiangVien
-            this.cboGiangVien.Name = "cboGiangVien";
-            this.cboGiangVien.Location = new System.Drawing.Point(140, 114);
-            this.cboGiangVien.TabIndex = 13;
-            this.cboGiangVien.Size = new System.Drawing.Size(260, 23);
-            this.cboGiangVien.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboGiangVien.FormattingEnabled = true;
-            // lblSVToiThieu
-            this.lblSVToiThieu.Name = "lblSVToiThieu";
-            this.lblSVToiThieu.AutoSize = true;
-            this.lblSVToiThieu.Location = new System.Drawing.Point(440, 117);
-            this.lblSVToiThieu.Text = "Số SV tối thiểu:";
-            this.lblSVToiThieu.TabIndex = 14;
-            // numSVToiThieu
-            this.numSVToiThieu.Name = "numSVToiThieu";
-            this.numSVToiThieu.Location = new System.Drawing.Point(570, 114);
-            this.numSVToiThieu.TabIndex = 15;
-            this.numSVToiThieu.Size = new System.Drawing.Size(100, 23);
-            this.numSVToiThieu.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
-            this.numSVToiThieu.Maximum = new decimal(new int[] { 500, 0, 0, 0 });
-            this.numSVToiThieu.Value = new decimal(new int[] { 0, 0, 0, 0 });
-            // lblHuyLop
-            this.lblHuyLop.Name = "lblHuyLop";
-            this.lblHuyLop.AutoSize = true;
-            this.lblHuyLop.Location = new System.Drawing.Point(10, 151);
-            this.lblHuyLop.Text = "Trạng thái:";
-            this.lblHuyLop.TabIndex = 16;
-            // chkHuyLop
-            this.chkHuyLop.Name = "chkHuyLop";
-            this.chkHuyLop.Location = new System.Drawing.Point(140, 148);
-            this.chkHuyLop.TabIndex = 17;
-            this.chkHuyLop.AutoSize = true;
-            this.chkHuyLop.Text = "Hủy lớp";
-            // this
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 621);
-            this.MinimumSize = new System.Drawing.Size(860, 520);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Quản lý lớp tín chỉ";
-            this.Padding = new System.Windows.Forms.Padding(16);
-            this.Name = "FrmLopTinChi";
-            this.Load += new System.EventHandler(this.FrmLopTinChi_Load);
-            this.Shown += new System.EventHandler(this.FrmLopTinChi_Shown);
-            this.Controls.Add(this.dgv);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.pnlTim);
-            this.Controls.Add(this.pnlNut);
-            this.Controls.Add(this.pnlNhap);
-            this.dgv.Columns.Add(this.colMaLTC);
-            this.dgv.Columns.Add(this.colNienKhoa);
-            this.dgv.Columns.Add(this.colHocKy);
-            this.dgv.Columns.Add(this.colTenMH);
-            this.dgv.Columns.Add(this.colNhom);
-            this.dgv.Columns.Add(this.colTenGV);
-            this.dgv.Columns.Add(this.colSoSV);
-            this.dgv.Columns.Add(this.colSoSVToiThieu);
-            this.dgv.Columns.Add(this.colTrangThai);
-            this.statusStrip.Items.Add(this.lblTrangThai);
+            this.pnlTim.BackColor = QLDSV_HTC.UI.Palette.Surface;
+            this.pnlTim.Padding = new System.Windows.Forms.Padding(8);
             this.pnlTim.Controls.Add(this.lblLocNienKhoa);
             this.pnlTim.Controls.Add(this.cboLocNienKhoa);
             this.pnlTim.Controls.Add(this.lblLocHocKy);
             this.pnlTim.Controls.Add(this.cboLocHocKy);
             this.pnlTim.Controls.Add(this.btnLoc);
+
+            // lblLocNienKhoa
+            this.lblLocNienKhoa.Name = "lblLocNienKhoa";
+            this.lblLocNienKhoa.AutoSize = true;
+            this.lblLocNienKhoa.Location = new System.Drawing.Point(12, 15);
+            this.lblLocNienKhoa.Text = "Niên khóa:";
+            this.lblLocNienKhoa.TabIndex = 0;
+
+            // cboLocNienKhoa
+            this.cboLocNienKhoa.Name = "cboLocNienKhoa";
+            this.cboLocNienKhoa.Location = new System.Drawing.Point(82, 12);
+            this.cboLocNienKhoa.Size = new System.Drawing.Size(140, 23);
+            this.cboLocNienKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLocNienKhoa.TabIndex = 1;
+
+            // lblLocHocKy
+            this.lblLocHocKy.Name = "lblLocHocKy";
+            this.lblLocHocKy.AutoSize = true;
+            this.lblLocHocKy.Location = new System.Drawing.Point(240, 15);
+            this.lblLocHocKy.Text = "Học kỳ:";
+            this.lblLocHocKy.TabIndex = 2;
+
+            // cboLocHocKy
+            this.cboLocHocKy.Name = "cboLocHocKy";
+            this.cboLocHocKy.Location = new System.Drawing.Point(295, 12);
+            this.cboLocHocKy.Size = new System.Drawing.Size(90, 23);
+            this.cboLocHocKy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLocHocKy.TabIndex = 3;
+
+            // btnLoc
+            this.btnLoc.Name = "btnLoc";
+            this.btnLoc.Location = new System.Drawing.Point(400, 8);
+            this.btnLoc.Size = new System.Drawing.Size(95, 32);
+            this.btnLoc.TabIndex = 4;
+            this.btnLoc.Text = "Lọc dữ liệu";
+            this.btnLoc.Variant = QLDSV_HTC.UI.ButtonVariant.Soft;
+            this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
+
+            // ---- pnlNut ----
+            this.pnlNut.Name = "pnlNut";
+            this.pnlNut.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNut.Height = 48;
+            this.pnlNut.TabIndex = 1;
+            this.pnlNut.BackColor = QLDSV_HTC.UI.Palette.Surface;
             this.pnlNut.Controls.Add(this.btnNhapMoi);
             this.pnlNut.Controls.Add(this.btnThem);
             this.pnlNut.Controls.Add(this.btnSua);
             this.pnlNut.Controls.Add(this.btnXoa);
             this.pnlNut.Controls.Add(this.btnTaiLai);
+
+            // btnNhapMoi
+            this.btnNhapMoi.Name = "btnNhapMoi";
+            this.btnNhapMoi.Location = new System.Drawing.Point(8, 7);
+            this.btnNhapMoi.Size = new System.Drawing.Size(105, 34);
+            this.btnNhapMoi.TabIndex = 0;
+            this.btnNhapMoi.Text = "Nhập mới";
+            this.btnNhapMoi.Variant = QLDSV_HTC.UI.ButtonVariant.Secondary;
+            this.btnNhapMoi.Click += new System.EventHandler(this.btnNhapMoi_Click);
+
+            // btnThem
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Location = new System.Drawing.Point(121, 7);
+            this.btnThem.Size = new System.Drawing.Size(105, 34);
+            this.btnThem.TabIndex = 1;
+            this.btnThem.Text = "Thêm";
+            this.btnThem.Variant = QLDSV_HTC.UI.ButtonVariant.Primary;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+
+            // btnSua
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Location = new System.Drawing.Point(234, 7);
+            this.btnSua.Size = new System.Drawing.Size(105, 34);
+            this.btnSua.TabIndex = 2;
+            this.btnSua.Text = "Sửa";
+            this.btnSua.Variant = QLDSV_HTC.UI.ButtonVariant.Primary;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+
+            // btnXoa
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Location = new System.Drawing.Point(347, 7);
+            this.btnXoa.Size = new System.Drawing.Size(105, 34);
+            this.btnXoa.TabIndex = 3;
+            this.btnXoa.Text = "Xóa";
+            this.btnXoa.Variant = QLDSV_HTC.UI.ButtonVariant.Danger;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+
+            // btnTaiLai
+            this.btnTaiLai.Name = "btnTaiLai";
+            this.btnTaiLai.Location = new System.Drawing.Point(460, 7);
+            this.btnTaiLai.Size = new System.Drawing.Size(105, 34);
+            this.btnTaiLai.TabIndex = 4;
+            this.btnTaiLai.Text = "Tải lại";
+            this.btnTaiLai.Variant = QLDSV_HTC.UI.ButtonVariant.Ghost;
+            this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
+
+            // ---- pnlNhap ----
+            this.pnlNhap.Name = "pnlNhap";
+            this.pnlNhap.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNhap.Height = 88;
+            this.pnlNhap.TabIndex = 0;
+            this.pnlNhap.BackColor = QLDSV_HTC.UI.Palette.Surface;
+            this.pnlNhap.Padding = new System.Windows.Forms.Padding(12, 10, 12, 8);
             this.pnlNhap.Controls.Add(this.lblMaLTC);
             this.pnlNhap.Controls.Add(this.txtMaLTC);
             this.pnlNhap.Controls.Add(this.lblNienKhoa);
@@ -408,13 +316,165 @@ namespace QLDSV_HTC.Forms
             this.pnlNhap.Controls.Add(this.numSVToiThieu);
             this.pnlNhap.Controls.Add(this.lblHuyLop);
             this.pnlNhap.Controls.Add(this.chkHuyLop);
+
+            // lblMaLTC
+            this.lblMaLTC.Name = "lblMaLTC";
+            this.lblMaLTC.AutoSize = true;
+            this.lblMaLTC.Location = new System.Drawing.Point(12, 15);
+            this.lblMaLTC.Text = "Mã:";
+            this.lblMaLTC.TabIndex = 0;
+
+            // txtMaLTC
+            this.txtMaLTC.Name = "txtMaLTC";
+            this.txtMaLTC.Location = new System.Drawing.Point(45, 12);
+            this.txtMaLTC.Size = new System.Drawing.Size(55, 23);
+            this.txtMaLTC.ReadOnly = true;
+            this.txtMaLTC.TabIndex = 1;
+
+            // lblNienKhoa
+            this.lblNienKhoa.Name = "lblNienKhoa";
+            this.lblNienKhoa.AutoSize = true;
+            this.lblNienKhoa.Location = new System.Drawing.Point(115, 15);
+            this.lblNienKhoa.Text = "Niên khóa (*):";
+            this.lblNienKhoa.TabIndex = 2;
+
+            // txtNienKhoa
+            this.txtNienKhoa.Name = "txtNienKhoa";
+            this.txtNienKhoa.Location = new System.Drawing.Point(200, 12);
+            this.txtNienKhoa.Size = new System.Drawing.Size(95, 23);
+            this.txtNienKhoa.MaxLength = 9;
+            this.txtNienKhoa.PlaceholderText = "2023-2024";
+            this.txtNienKhoa.TabIndex = 3;
+
+            // lblHocKy
+            this.lblHocKy.Name = "lblHocKy";
+            this.lblHocKy.AutoSize = true;
+            this.lblHocKy.Location = new System.Drawing.Point(310, 15);
+            this.lblHocKy.Text = "Học kỳ:";
+            this.lblHocKy.TabIndex = 4;
+
+            // numHocKy
+            this.numHocKy.Name = "numHocKy";
+            this.numHocKy.Location = new System.Drawing.Point(365, 12);
+            this.numHocKy.Size = new System.Drawing.Size(50, 23);
+            this.numHocKy.Minimum = 1;
+            this.numHocKy.Maximum = 3;
+            this.numHocKy.Value = 1;
+            this.numHocKy.TabIndex = 5;
+
+            // lblNhom
+            this.lblNhom.Name = "lblNhom";
+            this.lblNhom.AutoSize = true;
+            this.lblNhom.Location = new System.Drawing.Point(430, 15);
+            this.lblNhom.Text = "Nhóm:";
+            this.lblNhom.TabIndex = 6;
+
+            // numNhom
+            this.numNhom.Name = "numNhom";
+            this.numNhom.Location = new System.Drawing.Point(480, 12);
+            this.numNhom.Size = new System.Drawing.Size(50, 23);
+            this.numNhom.Minimum = 1;
+            this.numNhom.Maximum = 50;
+            this.numNhom.Value = 1;
+            this.numNhom.TabIndex = 7;
+
+            // lblMonHoc
+            this.lblMonHoc.Name = "lblMonHoc";
+            this.lblMonHoc.AutoSize = true;
+            this.lblMonHoc.Location = new System.Drawing.Point(545, 15);
+            this.lblMonHoc.Text = "Môn học (*):";
+            this.lblMonHoc.TabIndex = 8;
+
+            // cboMonHoc
+            this.cboMonHoc.Name = "cboMonHoc";
+            this.cboMonHoc.Location = new System.Drawing.Point(625, 12);
+            this.cboMonHoc.Size = new System.Drawing.Size(260, 23);
+            this.cboMonHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMonHoc.TabIndex = 9;
+
+            // lblKhoa
+            this.lblKhoa.Name = "lblKhoa";
+            this.lblKhoa.AutoSize = true;
+            this.lblKhoa.Location = new System.Drawing.Point(12, 51);
+            this.lblKhoa.Text = "Khoa:";
+            this.lblKhoa.TabIndex = 10;
+
+            // cboKhoa
+            this.cboKhoa.Name = "cboKhoa";
+            this.cboKhoa.Location = new System.Drawing.Point(60, 48);
+            this.cboKhoa.Size = new System.Drawing.Size(160, 23);
+            this.cboKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboKhoa.TabIndex = 11;
+            this.cboKhoa.SelectedIndexChanged += new System.EventHandler(this.cboKhoa_SelectedIndexChanged);
+
+            // lblGiangVien
+            this.lblGiangVien.Name = "lblGiangVien";
+            this.lblGiangVien.AutoSize = true;
+            this.lblGiangVien.Location = new System.Drawing.Point(235, 51);
+            this.lblGiangVien.Text = "Giảng viên (*):";
+            this.lblGiangVien.TabIndex = 12;
+
+            // cboGiangVien
+            this.cboGiangVien.Name = "cboGiangVien";
+            this.cboGiangVien.Location = new System.Drawing.Point(325, 48);
+            this.cboGiangVien.Size = new System.Drawing.Size(205, 23);
+            this.cboGiangVien.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboGiangVien.TabIndex = 13;
+
+            // lblSVToiThieu
+            this.lblSVToiThieu.Name = "lblSVToiThieu";
+            this.lblSVToiThieu.AutoSize = true;
+            this.lblSVToiThieu.Location = new System.Drawing.Point(545, 51);
+            this.lblSVToiThieu.Text = "SV tối thiểu:";
+            this.lblSVToiThieu.TabIndex = 14;
+
+            // numSVToiThieu
+            this.numSVToiThieu.Name = "numSVToiThieu";
+            this.numSVToiThieu.Location = new System.Drawing.Point(625, 48);
+            this.numSVToiThieu.Size = new System.Drawing.Size(70, 23);
+            this.numSVToiThieu.Maximum = 1000;
+            this.numSVToiThieu.TabIndex = 15;
+
+            // lblHuyLop
+            this.lblHuyLop.Name = "lblHuyLop";
+            this.lblHuyLop.AutoSize = true;
+            this.lblHuyLop.Location = new System.Drawing.Point(715, 51);
+            this.lblHuyLop.Text = "Hủy lớp:";
+            this.lblHuyLop.TabIndex = 16;
+
+            // chkHuyLop
+            this.chkHuyLop.Name = "chkHuyLop";
+            this.chkHuyLop.Location = new System.Drawing.Point(775, 50);
+            this.chkHuyLop.Size = new System.Drawing.Size(80, 20);
+            this.chkHuyLop.Text = "Đã hủy";
+            this.chkHuyLop.TabIndex = 17;
+
+            // ---- FrmLopTinChi ----
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.Name = "FrmLopTinChi";
+            this.Text = "Quản lý Lớp tín chỉ";
+            this.Load += new System.EventHandler(this.FrmLopTinChi_Load);
+            this.Shown += new System.EventHandler(this.FrmLopTinChi_Shown);
+
+            this.Controls.Add(this.dgv);
+            this.Controls.Add(this.pnlTim);
+            this.Controls.Add(this.pnlNut);
+            this.Controls.Add(this.pnlNhap);
+            this.Controls.Add(this.statusStrip);
+
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHocKy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNhom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSVToiThieu)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.pnlTim.ResumeLayout(false);
+            this.pnlTim.PerformLayout();
             this.pnlNut.ResumeLayout(false);
             this.pnlNhap.ResumeLayout(false);
+            this.pnlNhap.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }

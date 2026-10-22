@@ -18,7 +18,7 @@ public static class Toast
         try
         {
             var f = new FrmToast(message, kind);
-            var area = owner is { IsDisposed: false } ? owner!.Bounds : Screen.PrimaryScreen.WorkingArea;
+            var area = owner is { IsDisposed: false } ? owner.Bounds : (Screen.PrimaryScreen?.WorkingArea ?? Screen.GetWorkingArea(Point.Empty));
             f.Location = new Point(Math.Max(area.Left, area.Right - f.Width - 24), area.Top + 24);
             f.Show();
         }

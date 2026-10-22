@@ -21,184 +21,305 @@ namespace QLDSV_HTC.Forms
         /// <summary>Required method for Designer support - do not modify the contents of this method with the code editor.</summary>
         private void InitializeComponent()
         {
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.lblNguoiDung = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.mnuHeThong = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuDoiMatKhau = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuDangXuat = new System.Windows.Forms.ToolStripMenuItem();
-            this.sepHeThong = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuThoat = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuDanhMuc = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuKhoa = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuLop = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSinhVien = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuMonHoc = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuGiangVien = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuDaoTao = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuLopTinChi = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuNhapDiem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTaiKhoanSV = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuBangDiemCaNhan = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCuaSo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuXepTang = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuChiaNgang = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuChiaDoc = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuDongTatCa = new System.Windows.Forms.ToolStripMenuItem();
-            this.SuspendLayout();
-            // statusStrip
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.TabIndex = 1;
-            // lblNguoiDung
-            this.lblNguoiDung.Name = "lblNguoiDung";
-            this.lblNguoiDung.Text = "";
-            // menuStrip
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.MdiWindowListItem = this.mnuCuaSo;
-            this.menuStrip.Text = "menuStrip";
-            this.menuStrip.TabIndex = 0;
-            // mnuHeThong
-            this.mnuHeThong.Name = "mnuHeThong";
-            this.mnuHeThong.Text = "Hệ thống";
-            // mnuDoiMatKhau
-            this.mnuDoiMatKhau.Name = "mnuDoiMatKhau";
-            this.mnuDoiMatKhau.Text = "Đổi mật khẩu";
-            this.mnuDoiMatKhau.Click += new System.EventHandler(this.mnuDoiMatKhau_Click);
-            // mnuDangXuat
-            this.mnuDangXuat.Name = "mnuDangXuat";
-            this.mnuDangXuat.Text = "Đăng xuất";
-            this.mnuDangXuat.Click += new System.EventHandler(this.mnuDangXuat_Click);
-            // sepHeThong
-            this.sepHeThong.Name = "sepHeThong";
-            // mnuThoat
-            this.mnuThoat.Name = "mnuThoat";
-            this.mnuThoat.Text = "Thoát";
-            this.mnuThoat.Click += new System.EventHandler(this.mnuThoat_Click);
-            // mnuDanhMuc
-            this.mnuDanhMuc.Name = "mnuDanhMuc";
-            this.mnuDanhMuc.Text = "Danh mục";
-            // mnuKhoa
-            this.mnuKhoa.Name = "mnuKhoa";
-            this.mnuKhoa.Text = "Khoa";
-            this.mnuKhoa.Click += new System.EventHandler(this.mnuKhoa_Click);
-            // mnuLop
-            this.mnuLop.Name = "mnuLop";
-            this.mnuLop.Text = "Lớp";
-            this.mnuLop.Click += new System.EventHandler(this.mnuLop_Click);
-            // mnuSinhVien
-            this.mnuSinhVien.Name = "mnuSinhVien";
-            this.mnuSinhVien.Text = "Sinh viên";
-            this.mnuSinhVien.Click += new System.EventHandler(this.mnuSinhVien_Click);
-            // mnuMonHoc
-            this.mnuMonHoc.Name = "mnuMonHoc";
-            this.mnuMonHoc.Text = "Môn học";
-            this.mnuMonHoc.Click += new System.EventHandler(this.mnuMonHoc_Click);
-            // mnuGiangVien
-            this.mnuGiangVien.Name = "mnuGiangVien";
-            this.mnuGiangVien.Text = "Giảng viên";
-            this.mnuGiangVien.Click += new System.EventHandler(this.mnuGiangVien_Click);
-            // mnuDaoTao
-            this.mnuDaoTao.Name = "mnuDaoTao";
-            this.mnuDaoTao.Text = "Đào tạo";
-            // mnuLopTinChi
-            this.mnuLopTinChi.Name = "mnuLopTinChi";
-            this.mnuLopTinChi.Text = "Lớp tín chỉ";
-            this.mnuLopTinChi.Click += new System.EventHandler(this.mnuLopTinChi_Click);
-            // mnuNhapDiem
-            this.mnuNhapDiem.Name = "mnuNhapDiem";
-            this.mnuNhapDiem.Text = "Nhập điểm";
-            this.mnuNhapDiem.Click += new System.EventHandler(this.mnuNhapDiem_Click);
-            // mnuTaiKhoanSV
-            this.mnuTaiKhoanSV.Name = "mnuTaiKhoanSV";
-            this.mnuTaiKhoanSV.Text = "Sinh viên";
-            // mnuBangDiemCaNhan
-            this.mnuBangDiemCaNhan.Name = "mnuBangDiemCaNhan";
-            this.mnuBangDiemCaNhan.Text = "Bảng điểm cá nhân";
-            this.mnuBangDiemCaNhan.Click += new System.EventHandler(this.mnuBangDiemCaNhan_Click);
-            // mnuCuaSo
-            this.mnuCuaSo.Name = "mnuCuaSo";
-            this.mnuCuaSo.Text = "Cửa sổ";
-            // mnuXepTang
-            this.mnuXepTang.Name = "mnuXepTang";
-            this.mnuXepTang.Text = "Xếp tầng";
-            this.mnuXepTang.Click += new System.EventHandler(this.mnuXepTang_Click);
-            // mnuChiaNgang
-            this.mnuChiaNgang.Name = "mnuChiaNgang";
-            this.mnuChiaNgang.Text = "Chia đôi ngang";
-            this.mnuChiaNgang.Click += new System.EventHandler(this.mnuChiaNgang_Click);
-            // mnuChiaDoc
-            this.mnuChiaDoc.Name = "mnuChiaDoc";
-            this.mnuChiaDoc.Text = "Chia đôi dọc";
-            this.mnuChiaDoc.Click += new System.EventHandler(this.mnuChiaDoc_Click);
-            // mnuDongTatCa
-            this.mnuDongTatCa.Name = "mnuDongTatCa";
-            this.mnuDongTatCa.Text = "Đóng tất cả";
-            this.mnuDongTatCa.Click += new System.EventHandler(this.mnuDongTatCa_Click);
-            // this
+            // =====================================================================
+            // LAYOUT CHÍNH: Sidebar (trái) + Header (trên) + Content (giữa)
+            // =====================================================================
+            pnlSidebar = new QLDSV_HTC.UI.GradientPanel();
+            pnlSidebarHeader = new System.Windows.Forms.Panel();
+            picLogo = new System.Windows.Forms.PictureBox();
+            lblAppName = new System.Windows.Forms.Label();
+            lblAppSub = new System.Windows.Forms.Label();
+            pnlSidebarNav = new System.Windows.Forms.Panel();
+            // Nav buttons
+            btnNavDashboard = new QLDSV_HTC.UI.SidebarButton();
+            btnNavKhoa = new QLDSV_HTC.UI.SidebarButton();
+            btnNavLop = new QLDSV_HTC.UI.SidebarButton();
+            btnNavSinhVien = new QLDSV_HTC.UI.SidebarButton();
+            btnNavMonHoc = new QLDSV_HTC.UI.SidebarButton();
+            btnNavGiangVien = new QLDSV_HTC.UI.SidebarButton();
+            btnNavLopTinChi = new QLDSV_HTC.UI.SidebarButton();
+            btnNavNhapDiem = new QLDSV_HTC.UI.SidebarButton();
+            btnNavBangDiem = new QLDSV_HTC.UI.SidebarButton();
+            pnlSidebarFooter = new System.Windows.Forms.Panel();
+            btnNavDoiMatKhau = new QLDSV_HTC.UI.SidebarButton();
+            btnNavDangXuat = new QLDSV_HTC.UI.SidebarButton();
+
+            // Header
+            pnlHeader = new System.Windows.Forms.Panel();
+            lblPageTitle = new System.Windows.Forms.Label();
+            lblNguoiDung = new System.Windows.Forms.Label();
+
+            // Content area
+            pnlContent = new System.Windows.Forms.Panel();
+
+            // =====================================================================
+            // CẤU HÌNH
+            // =====================================================================
+            pnlSidebar.SuspendLayout();
+            pnlSidebarHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
+            pnlSidebarNav.SuspendLayout();
+            pnlSidebarFooter.SuspendLayout();
+            pnlHeader.SuspendLayout();
+            SuspendLayout();
+
+            // ---- SIDEBAR ----
+            pnlSidebar.Name = "pnlSidebar";
+            pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            pnlSidebar.Width = 230;
+            pnlSidebar.StartColor = QLDSV_HTC.UI.Palette.SidebarTop;
+            pnlSidebar.EndColor = QLDSV_HTC.UI.Palette.SidebarBottom;
+            pnlSidebar.Decorations = true;
+
+            // Sidebar Header: Logo + Tên ứng dụng
+            pnlSidebarHeader.Name = "pnlSidebarHeader";
+            pnlSidebarHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlSidebarHeader.Height = 85;
+            pnlSidebarHeader.BackColor = System.Drawing.Color.Transparent;
+            pnlSidebarHeader.Padding = new System.Windows.Forms.Padding(12, 12, 12, 8);
+
+            // picLogo
+            picLogo.Name = "picLogo";
+            picLogo.Location = new System.Drawing.Point(12, 16);
+            picLogo.Size = new System.Drawing.Size(48, 48);
+            picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            picLogo.BackColor = System.Drawing.Color.Transparent;
+
+            lblAppName.Name = "lblAppName";
+            lblAppName.Text = "QUẢN LÝ\r\nSINH VIÊN";
+            lblAppName.Font = new System.Drawing.Font(QLDSV_HTC.UI.Palette.FontFamily, 11F, System.Drawing.FontStyle.Bold);
+            lblAppName.ForeColor = System.Drawing.Color.White;
+            lblAppName.Location = new System.Drawing.Point(68, 14);
+            lblAppName.AutoSize = true;
+
+            lblAppSub.Name = "lblAppSub";
+            lblAppSub.Text = "UTC Portal";
+            lblAppSub.Font = QLDSV_HTC.UI.Palette.FontSmall;
+            lblAppSub.ForeColor = System.Drawing.Color.FromArgb(140, 180, 230);
+            lblAppSub.Location = new System.Drawing.Point(68, 54);
+            lblAppSub.AutoSize = true;
+
+            pnlSidebarHeader.Controls.Add(picLogo);
+            pnlSidebarHeader.Controls.Add(lblAppName);
+            pnlSidebarHeader.Controls.Add(lblAppSub);
+
+            // Sidebar Nav: Danh sách nút điều hướng
+            pnlSidebarNav.Name = "pnlSidebarNav";
+            pnlSidebarNav.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlSidebarNav.BackColor = System.Drawing.Color.Transparent;
+            pnlSidebarNav.Padding = new System.Windows.Forms.Padding(8, 8, 8, 0);
+
+            // --- Dashboard ---
+            btnNavDashboard.Name = "btnNavDashboard";
+            btnNavDashboard.Text = "Tổng quan";
+            btnNavDashboard.Icon = QLDSV_HTC.UI.NavIcon.Dashboard;
+            btnNavDashboard.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavDashboard.Height = 42;
+            btnNavDashboard.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavDashboard.Click += new System.EventHandler(this.btnNavDashboard_Click);
+
+            // --- Khoa ---
+            btnNavKhoa.Name = "btnNavKhoa";
+            btnNavKhoa.Text = "Quản lý khoa";
+            btnNavKhoa.Icon = QLDSV_HTC.UI.NavIcon.Khoa;
+            btnNavKhoa.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavKhoa.Height = 42;
+            btnNavKhoa.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavKhoa.Click += new System.EventHandler(this.btnNavKhoa_Click);
+
+            // --- Lớp ---
+            btnNavLop.Name = "btnNavLop";
+            btnNavLop.Text = "Quản lý lớp";
+            btnNavLop.Icon = QLDSV_HTC.UI.NavIcon.Lop;
+            btnNavLop.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavLop.Height = 42;
+            btnNavLop.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavLop.Click += new System.EventHandler(this.btnNavLop_Click);
+
+            // --- Sinh viên ---
+            btnNavSinhVien.Name = "btnNavSinhVien";
+            btnNavSinhVien.Text = "Quản lý sinh viên";
+            btnNavSinhVien.Icon = QLDSV_HTC.UI.NavIcon.SinhVien;
+            btnNavSinhVien.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavSinhVien.Height = 42;
+            btnNavSinhVien.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavSinhVien.Click += new System.EventHandler(this.btnNavSinhVien_Click);
+
+            // --- Môn học ---
+            btnNavMonHoc.Name = "btnNavMonHoc";
+            btnNavMonHoc.Text = "Quản lý môn học";
+            btnNavMonHoc.Icon = QLDSV_HTC.UI.NavIcon.MonHoc;
+            btnNavMonHoc.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavMonHoc.Height = 42;
+            btnNavMonHoc.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavMonHoc.Click += new System.EventHandler(this.btnNavMonHoc_Click);
+
+            // --- Giảng viên ---
+            btnNavGiangVien.Name = "btnNavGiangVien";
+            btnNavGiangVien.Text = "Quản lý giảng viên";
+            btnNavGiangVien.Icon = QLDSV_HTC.UI.NavIcon.GiangVien;
+            btnNavGiangVien.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavGiangVien.Height = 42;
+            btnNavGiangVien.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavGiangVien.Click += new System.EventHandler(this.btnNavGiangVien_Click);
+
+            // --- Lớp tín chỉ ---
+            btnNavLopTinChi.Name = "btnNavLopTinChi";
+            btnNavLopTinChi.Text = "Lớp tín chỉ";
+            btnNavLopTinChi.Icon = QLDSV_HTC.UI.NavIcon.LopTinChi;
+            btnNavLopTinChi.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavLopTinChi.Height = 42;
+            btnNavLopTinChi.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavLopTinChi.Click += new System.EventHandler(this.btnNavLopTinChi_Click);
+
+            // --- Nhập điểm ---
+            btnNavNhapDiem.Name = "btnNavNhapDiem";
+            btnNavNhapDiem.Text = "Nhập điểm";
+            btnNavNhapDiem.Icon = QLDSV_HTC.UI.NavIcon.NhapDiem;
+            btnNavNhapDiem.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavNhapDiem.Height = 42;
+            btnNavNhapDiem.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavNhapDiem.Click += new System.EventHandler(this.btnNavNhapDiem_Click);
+
+            // --- Bảng điểm ---
+            btnNavBangDiem.Name = "btnNavBangDiem";
+            btnNavBangDiem.Text = "Bảng điểm cá nhân";
+            btnNavBangDiem.Icon = QLDSV_HTC.UI.NavIcon.BangDiem;
+            btnNavBangDiem.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavBangDiem.Height = 42;
+            btnNavBangDiem.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavBangDiem.Click += new System.EventHandler(this.btnNavBangDiem_Click);
+
+            // Thứ tự Dock.Top: add theo thứ tự ngược
+            pnlSidebarNav.Controls.Add(btnNavBangDiem);
+            pnlSidebarNav.Controls.Add(btnNavNhapDiem);
+            pnlSidebarNav.Controls.Add(btnNavLopTinChi);
+            pnlSidebarNav.Controls.Add(btnNavGiangVien);
+            pnlSidebarNav.Controls.Add(btnNavMonHoc);
+            pnlSidebarNav.Controls.Add(btnNavSinhVien);
+            pnlSidebarNav.Controls.Add(btnNavLop);
+            pnlSidebarNav.Controls.Add(btnNavKhoa);
+            pnlSidebarNav.Controls.Add(btnNavDashboard);
+
+            // Sidebar Footer: đổi mật khẩu + đăng xuất
+            pnlSidebarFooter.Name = "pnlSidebarFooter";
+            pnlSidebarFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            pnlSidebarFooter.Height = 100;
+            pnlSidebarFooter.BackColor = System.Drawing.Color.Transparent;
+            pnlSidebarFooter.Padding = new System.Windows.Forms.Padding(8, 4, 8, 4);
+
+            btnNavDoiMatKhau.Name = "btnNavDoiMatKhau";
+            btnNavDoiMatKhau.Text = "Đổi mật khẩu";
+            btnNavDoiMatKhau.Icon = QLDSV_HTC.UI.NavIcon.DoiMatKhau;
+            btnNavDoiMatKhau.Dock = System.Windows.Forms.DockStyle.Bottom;
+            btnNavDoiMatKhau.Height = 40;
+            btnNavDoiMatKhau.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavDoiMatKhau.Click += new System.EventHandler(this.btnNavDoiMatKhau_Click);
+
+            btnNavDangXuat.Name = "btnNavDangXuat";
+            btnNavDangXuat.Text = "Đăng xuất";
+            btnNavDangXuat.Icon = QLDSV_HTC.UI.NavIcon.Logout;
+            btnNavDangXuat.Dock = System.Windows.Forms.DockStyle.Bottom;
+            btnNavDangXuat.Height = 40;
+            btnNavDangXuat.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavDangXuat.Click += new System.EventHandler(this.btnNavDangXuat_Click);
+
+            pnlSidebarFooter.Controls.Add(btnNavDoiMatKhau);
+            pnlSidebarFooter.Controls.Add(btnNavDangXuat);
+
+            // Lắp sidebar
+            pnlSidebar.Controls.Add(pnlSidebarNav);
+            pnlSidebar.Controls.Add(pnlSidebarFooter);
+            pnlSidebar.Controls.Add(pnlSidebarHeader);
+
+            // ---- HEADER ----
+            pnlHeader.Name = "pnlHeader";
+            pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlHeader.Height = 56;
+            pnlHeader.BackColor = System.Drawing.Color.White;
+            pnlHeader.Padding = new System.Windows.Forms.Padding(24, 0, 24, 0);
+
+            lblPageTitle.Name = "lblPageTitle";
+            lblPageTitle.Text = "Tổng quan";
+            lblPageTitle.Font = new System.Drawing.Font(QLDSV_HTC.UI.Palette.FontFamily, 14F, System.Drawing.FontStyle.Bold);
+            lblPageTitle.ForeColor = QLDSV_HTC.UI.Palette.Navy;
+            lblPageTitle.Location = new System.Drawing.Point(24, 14);
+            lblPageTitle.AutoSize = true;
+
+            lblNguoiDung.Name = "lblNguoiDung";
+            lblNguoiDung.Text = "";
+            lblNguoiDung.Font = QLDSV_HTC.UI.Palette.FontSmall;
+            lblNguoiDung.ForeColor = QLDSV_HTC.UI.Palette.Muted;
+            lblNguoiDung.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            lblNguoiDung.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            lblNguoiDung.AutoSize = false;
+            lblNguoiDung.Size = new System.Drawing.Size(500, 56);
+
+            pnlHeader.Controls.Add(lblPageTitle);
+            pnlHeader.Controls.Add(lblNguoiDung);
+            pnlHeader.Paint += PnlHeader_Paint;
+
+            // ---- CONTENT ----
+            pnlContent.Name = "pnlContent";
+            pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlContent.BackColor = QLDSV_HTC.UI.Palette.Canvas;
+            pnlContent.Padding = new System.Windows.Forms.Padding(0);
+
+            // Lắp vào form
+            this.Controls.Add(pnlContent);
+            this.Controls.Add(pnlHeader);
+            this.Controls.Add(pnlSidebar);
+
+            // ---- FORM ----
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1100, 700);
-            this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuStrip;
-            this.MinimumSize = new System.Drawing.Size(900, 600);
-            this.Text = "Quản lý điểm sinh viên - QLDSV_HTC";
+            this.ClientSize = new System.Drawing.Size(1280, 800);
+            this.MinimumSize = new System.Drawing.Size(1024, 680);
+            this.Text = "Quản lý sinh viên — UTC Portal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Name = "FrmMain";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.menuStrip);
-            this.statusStrip.Items.Add(this.lblNguoiDung);
-            this.menuStrip.Items.Add(this.mnuHeThong);
-            this.menuStrip.Items.Add(this.mnuDanhMuc);
-            this.menuStrip.Items.Add(this.mnuDaoTao);
-            this.menuStrip.Items.Add(this.mnuTaiKhoanSV);
-            this.menuStrip.Items.Add(this.mnuCuaSo);
-            this.mnuHeThong.DropDownItems.Add(this.mnuDoiMatKhau);
-            this.mnuHeThong.DropDownItems.Add(this.mnuDangXuat);
-            this.mnuHeThong.DropDownItems.Add(this.sepHeThong);
-            this.mnuHeThong.DropDownItems.Add(this.mnuThoat);
-            this.mnuDanhMuc.DropDownItems.Add(this.mnuKhoa);
-            this.mnuDanhMuc.DropDownItems.Add(this.mnuLop);
-            this.mnuDanhMuc.DropDownItems.Add(this.mnuSinhVien);
-            this.mnuDanhMuc.DropDownItems.Add(this.mnuMonHoc);
-            this.mnuDanhMuc.DropDownItems.Add(this.mnuGiangVien);
-            this.mnuDaoTao.DropDownItems.Add(this.mnuLopTinChi);
-            this.mnuDaoTao.DropDownItems.Add(this.mnuNhapDiem);
-            this.mnuTaiKhoanSV.DropDownItems.Add(this.mnuBangDiemCaNhan);
-            this.mnuCuaSo.DropDownItems.Add(this.mnuXepTang);
-            this.mnuCuaSo.DropDownItems.Add(this.mnuChiaNgang);
-            this.mnuCuaSo.DropDownItems.Add(this.mnuChiaDoc);
-            this.mnuCuaSo.DropDownItems.Add(this.mnuDongTatCa);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+
+            pnlSidebar.ResumeLayout(false);
+            pnlSidebarHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
+            pnlSidebarNav.ResumeLayout(false);
+            pnlSidebarFooter.ResumeLayout(false);
+            pnlHeader.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel lblNguoiDung;
-        private System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.ToolStripMenuItem mnuHeThong;
-        private System.Windows.Forms.ToolStripMenuItem mnuDoiMatKhau;
-        private System.Windows.Forms.ToolStripMenuItem mnuDangXuat;
-        private System.Windows.Forms.ToolStripSeparator sepHeThong;
-        private System.Windows.Forms.ToolStripMenuItem mnuThoat;
-        private System.Windows.Forms.ToolStripMenuItem mnuDanhMuc;
-        private System.Windows.Forms.ToolStripMenuItem mnuKhoa;
-        private System.Windows.Forms.ToolStripMenuItem mnuLop;
-        private System.Windows.Forms.ToolStripMenuItem mnuSinhVien;
-        private System.Windows.Forms.ToolStripMenuItem mnuMonHoc;
-        private System.Windows.Forms.ToolStripMenuItem mnuGiangVien;
-        private System.Windows.Forms.ToolStripMenuItem mnuDaoTao;
-        private System.Windows.Forms.ToolStripMenuItem mnuLopTinChi;
-        private System.Windows.Forms.ToolStripMenuItem mnuNhapDiem;
-        private System.Windows.Forms.ToolStripMenuItem mnuTaiKhoanSV;
-        private System.Windows.Forms.ToolStripMenuItem mnuBangDiemCaNhan;
-        private System.Windows.Forms.ToolStripMenuItem mnuCuaSo;
-        private System.Windows.Forms.ToolStripMenuItem mnuXepTang;
-        private System.Windows.Forms.ToolStripMenuItem mnuChiaNgang;
-        private System.Windows.Forms.ToolStripMenuItem mnuChiaDoc;
-        private System.Windows.Forms.ToolStripMenuItem mnuDongTatCa;
+        private void PnlHeader_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            // Đường kẻ dưới header
+            using var pen = new System.Drawing.Pen(QLDSV_HTC.UI.Palette.Border, 1);
+            e.Graphics.DrawLine(pen, 0, pnlHeader.Height - 1, pnlHeader.Width, pnlHeader.Height - 1);
+        }
+
+        private QLDSV_HTC.UI.GradientPanel pnlSidebar;
+        private System.Windows.Forms.Panel pnlSidebarHeader;
+        private System.Windows.Forms.PictureBox picLogo;
+        private System.Windows.Forms.Label lblAppName;
+        private System.Windows.Forms.Label lblAppSub;
+        private System.Windows.Forms.Panel pnlSidebarNav;
+        private QLDSV_HTC.UI.SidebarButton btnNavDashboard;
+        private QLDSV_HTC.UI.SidebarButton btnNavKhoa;
+        private QLDSV_HTC.UI.SidebarButton btnNavLop;
+        private QLDSV_HTC.UI.SidebarButton btnNavSinhVien;
+        private QLDSV_HTC.UI.SidebarButton btnNavMonHoc;
+        private QLDSV_HTC.UI.SidebarButton btnNavGiangVien;
+        private QLDSV_HTC.UI.SidebarButton btnNavLopTinChi;
+        private QLDSV_HTC.UI.SidebarButton btnNavNhapDiem;
+        private QLDSV_HTC.UI.SidebarButton btnNavBangDiem;
+        private System.Windows.Forms.Panel pnlSidebarFooter;
+        private QLDSV_HTC.UI.SidebarButton btnNavDoiMatKhau;
+        private QLDSV_HTC.UI.SidebarButton btnNavDangXuat;
+        private System.Windows.Forms.Panel pnlHeader;
+        private System.Windows.Forms.Label lblPageTitle;
+        private System.Windows.Forms.Label lblNguoiDung;
+        private System.Windows.Forms.Panel pnlContent;
     }
 }

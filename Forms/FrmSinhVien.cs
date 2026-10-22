@@ -318,4 +318,9 @@ public partial class FrmSinhVien : BaseForm
         this.lblTrangThai.Text = "Đã xóa sinh viên.";
         MessageBox.Show("Đã xóa sinh viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
+
+    private void txtTen_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }

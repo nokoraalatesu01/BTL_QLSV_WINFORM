@@ -395,12 +395,6 @@ namespace QLDSV_HTC.Forms
         #endregion
 
         private System.Windows.Forms.DataGridView dgv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHocVi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHocHam;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colChuyenMon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTenKhoa;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel lblTrangThai;
         private System.Windows.Forms.Panel pnlTim;

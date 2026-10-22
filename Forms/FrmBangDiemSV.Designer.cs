@@ -93,15 +93,6 @@ namespace QLDSV_HTC.Forms
         #endregion
 
         private System.Windows.Forms.DataGridView dgv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNienKhoa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHocKy;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaMH;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTenMH;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNhom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDiemCC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDiemGK;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDiemCK;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDiemTK;
         private System.Windows.Forms.Label lblTrungBinh;
         private System.Windows.Forms.Label lblThongTin;
     }

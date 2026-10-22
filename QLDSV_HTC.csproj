@@ -25,4 +25,15 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="GUIMage\LogoUTC.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="CopyLogoToResources" BeforeTargets="BeforeBuild">
+    <MakeDir Directories="$(ProjectDir)Resources\img" Condition="!Exists('$(ProjectDir)Resources\img')" />
+    <Copy SourceFiles="$(ProjectDir)GUIMage\LogoUTC.png" DestinationFolder="$(ProjectDir)Resources\img\" SkipUnchangedFiles="true" Condition="Exists('$(ProjectDir)GUIMage\LogoUTC.png')" />
+  </Target>
+
 </Project>

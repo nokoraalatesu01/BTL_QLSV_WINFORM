@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using QLDSV_HTC.BLL;
+using QLDSV_HTC.UI;
 
 namespace QLDSV_HTC.Forms
 {
     /// <summary>Form chính (MDI): menu hiển thị theo quyền của người dùng đang đăng nhập.</summary>
-    public partial class FrmMain : Form
+    public partial class FrmMain : BaseForm
     {
         private readonly Dictionary<Type, Form> _formDangMo = new Dictionary<Type, Form>();
 
@@ -16,6 +17,13 @@ namespace QLDSV_HTC.Forms
         public FrmMain()
         {
             InitializeComponent();
+            foreach (Control c in this.Controls)
+            {
+                if (c is MdiClient mc)
+                    mc.BackColor = Palette.Canvas;
+            }
+            this.lblNguoiDung.Font = Palette.FontSmall;
+            this.lblNguoiDung.ForeColor = Palette.Muted;
         }
 
         private void FrmMain_Load(object sender, EventArgs e)

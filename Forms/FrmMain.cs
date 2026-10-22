@@ -212,54 +212,10 @@ namespace QLDSV_HTC.Forms
         {
             try
             {
-                SaoChepLogo();
                 var logo = LayHinhAnh("LogoUTC.png") ?? LayHinhAnh("logo_login.png");
                 if (logo != null && this.picLogo != null)
                 {
                     this.picLogo.Image = logo;
-                }
-            }
-            catch { }
-        }
-
-        private static void SaoChepLogo()
-        {
-            try
-            {
-                string[] cacNguon = new string[]
-                {
-                    Path.Combine(Application.StartupPath, "GUIMage", "LogoUTC.png"),
-                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GUIMage", "LogoUTC.png"),
-                    Path.Combine(Application.StartupPath, "..", "..", "..", "GUIMage", "LogoUTC.png"),
-                    Path.Combine(Directory.GetCurrentDirectory(), "GUIMage", "LogoUTC.png")
-                };
-
-                string[] cacDich = new string[]
-                {
-                    Path.Combine(Application.StartupPath, "Resources", "img", "LogoUTC.png"),
-                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "img", "LogoUTC.png"),
-                    Path.Combine(Application.StartupPath, "..", "..", "..", "Resources", "img", "LogoUTC.png"),
-                    Path.Combine(Directory.GetCurrentDirectory(), "Resources", "img", "LogoUTC.png")
-                };
-
-                string? src = null;
-                foreach (var s in cacNguon)
-                {
-                    if (File.Exists(s)) { src = s; break; }
-                }
-
-                if (src != null)
-                {
-                    foreach (var d in cacDich)
-                    {
-                        try
-                        {
-                            string dir = Path.GetDirectoryName(d)!;
-                            if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-                            if (!File.Exists(d)) File.Copy(src, d, true);
-                        }
-                        catch { }
-                    }
                 }
             }
             catch { }
@@ -274,11 +230,7 @@ namespace QLDSV_HTC.Forms
                     Path.Combine(Application.StartupPath, "Resources", "img", tenTep),
                     Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "img", tenTep),
                     Path.Combine(Application.StartupPath, "..", "..", "..", "Resources", "img", tenTep),
-                    Path.Combine(Directory.GetCurrentDirectory(), "Resources", "img", tenTep),
-                    Path.Combine(Application.StartupPath, "GUIMage", tenTep),
-                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GUIMage", tenTep),
-                    Path.Combine(Application.StartupPath, "..", "..", "..", "GUIMage", tenTep),
-                    Path.Combine(Directory.GetCurrentDirectory(), "GUIMage", tenTep)
+                    Path.Combine(Directory.GetCurrentDirectory(), "Resources", "img", tenTep)
                 };
 
                 foreach (var duongDan in cacDuongDan)

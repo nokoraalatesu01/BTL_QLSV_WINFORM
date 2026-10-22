@@ -52,4 +52,5 @@ public partial class FrmDoiMatKhau : BaseForm
     {
         this.Close();
     }
+
 }

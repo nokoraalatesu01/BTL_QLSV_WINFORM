@@ -27,13 +27,13 @@ namespace QLDSV_HTC.Forms
             this.pnlTim = new System.Windows.Forms.Panel();
             this.lblTim = new System.Windows.Forms.Label();
             this.txtTim = new System.Windows.Forms.TextBox();
-            this.btnTim = new System.Windows.Forms.Button();
+            this.btnTim = new QLDSV_HTC.UI.ModernButton();
             this.pnlNut = new System.Windows.Forms.Panel();
-            this.btnNhapMoi = new System.Windows.Forms.Button();
-            this.btnThem = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
-            this.btnTaiLai = new System.Windows.Forms.Button();
+            this.btnNhapMoi = new QLDSV_HTC.UI.ModernButton();
+            this.btnThem = new QLDSV_HTC.UI.ModernButton();
+            this.btnSua = new QLDSV_HTC.UI.ModernButton();
+            this.btnXoa = new QLDSV_HTC.UI.ModernButton();
+            this.btnTaiLai = new QLDSV_HTC.UI.ModernButton();
             this.pnlNhap = new System.Windows.Forms.Panel();
             this.lblMaGV = new System.Windows.Forms.Label();
             this.txtMaGV = new System.Windows.Forms.TextBox();
@@ -62,10 +62,9 @@ namespace QLDSV_HTC.Forms
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.AllowUserToResizeRows = false;
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv.BackgroundColor = System.Drawing.Color.White;
-            this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.ColumnHeadersHeight = 29;
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.dgv.Location = new System.Drawing.Point(0, 370);
             this.dgv.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgv.MultiSelect = false;
@@ -134,7 +133,6 @@ namespace QLDSV_HTC.Forms
             this.btnTim.Size = new System.Drawing.Size(129, 49);
             this.btnTim.TabIndex = 21;
             this.btnTim.Text = "Tìm";
-            this.btnTim.UseVisualStyleBackColor = true;
             this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
             // 
             // pnlNut
@@ -145,6 +143,8 @@ namespace QLDSV_HTC.Forms
             this.pnlNut.Controls.Add(this.btnXoa);
             this.pnlNut.Controls.Add(this.btnTaiLai);
             this.pnlNut.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNut.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            this.pnlNut.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.pnlNut.Location = new System.Drawing.Point(0, 236);
             this.pnlNut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlNut.Name = "pnlNut";
@@ -159,7 +159,6 @@ namespace QLDSV_HTC.Forms
             this.btnNhapMoi.Size = new System.Drawing.Size(129, 49);
             this.btnNhapMoi.TabIndex = 14;
             this.btnNhapMoi.Text = "Nhập mới";
-            this.btnNhapMoi.UseVisualStyleBackColor = true;
             this.btnNhapMoi.Click += new System.EventHandler(this.btnNhapMoi_Click);
             // 
             // btnThem
@@ -170,7 +169,6 @@ namespace QLDSV_HTC.Forms
             this.btnThem.Size = new System.Drawing.Size(129, 49);
             this.btnThem.TabIndex = 15;
             this.btnThem.Text = "Thêm";
-            this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnSua
@@ -181,7 +179,6 @@ namespace QLDSV_HTC.Forms
             this.btnSua.Size = new System.Drawing.Size(129, 49);
             this.btnSua.TabIndex = 16;
             this.btnSua.Text = "Sửa";
-            this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
@@ -192,7 +189,6 @@ namespace QLDSV_HTC.Forms
             this.btnXoa.Size = new System.Drawing.Size(129, 49);
             this.btnXoa.TabIndex = 17;
             this.btnXoa.Text = "Xóa";
-            this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnTaiLai
@@ -203,7 +199,6 @@ namespace QLDSV_HTC.Forms
             this.btnTaiLai.Size = new System.Drawing.Size(129, 49);
             this.btnTaiLai.TabIndex = 18;
             this.btnTaiLai.Text = "Tải lại";
-            this.btnTaiLai.UseVisualStyleBackColor = true;
             this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
             // 
             // pnlNhap
@@ -223,6 +218,8 @@ namespace QLDSV_HTC.Forms
             this.pnlNhap.Controls.Add(this.lblChuyenMon);
             this.pnlNhap.Controls.Add(this.txtChuyenMon);
             this.pnlNhap.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNhap.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            this.pnlNhap.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.pnlNhap.Location = new System.Drawing.Point(0, 0);
             this.pnlNhap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlNhap.Name = "pnlNhap";
@@ -400,13 +397,13 @@ namespace QLDSV_HTC.Forms
         private System.Windows.Forms.Panel pnlTim;
         private System.Windows.Forms.Label lblTim;
         private System.Windows.Forms.TextBox txtTim;
-        private System.Windows.Forms.Button btnTim;
+        private QLDSV_HTC.UI.ModernButton btnTim;
         private System.Windows.Forms.Panel pnlNut;
-        private System.Windows.Forms.Button btnNhapMoi;
-        private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.Button btnSua;
-        private System.Windows.Forms.Button btnXoa;
-        private System.Windows.Forms.Button btnTaiLai;
+        private QLDSV_HTC.UI.ModernButton btnNhapMoi;
+        private QLDSV_HTC.UI.ModernButton btnThem;
+        private QLDSV_HTC.UI.ModernButton btnSua;
+        private QLDSV_HTC.UI.ModernButton btnXoa;
+        private QLDSV_HTC.UI.ModernButton btnTaiLai;
         private System.Windows.Forms.Panel pnlNhap;
         private System.Windows.Forms.Label lblMaGV;
         private System.Windows.Forms.TextBox txtMaGV;

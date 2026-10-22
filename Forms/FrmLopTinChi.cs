@@ -17,43 +17,77 @@ public partial class FrmLopTinChi : Form
     }
 
     // ---------------- Sự kiện ----------------
-    private void FrmLopTinChi_Load(object? sender, EventArgs e) => UiHelper.Run(() =>
+    private void FrmLopTinChi_Load(object sender, EventArgs e)
     {
-        UiHelper.BindCombo(cboMonHoc, LopTinChiBLL.LayMonHocChoChon(), "HienThi", "MaMH");
-        UiHelper.BindCombo(cboKhoa, LopTinChiBLL.LayKhoaChoChon(), "TenKhoa", "MaKhoa");
-        NapGiangVienTheoKhoa();
-
-        cboLocHocKy.Items.AddRange(new object[] { TatCa, "1", "2", "3" });
-        cboLocHocKy.SelectedIndex = 0;
-        NapBoLocNienKhoa();
-        if (!_coQuyenGhi)
+        UiHelper.Run(() =>
         {
-            // Chỉ xem: ẩn ô nhập và các nút thay đổi dữ liệu.
-            pnlNhap.Visible = false;
-            btnNhapMoi.Visible = btnThem.Visible = btnSua.Visible = btnXoa.Visible = false;
-            lblTrangThai.Text = "Bạn chỉ có quyền xem danh sách này.";
-        }
-        TaiDuLieu();
-    });
+            UiHelper.BindCombo(cboMonHoc, LopTinChiBLL.LayMonHocChoChon(), "HienThi", "MaMH");
+            UiHelper.BindCombo(cboKhoa, LopTinChiBLL.LayKhoaChoChon(), "TenKhoa", "MaKhoa");
+            NapGiangVienTheoKhoa();
 
-    private void FrmLopTinChi_Shown(object? sender, EventArgs e) => UiHelper.Run(NhapMoi);
-    private void btnNhapMoi_Click(object? sender, EventArgs e) => UiHelper.Run(NhapMoi);
-    private void btnTaiLai_Click(object? sender, EventArgs e) => UiHelper.Run(TaiDuLieu);
-    private void btnLoc_Click(object? sender, EventArgs e) => UiHelper.Run(TaiDuLieu);
-    private void btnThem_Click(object? sender, EventArgs e) => UiHelper.Run(() =>
+            cboLocHocKy.Items.AddRange(new object[] { TatCa, "1", "2", "3" });
+            cboLocHocKy.SelectedIndex = 0;
+            NapBoLocNienKhoa();
+            if (!_coQuyenGhi)
+            {
+                // Chỉ xem: ẩn ô nhập và các nút thay đổi dữ liệu.
+                pnlNhap.Visible = false;
+                btnNhapMoi.Visible = btnThem.Visible = btnSua.Visible = btnXoa.Visible = false;
+                lblTrangThai.Text = "Bạn chỉ có quyền xem danh sách này.";
+            }
+            TaiDuLieu();
+        });
+    }
+
+    private void FrmLopTinChi_Shown(object sender, EventArgs e)
     {
-        if (dgv.SelectedRows.Count > 0)
-        {
-            UiHelper.ShowWarning("Đang chọn một dòng trong danh sách. Bấm 'Nhập mới' trước khi thêm bản ghi mới.");
-            return;
-        }
-        Them();
-    });
-    private void btnSua_Click(object? sender, EventArgs e) => UiHelper.Run(Sua);
-    private void btnXoa_Click(object? sender, EventArgs e) => UiHelper.Run(Xoa);
-    private void cboKhoa_SelectedIndexChanged(object? sender, EventArgs e) => UiHelper.Run(NapGiangVienTheoKhoa);
+        UiHelper.Run(NhapMoi);
+    }
 
-    private void dgv_SelectionChanged(object? sender, EventArgs e)
+    private void btnNhapMoi_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(NhapMoi);
+    }
+
+    private void btnTaiLai_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(TaiDuLieu);
+    }
+
+    private void btnLoc_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(TaiDuLieu);
+    }
+
+    private void btnThem_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(() =>
+        {
+            if (dgv.SelectedRows.Count > 0)
+            {
+                UiHelper.ShowWarning("Đang chọn một dòng trong danh sách. Bấm 'Nhập mới' trước khi thêm bản ghi mới.");
+                return;
+            }
+            Them();
+        });
+    }
+
+    private void btnSua_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(Sua);
+    }
+
+    private void btnXoa_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(Xoa);
+    }
+
+    private void cboKhoa_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        UiHelper.Run(NapGiangVienTheoKhoa);
+    }
+
+    private void dgv_SelectionChanged(object sender, EventArgs e)
     {
         if (_dangTai || dgv.SelectedRows.Count == 0) return;
         if (dgv.SelectedRows[0].DataBoundItem is LopTinChi item)

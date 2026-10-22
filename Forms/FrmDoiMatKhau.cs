@@ -10,12 +10,18 @@ public partial class FrmDoiMatKhau : Form
         InitializeComponent();
     }
 
-    private void btnDoi_Click(object? sender, EventArgs e) => UiHelper.Run(() =>
+    private void btnDoi_Click(object sender, EventArgs e)
     {
-        AuthBLL.DoiMatKhau(txtCu.Text, txtMoi.Text, txtXacNhan.Text);
-        UiHelper.ShowInfo("Đã đổi mật khẩu thành công.");
-        Close();
-    });
+        UiHelper.Run(() =>
+        {
+            AuthBLL.DoiMatKhau(txtCu.Text, txtMoi.Text, txtXacNhan.Text);
+            UiHelper.ShowInfo("Đã đổi mật khẩu thành công.");
+            Close();
+        });
+    }
 
-    private void btnHuy_Click(object? sender, EventArgs e) => Close();
+    private void btnHuy_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
 }

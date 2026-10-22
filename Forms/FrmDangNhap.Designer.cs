@@ -21,128 +21,125 @@ namespace QLDSV_HTC.Forms
         /// <summary>Required method for Designer support - do not modify the contents of this method with the code editor.</summary>
         private void InitializeComponent()
         {
-            lblTieuDe = new Label();
-            lblTenDangNhap = new Label();
-            txtTenDangNhap = new TextBox();
-            lblMatKhau = new Label();
-            txtMatKhau = new TextBox();
-            btnDangNhap = new Button();
-            btnThoat = new Button();
-            lblGoiY = new Label();
-            SuspendLayout();
+            this.lblTieuDe = new System.Windows.Forms.Label();
+            this.lblTenDangNhap = new System.Windows.Forms.Label();
+            this.txtTenDangNhap = new System.Windows.Forms.TextBox();
+            this.lblMatKhau = new System.Windows.Forms.Label();
+            this.txtMatKhau = new System.Windows.Forms.TextBox();
+            this.btnDangNhap = new System.Windows.Forms.Button();
+            this.btnThoat = new System.Windows.Forms.Button();
+            this.lblGoiY = new System.Windows.Forms.Label();
+            this.SuspendLayout();
             // 
             // lblTieuDe
             // 
-            lblTieuDe.Dock = DockStyle.Top;
-            lblTieuDe.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblTieuDe.Location = new Point(0, 0);
-            lblTieuDe.Margin = new Padding(4, 0, 4, 0);
-            lblTieuDe.Name = "lblTieuDe";
-            lblTieuDe.Size = new Size(566, 80);
-            lblTieuDe.TabIndex = 0;
-            lblTieuDe.Text = "QUẢN LÝ ĐIỂM SINH VIÊN";
-            lblTieuDe.TextAlign = ContentAlignment.MiddleCenter;
+            this.lblTieuDe.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTieuDe.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.lblTieuDe.Location = new System.Drawing.Point(0, 0);
+            this.lblTieuDe.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTieuDe.Name = "lblTieuDe";
+            this.lblTieuDe.Size = new System.Drawing.Size(566, 80);
+            this.lblTieuDe.TabIndex = 0;
+            this.lblTieuDe.Text = "QUẢN LÝ ĐIỂM SINH VIÊN";
+            this.lblTieuDe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblTenDangNhap
             // 
-            lblTenDangNhap.AutoSize = true;
-            lblTenDangNhap.Location = new Point(39, 129);
-            lblTenDangNhap.Margin = new Padding(4, 0, 4, 0);
-            lblTenDangNhap.Name = "lblTenDangNhap";
-            lblTenDangNhap.Size = new Size(128, 23);
-            lblTenDangNhap.TabIndex = 0;
-            lblTenDangNhap.Text = "Tên đăng nhập:";
-            lblTenDangNhap.Click += lblTenDangNhap_Click;
+            this.lblTenDangNhap.AutoSize = true;
+            this.lblTenDangNhap.Location = new System.Drawing.Point(39, 129);
+            this.lblTenDangNhap.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTenDangNhap.Name = "lblTenDangNhap";
+            this.lblTenDangNhap.Size = new System.Drawing.Size(128, 23);
+            this.lblTenDangNhap.TabIndex = 0;
+            this.lblTenDangNhap.Text = "Tên đăng nhập:";
             // 
             // txtTenDangNhap
             // 
-            txtTenDangNhap.Location = new Point(193, 123);
-            txtTenDangNhap.Margin = new Padding(4, 5, 4, 5);
-            txtTenDangNhap.MaxLength = 50;
-            txtTenDangNhap.Name = "txtTenDangNhap";
-            txtTenDangNhap.Size = new Size(320, 30);
-            txtTenDangNhap.TabIndex = 1;
-            txtTenDangNhap.TextChanged += txtTenDangNhap_TextChanged;
+            this.txtTenDangNhap.Location = new System.Drawing.Point(193, 123);
+            this.txtTenDangNhap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtTenDangNhap.MaxLength = 50;
+            this.txtTenDangNhap.Name = "txtTenDangNhap";
+            this.txtTenDangNhap.Size = new System.Drawing.Size(320, 30);
+            this.txtTenDangNhap.TabIndex = 1;
             // 
             // lblMatKhau
             // 
-            lblMatKhau.AutoSize = true;
-            lblMatKhau.Location = new Point(39, 190);
-            lblMatKhau.Margin = new Padding(4, 0, 4, 0);
-            lblMatKhau.Name = "lblMatKhau";
-            lblMatKhau.Size = new Size(86, 23);
-            lblMatKhau.TabIndex = 2;
-            lblMatKhau.Text = "Mật khẩu:";
+            this.lblMatKhau.AutoSize = true;
+            this.lblMatKhau.Location = new System.Drawing.Point(39, 190);
+            this.lblMatKhau.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMatKhau.Name = "lblMatKhau";
+            this.lblMatKhau.Size = new System.Drawing.Size(86, 23);
+            this.lblMatKhau.TabIndex = 2;
+            this.lblMatKhau.Text = "Mật khẩu:";
             // 
             // txtMatKhau
             // 
-            txtMatKhau.Location = new Point(193, 184);
-            txtMatKhau.Margin = new Padding(4, 5, 4, 5);
-            txtMatKhau.MaxLength = 100;
-            txtMatKhau.Name = "txtMatKhau";
-            txtMatKhau.Size = new Size(320, 30);
-            txtMatKhau.TabIndex = 3;
-            txtMatKhau.UseSystemPasswordChar = true;
-            txtMatKhau.TextChanged += txtMatKhau_TextChanged;
+            this.txtMatKhau.Location = new System.Drawing.Point(193, 184);
+            this.txtMatKhau.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtMatKhau.MaxLength = 100;
+            this.txtMatKhau.Name = "txtMatKhau";
+            this.txtMatKhau.Size = new System.Drawing.Size(320, 30);
+            this.txtMatKhau.TabIndex = 3;
+            this.txtMatKhau.UseSystemPasswordChar = true;
             // 
             // btnDangNhap
             // 
-            btnDangNhap.Location = new Point(244, 255);
-            btnDangNhap.Margin = new Padding(4, 5, 4, 5);
-            btnDangNhap.Name = "btnDangNhap";
-            btnDangNhap.Size = new Size(129, 49);
-            btnDangNhap.TabIndex = 4;
-            btnDangNhap.Text = "Đăng nhập";
-            btnDangNhap.UseVisualStyleBackColor = true;
-            btnDangNhap.Click += btnDangNhap_Click;
+            this.btnDangNhap.Location = new System.Drawing.Point(244, 255);
+            this.btnDangNhap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnDangNhap.Name = "btnDangNhap";
+            this.btnDangNhap.Size = new System.Drawing.Size(129, 49);
+            this.btnDangNhap.TabIndex = 4;
+            this.btnDangNhap.Text = "Đăng nhập";
+            this.btnDangNhap.UseVisualStyleBackColor = true;
+            this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click);
             // 
             // btnThoat
             // 
-            btnThoat.Location = new Point(386, 255);
-            btnThoat.Margin = new Padding(4, 5, 4, 5);
-            btnThoat.Name = "btnThoat";
-            btnThoat.Size = new Size(129, 49);
-            btnThoat.TabIndex = 5;
-            btnThoat.Text = "Thoát";
-            btnThoat.UseVisualStyleBackColor = true;
-            btnThoat.Click += btnThoat_Click;
+            this.btnThoat.Location = new System.Drawing.Point(386, 255);
+            this.btnThoat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnThoat.Name = "btnThoat";
+            this.btnThoat.Size = new System.Drawing.Size(129, 49);
+            this.btnThoat.TabIndex = 5;
+            this.btnThoat.Text = "Thoát";
+            this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // lblGoiY
             // 
-            lblGoiY.Dock = DockStyle.Bottom;
-            lblGoiY.ForeColor = Color.DimGray;
-            lblGoiY.Location = new Point(0, 343);
-            lblGoiY.Margin = new Padding(4, 0, 4, 0);
-            lblGoiY.Name = "lblGoiY";
-            lblGoiY.Size = new Size(566, 71);
-            lblGoiY.TabIndex = 6;
-            lblGoiY.Text = "Tài khoản mẫu (mật khẩu 123456):\npgv  |  khoa_cntt  |  khoa_vt  |  N21CN001";
-            lblGoiY.TextAlign = ContentAlignment.MiddleCenter;
+            this.lblGoiY.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblGoiY.ForeColor = System.Drawing.Color.DimGray;
+            this.lblGoiY.Location = new System.Drawing.Point(0, 343);
+            this.lblGoiY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGoiY.Name = "lblGoiY";
+            this.lblGoiY.Size = new System.Drawing.Size(566, 71);
+            this.lblGoiY.TabIndex = 6;
+            this.lblGoiY.Text = "Tài khoản mẫu (mật khẩu 123456):\npgv  |  khoa_cntt  |  khoa_vt  |  N21CN001";
+            this.lblGoiY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FrmDangNhap
             // 
-            AcceptButton = btnDangNhap;
-            AutoScaleDimensions = new SizeF(9F, 23F);
-            AutoScaleMode = AutoScaleMode.Font;
-            CancelButton = btnThoat;
-            ClientSize = new Size(566, 414);
-            Controls.Add(lblTieuDe);
-            Controls.Add(lblTenDangNhap);
-            Controls.Add(txtTenDangNhap);
-            Controls.Add(lblMatKhau);
-            Controls.Add(txtMatKhau);
-            Controls.Add(btnDangNhap);
-            Controls.Add(btnThoat);
-            Controls.Add(lblGoiY);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(4, 5, 4, 5);
-            MaximizeBox = false;
-            MinimizeBox = false;
-            Name = "FrmDangNhap";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Đăng nhập - Quản lý điểm sinh viên (QLDSV_HTC)";
-            ResumeLayout(false);
-            PerformLayout();
+            this.AcceptButton = this.btnDangNhap;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnThoat;
+            this.ClientSize = new System.Drawing.Size(566, 414);
+            this.Controls.Add(this.lblTieuDe);
+            this.Controls.Add(this.lblTenDangNhap);
+            this.Controls.Add(this.txtTenDangNhap);
+            this.Controls.Add(this.lblMatKhau);
+            this.Controls.Add(this.txtMatKhau);
+            this.Controls.Add(this.btnDangNhap);
+            this.Controls.Add(this.btnThoat);
+            this.Controls.Add(this.lblGoiY);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "FrmDangNhap";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Đăng nhập - Quản lý điểm sinh viên (QLDSV_HTC)";
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         #endregion

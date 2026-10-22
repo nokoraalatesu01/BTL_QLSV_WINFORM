@@ -16,42 +16,73 @@ public partial class FrmGiangVien : Form
     }
 
     // ---------------- Sự kiện ----------------
-    private void FrmGiangVien_Load(object? sender, EventArgs e) => UiHelper.Run(() =>
+    private void FrmGiangVien_Load(object sender, EventArgs e)
     {
-        UiHelper.BindCombo(cboKhoa, GiangVienBLL.LayKhoaChoChon(), "TenKhoa", "MaKhoa");
-        if (!_coQuyenGhi)
+        UiHelper.Run(() =>
         {
-            // Chỉ xem: ẩn ô nhập và các nút thay đổi dữ liệu.
-            pnlNhap.Visible = false;
-            btnNhapMoi.Visible = btnThem.Visible = btnSua.Visible = btnXoa.Visible = false;
-            lblTrangThai.Text = "Bạn chỉ có quyền xem danh sách này.";
-        }
-        TaiDuLieu();
-    });
+            UiHelper.BindCombo(cboKhoa, GiangVienBLL.LayKhoaChoChon(), "TenKhoa", "MaKhoa");
+            if (!_coQuyenGhi)
+            {
+                // Chỉ xem: ẩn ô nhập và các nút thay đổi dữ liệu.
+                pnlNhap.Visible = false;
+                btnNhapMoi.Visible = btnThem.Visible = btnSua.Visible = btnXoa.Visible = false;
+                lblTrangThai.Text = "Bạn chỉ có quyền xem danh sách này.";
+            }
+            TaiDuLieu();
+        });
+    }
 
-    private void FrmGiangVien_Shown(object? sender, EventArgs e) => UiHelper.Run(NhapMoi);
-    private void btnNhapMoi_Click(object? sender, EventArgs e) => UiHelper.Run(NhapMoi);
-    private void btnTaiLai_Click(object? sender, EventArgs e) => UiHelper.Run(TaiDuLieu);
-    private void btnTim_Click(object? sender, EventArgs e) => UiHelper.Run(TaiDuLieu);
-    private void txtTim_KeyDown(object? sender, KeyEventArgs e)
+    private void FrmGiangVien_Shown(object sender, EventArgs e)
+    {
+        UiHelper.Run(NhapMoi);
+    }
+
+    private void btnNhapMoi_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(NhapMoi);
+    }
+
+    private void btnTaiLai_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(TaiDuLieu);
+    }
+
+    private void btnTim_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(TaiDuLieu);
+    }
+
+    private void txtTim_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode != Keys.Enter) return;
         e.SuppressKeyPress = true;
         UiHelper.Run(TaiDuLieu);
     }
-    private void btnThem_Click(object? sender, EventArgs e) => UiHelper.Run(() =>
-    {
-        if (dgv.SelectedRows.Count > 0)
-        {
-            UiHelper.ShowWarning("Đang chọn một dòng trong danh sách. Bấm 'Nhập mới' trước khi thêm bản ghi mới.");
-            return;
-        }
-        Them();
-    });
-    private void btnSua_Click(object? sender, EventArgs e) => UiHelper.Run(Sua);
-    private void btnXoa_Click(object? sender, EventArgs e) => UiHelper.Run(Xoa);
 
-    private void dgv_SelectionChanged(object? sender, EventArgs e)
+    private void btnThem_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(() =>
+        {
+            if (dgv.SelectedRows.Count > 0)
+            {
+                UiHelper.ShowWarning("Đang chọn một dòng trong danh sách. Bấm 'Nhập mới' trước khi thêm bản ghi mới.");
+                return;
+            }
+            Them();
+        });
+    }
+
+    private void btnSua_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(Sua);
+    }
+
+    private void btnXoa_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(Xoa);
+    }
+
+    private void dgv_SelectionChanged(object sender, EventArgs e)
     {
         if (_dangTai || dgv.SelectedRows.Count == 0) return;
         if (dgv.SelectedRows[0].DataBoundItem is GiangVien item)

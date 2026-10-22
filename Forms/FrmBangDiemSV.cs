@@ -12,7 +12,10 @@ public partial class FrmBangDiemSV : Form
         InitializeComponent();
     }
 
-    private void FrmBangDiemSV_Load(object? sender, EventArgs e) => UiHelper.Run(NapDuLieu);
+    private void FrmBangDiemSV_Load(object sender, EventArgs e)
+    {
+        UiHelper.Run(NapDuLieu);
+    }
 
     private void NapDuLieu()
     {

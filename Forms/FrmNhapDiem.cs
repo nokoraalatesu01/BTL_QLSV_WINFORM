@@ -70,63 +70,75 @@ public partial class FrmNhapDiem : Form
     // Sự kiện
     // ------------------------------------------------------------------
 
-    private void FrmNhapDiem_Load(object? sender, EventArgs e) => UiHelper.Run(() =>
+    private void FrmNhapDiem_Load(object sender, EventArgs e)
     {
-        _dangKhoiTao = true;
-        try
+        UiHelper.Run(() =>
         {
-            cboHocKy.Items.AddRange(new object[] { TatCa, "1", "2", "3" });
-            cboHocKy.SelectedIndex = 0;
+            _dangKhoiTao = true;
+            try
+            {
+                cboHocKy.Items.AddRange(new object[] { TatCa, "1", "2", "3" });
+                cboHocKy.SelectedIndex = 0;
 
-            cboNienKhoa.Items.Add(TatCa);
-            foreach (var nk in DiemBLL.LayNienKhoa())
-                cboNienKhoa.Items.Add(nk);
-            cboNienKhoa.SelectedIndex = cboNienKhoa.Items.Count > 1 ? 1 : 0; // mặc định niên khóa mới nhất
-        }
-        finally
-        {
-            _dangKhoiTao = false;
-        }
-        NapLopTinChi();
-        CapNhatTrangThaiNut();
-    });
+                cboNienKhoa.Items.Add(TatCa);
+                foreach (var nk in DiemBLL.LayNienKhoa())
+                    cboNienKhoa.Items.Add(nk);
+                cboNienKhoa.SelectedIndex = cboNienKhoa.Items.Count > 1 ? 1 : 0; // mặc định niên khóa mới nhất
+            }
+            finally
+            {
+                _dangKhoiTao = false;
+            }
+            NapLopTinChi();
+            CapNhatTrangThaiNut();
+        });
+    }
 
-    private void cboNienKhoa_SelectedIndexChanged(object? sender, EventArgs e)
+    private void cboNienKhoa_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (!_dangKhoiTao) UiHelper.Run(NapLopTinChi);
     }
 
-    private void cboHocKy_SelectedIndexChanged(object? sender, EventArgs e)
+    private void cboHocKy_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (!_dangKhoiTao) UiHelper.Run(NapLopTinChi);
     }
 
-    private void btnTai_Click(object? sender, EventArgs e) => UiHelper.Run(() =>
+    private void btnTai_Click(object sender, EventArgs e)
     {
-        if (cboLopTinChi.SelectedItem is not LopTinChi ltc)
+        UiHelper.Run(() =>
         {
-            UiHelper.ShowWarning("Hãy chọn một lớp tín chỉ.");
-            return;
-        }
-        MoLopTinChi(ltc);
-    });
+            if (cboLopTinChi.SelectedItem is not LopTinChi ltc)
+            {
+                UiHelper.ShowWarning("Hãy chọn một lớp tín chỉ.");
+                return;
+            }
+            MoLopTinChi(ltc);
+        });
+    }
 
-    private void btnLuu_Click(object? sender, EventArgs e) => UiHelper.Run(Luu);
-
-    private void btnHuy_Click(object? sender, EventArgs e) => UiHelper.Run(() =>
+    private void btnLuu_Click(object sender, EventArgs e)
     {
-        if (_ltcDangMo == null) return;
-        if (!UiHelper.Confirm("Hủy các thay đổi chưa lưu và tải lại điểm từ cơ sở dữ liệu?")) return;
-        MoLopTinChi(_ltcDangMo);
-    });
+        UiHelper.Run(Luu);
+    }
 
-    private void dgv_CellBeginEdit(object? sender, DataGridViewCellCancelEventArgs e)
+    private void btnHuy_Click(object sender, EventArgs e)
+    {
+        UiHelper.Run(() =>
+        {
+            if (_ltcDangMo == null) return;
+            if (!UiHelper.Confirm("Hủy các thay đổi chưa lưu và tải lại điểm từ cơ sở dữ liệu?")) return;
+            MoLopTinChi(_ltcDangMo);
+        });
+    }
+
+    private void dgv_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
     {
         if (e.RowIndex >= 0 && e.RowIndex < _rows.Count)
             _giaTriTruocKhiSua = GiaTri(_rows[e.RowIndex], dgv.Columns[e.ColumnIndex].DataPropertyName);
     }
 
-    private void dgv_CellEndEdit(object? sender, DataGridViewCellEventArgs e)
+    private void dgv_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
         if (e.RowIndex < 0 || e.RowIndex >= _rows.Count) return;
 
@@ -140,9 +152,12 @@ public partial class FrmNhapDiem : Form
         dgv.InvalidateRow(e.RowIndex); // cập nhật cột Tổng kết
     }
 
-    private void dgv_DataError(object? sender, DataGridViewDataErrorEventArgs e) => e.ThrowException = false;
+    private void dgv_DataError(object sender, DataGridViewDataErrorEventArgs e)
+    {
+        e.ThrowException = false;
+    }
 
-    private void FrmNhapDiem_FormClosing(object? sender, FormClosingEventArgs e)
+    private void FrmNhapDiem_FormClosing(object sender, FormClosingEventArgs e)
     {
         if (_daSua && !UiHelper.Confirm("Còn điểm chưa lưu. Đóng cửa sổ và bỏ các thay đổi?"))
             e.Cancel = true;

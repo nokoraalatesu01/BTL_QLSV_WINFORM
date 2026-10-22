@@ -10,29 +10,17 @@ public partial class FrmDangNhap : Form
         InitializeComponent();
     }
 
-    private void btnDangNhap_Click(object? sender, EventArgs e) => UiHelper.Run(() =>
+    private void btnDangNhap_Click(object sender, EventArgs e)
     {
-        AuthBLL.DangNhap(txtTenDangNhap.Text, txtMatKhau.Text);
-        DialogResult = DialogResult.OK; // gán DialogResult sẽ tự đóng hộp thoại
-    });
+        UiHelper.Run(() =>
+        {
+            AuthBLL.DangNhap(txtTenDangNhap.Text, txtMatKhau.Text);
+            DialogResult = DialogResult.OK; // gán DialogResult sẽ tự đóng hộp thoại
+        });
+    }
 
-    private void btnThoat_Click(object? sender, EventArgs e)
+    private void btnThoat_Click(object sender, EventArgs e)
     {
         DialogResult = DialogResult.Cancel;
-    }
-
-    private void txtTenDangNhap_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void txtMatKhau_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void lblTenDangNhap_Click(object sender, EventArgs e)
-    {
-
     }
 }

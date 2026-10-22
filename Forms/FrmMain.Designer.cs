@@ -40,6 +40,16 @@ namespace QLDSV_HTC.Forms
             btnNavLopTinChi = new QLDSV_HTC.UI.SidebarButton();
             btnNavNhapDiem = new QLDSV_HTC.UI.SidebarButton();
             btnNavBangDiem = new QLDSV_HTC.UI.SidebarButton();
+            btnNavLichDay = new QLDSV_HTC.UI.SidebarButton();
+            btnNavDiemDanh = new QLDSV_HTC.UI.SidebarButton();
+            btnNavThongKe = new QLDSV_HTC.UI.SidebarButton();
+            btnNavThongBao = new QLDSV_HTC.UI.SidebarButton();
+            btnNavThongTinCaNhan = new QLDSV_HTC.UI.SidebarButton();
+            btnNavLichHoc = new QLDSV_HTC.UI.SidebarButton();
+            btnNavDiemDanhSV = new QLDSV_HTC.UI.SidebarButton();
+            btnNavThongKeSV = new QLDSV_HTC.UI.SidebarButton();
+            btnNavThongBaoSV = new QLDSV_HTC.UI.SidebarButton();
+            btnNavThongTinCaNhanSV = new QLDSV_HTC.UI.SidebarButton();
             pnlSidebarFooter = new System.Windows.Forms.Panel();
             btnNavDoiMatKhau = new QLDSV_HTC.UI.SidebarButton();
             btnNavDangXuat = new QLDSV_HTC.UI.SidebarButton();
@@ -190,7 +200,107 @@ namespace QLDSV_HTC.Forms
             btnNavBangDiem.Font = QLDSV_HTC.UI.Palette.FontBase;
             btnNavBangDiem.Click += new System.EventHandler(this.btnNavBangDiem_Click);
 
+            // --- Lịch giảng dạy ---
+            btnNavLichDay.Name = "btnNavLichDay";
+            btnNavLichDay.Text = "Lịch giảng dạy";
+            btnNavLichDay.Icon = QLDSV_HTC.UI.NavIcon.LopTinChi;
+            btnNavLichDay.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavLichDay.Height = 42;
+            btnNavLichDay.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavLichDay.Click += new System.EventHandler(this.btnNavLichDay_Click);
+
+            // --- Điểm danh sinh viên ---
+            btnNavDiemDanh.Name = "btnNavDiemDanh";
+            btnNavDiemDanh.Text = "Điểm danh sinh viên";
+            btnNavDiemDanh.Icon = QLDSV_HTC.UI.NavIcon.SinhVien;
+            btnNavDiemDanh.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavDiemDanh.Height = 42;
+            btnNavDiemDanh.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavDiemDanh.Click += new System.EventHandler(this.btnNavDiemDanh_Click);
+
+            // --- Thống kê kết quả ---
+            btnNavThongKe.Name = "btnNavThongKe";
+            btnNavThongKe.Text = "Thống kê kết quả";
+            btnNavThongKe.Icon = QLDSV_HTC.UI.NavIcon.BangDiem;
+            btnNavThongKe.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavThongKe.Height = 42;
+            btnNavThongKe.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavThongKe.Click += new System.EventHandler(this.btnNavThongKe_Click);
+
+            // --- Thông báo ---
+            btnNavThongBao.Name = "btnNavThongBao";
+            btnNavThongBao.Text = "Thông báo";
+            btnNavThongBao.Icon = QLDSV_HTC.UI.NavIcon.DoiMatKhau;
+            btnNavThongBao.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavThongBao.Height = 42;
+            btnNavThongBao.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavThongBao.Click += new System.EventHandler(this.btnNavThongBao_Click);
+
+            // --- Thông tin cá nhân ---
+            btnNavThongTinCaNhan.Name = "btnNavThongTinCaNhan";
+            btnNavThongTinCaNhan.Text = "Thông tin cá nhân";
+            btnNavThongTinCaNhan.Icon = QLDSV_HTC.UI.NavIcon.Dashboard;
+            btnNavThongTinCaNhan.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavThongTinCaNhan.Height = 42;
+            btnNavThongTinCaNhan.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavThongTinCaNhan.Click += new System.EventHandler(this.btnNavThongTinCaNhan_Click);
+
+            // --- Lịch học (SV) ---
+            btnNavLichHoc.Name = "btnNavLichHoc";
+            btnNavLichHoc.Text = "Lịch học";
+            btnNavLichHoc.Icon = QLDSV_HTC.UI.NavIcon.LopTinChi;
+            btnNavLichHoc.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavLichHoc.Height = 42;
+            btnNavLichHoc.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavLichHoc.Click += new System.EventHandler(this.btnNavLichHoc_Click);
+
+            // --- Điểm danh (SV) ---
+            btnNavDiemDanhSV.Name = "btnNavDiemDanhSV";
+            btnNavDiemDanhSV.Text = "Điểm danh";
+            btnNavDiemDanhSV.Icon = QLDSV_HTC.UI.NavIcon.SinhVien;
+            btnNavDiemDanhSV.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavDiemDanhSV.Height = 42;
+            btnNavDiemDanhSV.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavDiemDanhSV.Click += new System.EventHandler(this.btnNavDiemDanhSV_Click);
+
+            // --- Thống kê kết quả (SV) ---
+            btnNavThongKeSV.Name = "btnNavThongKeSV";
+            btnNavThongKeSV.Text = "Thống kê kết quả";
+            btnNavThongKeSV.Icon = QLDSV_HTC.UI.NavIcon.BangDiem;
+            btnNavThongKeSV.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavThongKeSV.Height = 42;
+            btnNavThongKeSV.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavThongKeSV.Click += new System.EventHandler(this.btnNavThongKeSV_Click);
+
+            // --- Thông báo (SV) ---
+            btnNavThongBaoSV.Name = "btnNavThongBaoSV";
+            btnNavThongBaoSV.Text = "Thông báo";
+            btnNavThongBaoSV.Icon = QLDSV_HTC.UI.NavIcon.DoiMatKhau;
+            btnNavThongBaoSV.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavThongBaoSV.Height = 42;
+            btnNavThongBaoSV.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavThongBaoSV.Click += new System.EventHandler(this.btnNavThongBaoSV_Click);
+
+            // --- Thông tin cá nhân (SV) ---
+            btnNavThongTinCaNhanSV.Name = "btnNavThongTinCaNhanSV";
+            btnNavThongTinCaNhanSV.Text = "Thông tin cá nhân";
+            btnNavThongTinCaNhanSV.Icon = QLDSV_HTC.UI.NavIcon.Dashboard;
+            btnNavThongTinCaNhanSV.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavThongTinCaNhanSV.Height = 42;
+            btnNavThongTinCaNhanSV.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavThongTinCaNhanSV.Click += new System.EventHandler(this.btnNavThongTinCaNhanSV_Click);
+
             // Thứ tự Dock.Top: add theo thứ tự ngược
+            pnlSidebarNav.Controls.Add(btnNavThongTinCaNhanSV);
+            pnlSidebarNav.Controls.Add(btnNavThongBaoSV);
+            pnlSidebarNav.Controls.Add(btnNavThongKeSV);
+            pnlSidebarNav.Controls.Add(btnNavDiemDanhSV);
+            pnlSidebarNav.Controls.Add(btnNavLichHoc);
+            pnlSidebarNav.Controls.Add(btnNavThongTinCaNhan);
+            pnlSidebarNav.Controls.Add(btnNavThongBao);
+            pnlSidebarNav.Controls.Add(btnNavThongKe);
+            pnlSidebarNav.Controls.Add(btnNavDiemDanh);
+            pnlSidebarNav.Controls.Add(btnNavLichDay);
             pnlSidebarNav.Controls.Add(btnNavBangDiem);
             pnlSidebarNav.Controls.Add(btnNavNhapDiem);
             pnlSidebarNav.Controls.Add(btnNavLopTinChi);
@@ -314,6 +424,16 @@ namespace QLDSV_HTC.Forms
         private QLDSV_HTC.UI.SidebarButton btnNavLopTinChi;
         private QLDSV_HTC.UI.SidebarButton btnNavNhapDiem;
         private QLDSV_HTC.UI.SidebarButton btnNavBangDiem;
+        private QLDSV_HTC.UI.SidebarButton btnNavLichDay;
+        private QLDSV_HTC.UI.SidebarButton btnNavDiemDanh;
+        private QLDSV_HTC.UI.SidebarButton btnNavThongKe;
+        private QLDSV_HTC.UI.SidebarButton btnNavThongBao;
+        private QLDSV_HTC.UI.SidebarButton btnNavThongTinCaNhan;
+        private QLDSV_HTC.UI.SidebarButton btnNavLichHoc;
+        private QLDSV_HTC.UI.SidebarButton btnNavDiemDanhSV;
+        private QLDSV_HTC.UI.SidebarButton btnNavThongKeSV;
+        private QLDSV_HTC.UI.SidebarButton btnNavThongBaoSV;
+        private QLDSV_HTC.UI.SidebarButton btnNavThongTinCaNhanSV;
         private System.Windows.Forms.Panel pnlSidebarFooter;
         private QLDSV_HTC.UI.SidebarButton btnNavDoiMatKhau;
         private QLDSV_HTC.UI.SidebarButton btnNavDangXuat;

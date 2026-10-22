@@ -2,6 +2,7 @@ using System.Globalization;
 using QLDSV_HTC.BLL;
 using QLDSV_HTC.Helpers;
 using QLDSV_HTC.Models;
+using QLDSV_HTC.UI;
 
 namespace QLDSV_HTC.Forms;
 
@@ -9,7 +10,7 @@ namespace QLDSV_HTC.Forms;
 /// Nhập điểm: chọn niên khóa / học kỳ / lớp tín chỉ → hiển thị danh sách sinh viên → nhập CC, GK, CK.
 /// Điểm tổng kết tự tính = CC×0.1 + GK×0.3 + CK×0.6.
 /// </summary>
-public partial class FrmNhapDiem : Form
+public partial class FrmNhapDiem : BaseForm
 {
     private const string TatCa = "(Tất cả)";
 

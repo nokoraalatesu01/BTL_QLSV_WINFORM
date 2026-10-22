@@ -1,10 +1,11 @@
 using QLDSV_HTC.BLL;
 using QLDSV_HTC.Helpers;
 using QLDSV_HTC.Models;
+using QLDSV_HTC.UI;
 
 namespace QLDSV_HTC.Forms;
 
-public partial class FrmKhoa : Form
+public partial class FrmKhoa : BaseForm
 {
     private readonly bool _coQuyenGhi;
     private bool _dangTai;

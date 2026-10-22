@@ -1,9 +1,10 @@
 using QLDSV_HTC.BLL;
 using QLDSV_HTC.Helpers;
+using QLDSV_HTC.UI;
 
 namespace QLDSV_HTC.Forms;
 
-public partial class FrmDangNhap : Form
+public partial class FrmDangNhap : BaseForm
 {
     public FrmDangNhap()
     {

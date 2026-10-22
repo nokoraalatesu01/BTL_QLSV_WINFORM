@@ -8,10 +8,10 @@ Phần mềm quản lý điểm sinh viên hệ tín chỉ: C# WinForms, .NET 8,
 |---|---|
 | `Database/QLDSV_HTC.sql` | **Một file SQL duy nhất**: tạo DB, bảng, ràng buộc + dữ liệu mẫu 2 khoa CNTT & VT |
 | `Models/` | Lớp dữ liệu (Khoa, Lop, SinhVien, MonHoc, GiangVien, LopTinChi, DiemSinhVien, TaiKhoan…) |
-| `DAL/` | Truy cập dữ liệu: toàn bộ SQL có tham số (`Db.P`) |
+| `DAL/` | Truy cập dữ liệu: thực thi câu lệnh SQL qua `DataBaseProcess` (`DataReader`, `DataChange`) |
 | `BLL/` | Nghiệp vụ + **phân quyền** (`Quyen.cs`) + kiểm tra dữ liệu |
-| `Forms/` | Giao diện WinForms, mỗi form gồm `FrmX.cs` (xử lý) + `FrmX.Designer.cs` (bố cục, **mở được bằng Designer kéo thả**: bấm đúp file `FrmX.cs` hoặc chuột phải → View Designer) |
-| `Helpers/` | `Db`, `Validator`, `DiemHelper`, `PasswordHelper`, `UiHelper`… |
+| `Forms/` | Giao diện WinForms, mỗi form gồm `FrmX.cs` (xử lý) + `FrmX.Designer.cs` (bố cục, **mở được bằng Designer kéo thả**) |
+| `Helpers/` | `DataBaseProcess` (chuẩn giáo trình LTTQ: `OpenConnect`, `CloseConnect`, `DataReader`, `DataChange`), `Validator`, `DiemHelper`, `PasswordHelper`, `UiHelper`… |
 | `Program.cs` | Vòng lặp Đăng nhập → Form chính → (Đăng xuất → Đăng nhập lại) |
 | `appsettings.json` | Chuỗi kết nối SQL Server |
 

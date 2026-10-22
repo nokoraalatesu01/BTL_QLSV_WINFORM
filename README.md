@@ -44,7 +44,7 @@ Phần mềm quản lý điểm sinh viên hệ tín chỉ: C# WinForms, .NET 8,
 | `khoa_cntt` | KHOA | Chỉ khoa CNTT |
 | `khoa_vt` | KHOA | Chỉ khoa VT |
 | `GV001`…`GV005` (mã GV) | GV | Khoa của mình; chỉ lớp tín chỉ do mình phụ trách |
-| `N21CN001`, `N21VT001`… (mã SV) | SV | Chỉ xem điểm của chính mình |
+| `241230001`, `241230008`… (mã SV) | SV | Chỉ xem điểm của chính mình |
 
 Thêm khoa mới → tự tạo `khoa_<mã khoa>`; thêm giảng viên mới → tự tạo tài khoản (tên = mã GV); thêm sinh viên mới → tự tạo tài khoản (tên = mã SV). Mật khẩu mặc định `123456`, đổi ở *Hệ thống → Đổi mật khẩu*.
 
@@ -74,6 +74,16 @@ Kiểm tra ở **hai lớp**: Form ẩn menu/nút theo `Quyen.CoQuyen`, còn m�
 | Xóa | Chặn khi còn dữ liệu tham chiếu (khoa còn lớp/GV/LTC, lớp còn SV, SV đã có điểm, môn/GV đã dùng trong LTC) kèm thông báo rõ |
 | Không làm | Đăng ký tín chỉ, học phí, nhiều server (đúng đề) |
 
+## 6b. Tính năng bổ sung
+
+| Tính năng | Cách dùng |
+|---|---|
+| Enter nhảy ô | Ở mọi ô nhập (đăng nhập, đổi mật khẩu, thêm/sửa Khoa, Lớp, SV, GV, Môn học, Lớp tín chỉ) bấm **Enter** để sang ô kế tiếp; ở ô cuối thì Enter thực hiện nút mặc định (Đăng nhập / Đổi mật khẩu). Ô *Tìm kiếm* vẫn dùng Enter để tìm. |
+| Enter trong lưới nhập điểm | Gõ điểm xong bấm **Enter** → sang ô bên phải (CC → GK → CK), hết hàng thì xuống CC của sinh viên kế tiếp. |
+| Xuất Excel bảng điểm | *Đào tạo → Nhập điểm* → tải danh sách lớp tín chỉ → nút **📊 Xuất Excel** (PGV, KHOA, GV; GV chỉ xuất được lớp mình phụ trách). Xuất ra `.xlsx` gồm STT, Mã SV, Họ tên, Lớp, CC, GK, CK, Tổng kết. |
+
+Xuất Excel dùng thư viện NuGet **ClosedXML** (tự tải khi *Restore NuGet Packages*, cần Internet lần đầu).
+
 ## 7. Danh sách kiểm thử (làm lần lượt)
 
 | # | Kịch bản | Kết quả mong đợi |
@@ -81,18 +91,18 @@ Kiểm tra ở **hai lớp**: Form ẩn menu/nút theo `Quyen.CoQuyen`, còn m�
 | 1 | Đăng nhập sai mật khẩu | Báo "Tên đăng nhập hoặc mật khẩu không đúng." |
 | 2 | Đăng nhập `pgv` | Thấy đủ menu Danh mục + Đào tạo |
 | 3 | Đăng nhập `khoa_cntt` | Form Khoa & Môn học chỉ-xem; Lớp/SV/GV/LTC chỉ hiện dữ liệu CNTT; combo Khoa chỉ có CNTT |
-| 4 | Đăng nhập `N21CN001` | Chỉ có menu *Sinh viên → Bảng điểm cá nhân*, thấy điểm của mình |
+| 4 | Đăng nhập `241230001` | Chỉ có menu *Sinh viên → Bảng điểm cá nhân*, thấy điểm của mình |
 | 5 | Khoa: thêm `DTVT` | Thêm được, thông báo tài khoản `khoa_dtvt` |
 | 6 | Khoa: xóa `CNTT` | Bị chặn vì còn lớp/GV/LTC |
 | 7 | Lớp: thêm trùng mã | "Mã lớp đã tồn tại" |
 | 8 | SV: thêm mới rồi đăng nhập bằng mã SV vừa tạo | Đăng nhập được với `123456` |
-| 9 | SV: xóa `N21CN001` | Bị chặn (đã có điểm) |
-| 10 | SV: tìm "Hà" / "N21VT" / lọc theo lớp | Kết quả đúng |
+| 9 | SV: xóa `241230001` | Bị chặn (đã có điểm) |
+| 10 | SV: tìm "Hà" / "24123000" / lọc theo lớp | Kết quả đúng |
 | 11 | Môn học: tìm "dữ liệu" | Ra *Cơ sở dữ liệu*, *Cấu trúc dữ liệu…* |
 | 12 | LTC: tạo lớp với GV khác khoa | Bị chặn |
 | 13 | LTC: niên khóa `2023-2025` | Báo lỗi định dạng |
-| 14 | Nhập điểm: chọn LTC 1 (CSDL) | 5 SV; SV `N21CN005` thiếu CK nên chưa có TK |
-| 15 | Nhập CK `N21CN005` = 7.5, CC 9, GK 8.5 | TK hiện `7.95`; Lưu → mở lại vẫn đúng |
+| 14 | Nhập điểm: chọn LTC 1 (CSDL) | 5 SV; SV `241230005` thiếu CK nên chưa có TK |
+| 15 | Nhập CK `241230005` = 7.5, CC 9, GK 8.5 | TK hiện `7.95`; Lưu → mở lại vẫn đúng |
 | 16 | Gõ GK = 7.3 hoặc 11 hoặc `abc` | Ô báo lỗi đỏ, không lưu được |
 | 17 | Sửa điểm rồi đổi lớp/đóng form | Combo bị khóa / hỏi xác nhận bỏ thay đổi |
 | 18 | `khoa_vt` thử nhập điểm LTC 1 | Không có trong danh sách (khác khoa); gọi thẳng BLL cũng bị chặn |

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using QLDSV_HTC.BLL;
@@ -27,6 +29,43 @@ public partial class FrmNhapDiem : BaseForm
     public FrmNhapDiem()
     {
         InitializeComponent();
+        this.TaoCotLuoi();
+    }
+
+    /// <summary>
+    /// Tạo cột lưới thủ công: chỉ CC, GK, CK được sửa (Mã SV, Họ tên, Lớp, Tổng kết chỉ đọc),
+    /// nhờ vậy phím Enter chỉ nhảy qua các ô nhập điểm.
+    /// </summary>
+    private void TaoCotLuoi()
+    {
+        this.dgv.AutoGenerateColumns = false;
+        this.dgv.Columns.Clear();
+        this.ThemCot("MaSV", "Mã SV", 14, true, false);
+        this.ThemCot("HoTen", "Họ và tên", 30, true, false);
+        this.ThemCot("MaLop", "Lớp", 14, true, false);
+        this.ThemCot("CC", "Chuyên cần", 12, false, true);
+        this.ThemCot("GK", "Giữa kỳ", 12, false, true);
+        this.ThemCot("CK", "Cuối kỳ", 12, false, true);
+        this.ThemCot("TongKet", "Tổng kết", 12, true, true);
+    }
+
+    private void ThemCot(string thuocTinh, string tieuDe, float doRong, bool chiDoc, bool canGiua)
+    {
+        var cot = new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = thuocTinh,
+            Name = "col" + thuocTinh,
+            HeaderText = tieuDe,
+            FillWeight = doRong,
+            ReadOnly = chiDoc,
+            SortMode = DataGridViewColumnSortMode.NotSortable,
+        };
+        if (canGiua)
+        {
+            cot.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            cot.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+        this.dgv.Columns.Add(cot);
     }
 
     // ------------------------------------------------------------------
@@ -200,6 +239,53 @@ public partial class FrmNhapDiem : BaseForm
         }
     }
 
+    private void btnXuatExcel_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (this._ltcDangMo == null)
+            {
+                MessageBox.Show("Hãy tải danh sách điểm của một lớp tín chỉ trước khi xuất Excel.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (this._daSua && MessageBox.Show(
+                    "Còn điểm chưa lưu. File Excel chỉ chứa điểm ĐÃ LƯU trong cơ sở dữ liệu.\n\nVẫn tiếp tục xuất?",
+                    "Xác nhận xuất Excel", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            // Lấy lại từ BLL để vẫn kiểm tra quyền / phạm vi lớp tín chỉ như khi xem điểm.
+            var ds = DiemBLL.LayDanhSachDiem(this._ltcDangMo.MaLTC);
+
+            using var hop = new SaveFileDialog
+            {
+                Title = "Xuất bảng điểm ra Excel",
+                Filter = "Excel (*.xlsx)|*.xlsx",
+                DefaultExt = "xlsx",
+                AddExtension = true,
+                FileName = ExcelExporter.TenFileGoiY(this._ltcDangMo),
+            };
+            if (hop.ShowDialog(this) != DialogResult.OK) return;
+
+            ExcelExporter.XuatBangDiem(hop.FileName, this._ltcDangMo, ds);
+
+            if (MessageBox.Show("Đã xuất bảng điểm thành công!\n\nMở file ngay bây giờ?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                Process.Start(new ProcessStartInfo(hop.FileName) { UseShellExecute = true });
+            }
+        }
+        catch (IOException)
+        {
+            MessageBox.Show("Không ghi được file. Có thể file đang được mở trong Excel — hãy đóng file rồi thử lại.", "Lỗi xuất Excel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Lỗi xuất Excel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
     private void dgv_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
     {
         if (e.RowIndex >= 0 && e.RowIndex < this._rows.Count)
@@ -299,6 +385,10 @@ public partial class FrmNhapDiem : BaseForm
         bool coGhi = Quyen.CoQuyen(ChucNang.NhapDiem, HanhDong.Ghi);
         this.btnLuu.Enabled = coGhi && this._ltcDangMo != null && this._daSua;
         this.btnHuy.Enabled = this._ltcDangMo != null && this._daSua;
+
+        // Xuất Excel: PGV, KHOA, GV (mọi vai trò được xem điểm); phạm vi lớp do BLL kiểm soát.
+        this.btnXuatExcel.Visible = Quyen.CoQuyen(ChucNang.NhapDiem, HanhDong.Xem);
+        this.btnXuatExcel.Enabled = this._ltcDangMo != null;
         this.dgv.ReadOnly = !coGhi;
 
         // Đang có thay đổi chưa lưu: khóa bộ chọn để không lẫn điểm giữa hai lớp.

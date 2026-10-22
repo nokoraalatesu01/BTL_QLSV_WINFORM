@@ -21,10 +21,11 @@ namespace QLDSV_HTC.Forms
         /// <summary>Required method for Designer support - do not modify the contents of this method with the code editor.</summary>
         private void InitializeComponent()
         {
-            dgv = new DataGridView();
+            dgv = new QLDSV_HTC.UI.EnterGridView();
             pnlBottom = new Panel();
             btnLuu = new QLDSV_HTC.UI.ModernButton();
             btnHuy = new QLDSV_HTC.UI.ModernButton();
+            btnXuatExcel = new QLDSV_HTC.UI.ModernButton();
             lblHuongDan = new Label();
             lblThongTin = new Label();
             pnlTop = new Panel();
@@ -67,6 +68,7 @@ namespace QLDSV_HTC.Forms
             pnlBottom.BackColor = Color.White;
             pnlBottom.Controls.Add(btnLuu);
             pnlBottom.Controls.Add(btnHuy);
+            pnlBottom.Controls.Add(btnXuatExcel);
             pnlBottom.Controls.Add(lblHuongDan);
             pnlBottom.Dock = DockStyle.Bottom;
             pnlBottom.Location = new Point(0, 878);
@@ -105,15 +107,30 @@ namespace QLDSV_HTC.Forms
             btnHuy.Variant = UI.ButtonVariant.Secondary;
             btnHuy.Click += btnHuy_Click;
             // 
+            // btnXuatExcel
+            // 
+            btnXuatExcel.CornerRadius = 6;
+            btnXuatExcel.FlatStyle = FlatStyle.Flat;
+            btnXuatExcel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnXuatExcel.Location = new Point(319, 12);
+            btnXuatExcel.Margin = new Padding(4, 5, 4, 5);
+            btnXuatExcel.Name = "btnXuatExcel";
+            btnXuatExcel.Size = new Size(161, 49);
+            btnXuatExcel.TabIndex = 9;
+            btnXuatExcel.Text = "📊 Xuất Excel";
+            btnXuatExcel.UseVisualStyleBackColor = false;
+            btnXuatExcel.Variant = UI.ButtonVariant.Primary;
+            btnXuatExcel.Click += btnXuatExcel_Click;
+            // 
             // lblHuongDan
             // 
             lblHuongDan.AutoSize = true;
             lblHuongDan.ForeColor = Color.FromArgb(113, 128, 150);
-            lblHuongDan.Location = new Point(334, 25);
+            lblHuongDan.Location = new Point(496, 25);
             lblHuongDan.Margin = new Padding(4, 0, 4, 0);
             lblHuongDan.Name = "lblHuongDan";
             lblHuongDan.Size = new Size(743, 23);
-            lblHuongDan.TabIndex = 9;
+            lblHuongDan.TabIndex = 10;
             lblHuongDan.Text = "Công thức: Tổng kết = CC × 0.1 + GK × 0.3 + CK × 0.6. CC: 0-10 nguyên; GK, CK: 0-10 bước 0.5.";
             // 
             // lblThongTin
@@ -248,10 +265,11 @@ namespace QLDSV_HTC.Forms
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgv;
+        private QLDSV_HTC.UI.EnterGridView dgv;
         private System.Windows.Forms.Panel pnlBottom;
         private QLDSV_HTC.UI.ModernButton btnLuu;
         private QLDSV_HTC.UI.ModernButton btnHuy;
+        private QLDSV_HTC.UI.ModernButton btnXuatExcel;
         private System.Windows.Forms.Label lblHuongDan;
         private System.Windows.Forms.Label lblThongTin;
         private System.Windows.Forms.Panel pnlTop;

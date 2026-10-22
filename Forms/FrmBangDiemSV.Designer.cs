@@ -61,7 +61,7 @@ namespace QLDSV_HTC.Forms
             // 
             this.lblThongTin.AutoSize = true;
             this.lblThongTin.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblThongTin.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Bold);
+            this.lblThongTin.Font = QLDSV_HTC.UI.Palette.FontSemiBold;
             this.lblThongTin.Location = new System.Drawing.Point(0, 0);
             this.lblThongTin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblThongTin.Name = "lblThongTin";

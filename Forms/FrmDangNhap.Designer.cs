@@ -57,7 +57,7 @@ namespace QLDSV_HTC.Forms
             this.lblTieuDe.Size = new System.Drawing.Size(260, 60);
             this.lblTieuDe.Text = "QUẢN LÝ ĐIỂM SINH VIÊN";
             this.lblTieuDe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblTieuDe.ForeColor = System.Drawing.Color.White;
+            this.lblTieuDe.ForeColor = QLDSV_HTC.UI.Palette.Surface;
             this.lblTieuDe.Font = QLDSV_HTC.UI.Palette.FontH2;
             //
             // lblDangNhap

@@ -291,8 +291,8 @@ public class SidebarButton : Button
         SetStyle(ControlStyles.Selectable, false);
     }
 
-    protected override void OnMouseEnter(EventArgs e) { _hover = true; Invalidate(); base.OnMouseEnter(e); }
-    protected override void OnMouseLeave(EventArgs e) { _hover = false; Invalidate(); base.OnMouseLeave(e); }
+    protected override void OnMouseEnter(EventArgs e) { if (!Enabled) return; _hover = true; Invalidate(); base.OnMouseEnter(e); }
+    protected override void OnMouseLeave(EventArgs e) { if (!Enabled) return; _hover = false; Invalidate(); base.OnMouseLeave(e); }
 
     protected override void OnPaint(PaintEventArgs e)
     {
@@ -309,7 +309,12 @@ public class SidebarButton : Button
         Color bg;
         Color fg;
 
-        if (_active)
+        if (!Enabled)
+        {
+            bg = Color.Transparent;
+            fg = Palette.MutedLight;
+        }
+        else if (_active)
         {
             // Active: dải xanh Primary Blue bên phải, nền trái nhạt
             bg = Palette.SidebarActive;

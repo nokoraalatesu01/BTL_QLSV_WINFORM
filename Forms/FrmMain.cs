@@ -62,6 +62,41 @@ namespace QLDSV_HTC.Forms
                 this.btnNavBangDiem.Visible = coDiemCaNhan;
 
                 // Mở trang Tổng quan mặc định
+                if (Quyen.HienTai.VaiTro == VaiTro.GV)
+                {
+                    this.btnNavLichDay.Visible = true;
+                    this.btnNavDiemDanh.Visible = true;
+                    this.btnNavThongKe.Visible = true;
+                    this.btnNavThongBao.Visible = true;
+                    this.btnNavThongTinCaNhan.Visible = true;
+                }
+                else
+                {
+                    this.btnNavLichDay.Visible = false;
+                    this.btnNavDiemDanh.Visible = false;
+                    this.btnNavThongKe.Visible = false;
+                    this.btnNavThongBao.Visible = false;
+                    this.btnNavThongTinCaNhan.Visible = false;
+                }
+
+                if (Quyen.HienTai.VaiTro == VaiTro.SV)
+                {
+                    this.btnNavLichHoc.Visible = true;
+                    this.btnNavDiemDanhSV.Visible = true;
+                    this.btnNavThongKeSV.Visible = true;
+                    this.btnNavThongBaoSV.Visible = true;
+                    this.btnNavThongTinCaNhanSV.Visible = true;
+                }
+                else
+                {
+                    this.btnNavLichHoc.Visible = false;
+                    this.btnNavDiemDanhSV.Visible = false;
+                    this.btnNavThongKeSV.Visible = false;
+                    this.btnNavThongBaoSV.Visible = false;
+                    this.btnNavThongTinCaNhanSV.Visible = false;
+                }
+
+                // Mở Dashboard mặc định
                 DenTrangDashboard();
             }
             catch (Exception ex)
@@ -101,6 +136,33 @@ namespace QLDSV_HTC.Forms
                 this.lblWelcomeSub.Text = "Hệ thống Quản trị đào tạo & Quản lý sinh viên theo tín chỉ — UTC Portal.";
                 this.lblWelcomeRole.Text = $"Tài khoản: {nd.TenDangNhap}   |   Vai trò: {nd.VaiTroText}";
                 this.lblWelcomeTip.Text = "💡 Hướng dẫn: Bạn có toàn quyền quản trị và thiết lập danh mục ở menu bên trái.";
+        // ── Menu giao diện minh hoạ (chỉ dành cho giảng viên) ──────────────
+        private void MoGiaoDienDangPhatTrien(string tieuDe, SidebarButton nut)
+        {
+            try
+            {
+                DatActiveNut(nut);
+                this.lblPageTitle.Text = tieuDe;
+
+                XoaControlHienTai(giu: false);
+                if (_dashboard != null && !_dashboard.IsDisposed)
+                    _dashboard.Visible = false;
+
+                var lbl = new Label
+                {
+                    Text = "Chức năng đang phát triển. Vui lòng chờ các bản cập nhật mới.",
+                    Dock = DockStyle.Fill,
+                    Font = new Font(Palette.FontFamily, 14F, FontStyle.Italic),
+                    ForeColor = Palette.Muted,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    BackColor = Palette.Canvas
+                };
+                this.pnlContent.Controls.Add(lbl);
+                _controlHienTai = lbl;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -114,6 +176,18 @@ namespace QLDSV_HTC.Forms
         private void btnNavLopTinChi_Click(object sender, EventArgs e) => DenTrangForm("Lớp tín chỉ", this.btnNavLopTinChi, () => new FrmLopTinChi());
         private void btnNavNhapDiem_Click(object sender, EventArgs e) => DenTrangForm("Nhập điểm", this.btnNavNhapDiem, () => new FrmNhapDiem());
         private void btnNavBangDiem_Click(object sender, EventArgs e) => DenTrangForm("Bảng điểm cá nhân", this.btnNavBangDiem, () => new FrmBangDiemSV());
+
+        private void btnNavLichDay_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Lịch giảng dạy", this.btnNavLichDay);
+        private void btnNavDiemDanh_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Điểm danh sinh viên", this.btnNavDiemDanh);
+        private void btnNavThongKe_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thống kê kết quả", this.btnNavThongKe);
+        private void btnNavThongBao_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thông báo", this.btnNavThongBao);
+        private void btnNavThongTinCaNhan_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thông tin cá nhân", this.btnNavThongTinCaNhan);
+
+        private void btnNavLichHoc_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Lịch học", this.btnNavLichHoc);
+        private void btnNavDiemDanhSV_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Điểm danh", this.btnNavDiemDanhSV);
+        private void btnNavThongKeSV_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thống kê kết quả", this.btnNavThongKeSV);
+        private void btnNavThongBaoSV_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thông báo", this.btnNavThongBaoSV);
+        private void btnNavThongTinCaNhanSV_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thông tin cá nhân", this.btnNavThongTinCaNhanSV);
 
         private void btnNavDoiMatKhau_Click(object sender, EventArgs e)
         {

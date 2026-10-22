@@ -7,7 +7,7 @@ namespace QLDSV_HTC.Helpers
     public class DataBaseProcess
     {
         // Khai báo biến toàn cục, bạn phải thay đổi chuỗi kết nối phù hợp
-        string strConnect = "Data Source=DESKTOP-QDPB0LF\\SQLEXPRESS;Initial Catalog=QLDSV_HTC;Integrated Security=True;Encrypt=False;TrustServerCertificate=True;Connect Timeout=10";
+        string strConnect = "Data Source=DESKTOP-RLGANMR;Initial Catalog=QLDSV_HTC;Integrated Security=True;Encrypt=False;TrustServerCertificate=True;Connect Timeout=10";
         SqlConnection sqlConnect = null!;
 
         // Phương thức mở kết nối

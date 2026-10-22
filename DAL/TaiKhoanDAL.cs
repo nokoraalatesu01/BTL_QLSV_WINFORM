@@ -1,46 +1,62 @@
-using Microsoft.Data.SqlClient;
+using System;
+using System.Data;
 using QLDSV_HTC.Helpers;
 using QLDSV_HTC.Models;
 
-namespace QLDSV_HTC.DAL;
-
-public static class TaiKhoanDAL
+namespace QLDSV_HTC.DAL
 {
-    private static TaiKhoan Map(SqlDataReader r)
+    public static class TaiKhoanDAL
     {
-        if (!Enum.TryParse<VaiTro>(Db.Str(r, "VAITRO"), true, out var vaiTro))
-            throw new BusinessException("Tài khoản có vai trò không hợp lệ trong cơ sở dữ liệu.");
+        private static DataBaseProcess dtbase = new DataBaseProcess();
 
-        return new TaiKhoan
+        public static TaiKhoan? LayTheoTen(string tenDangNhap)
         {
-            TenDangNhap = Db.Str(r, "TENDANGNHAP"),
-            MatKhauHash = Db.Str(r, "MATKHAUHASH"),
-            Salt = Db.Str(r, "SALT"),
-            VaiTro = vaiTro,
-            MaKhoa = Db.StrN(r, "MAKHOA"),
-            MaGV = Db.StrN(r, "MAGV"),
-            MaSV = Db.StrN(r, "MASV"),
-            HoatDong = Db.Bool(r, "HOATDONG"),
-        };
+            string sql = "SELECT TENDANGNHAP, MATKHAUHASH, SALT, VAITRO, MAKHOA, MAGV, MASV, HOATDONG FROM TaiKhoan WHERE TENDANGNHAP = '" + tenDangNhap.Trim() + "'";
+            DataTable dt = dtbase.DataReader(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow r = dt.Rows[0];
+                if (!Enum.TryParse<VaiTro>(r["VAITRO"].ToString()?.Trim(), true, out var vaiTro))
+                    throw new BusinessException("Tài khoản có vai trò không hợp lệ trong cơ sở dữ liệu.");
+
+                return new TaiKhoan
+                {
+                    TenDangNhap = r["TENDANGNHAP"].ToString()?.Trim() ?? "",
+                    MatKhauHash = r["MATKHAUHASH"].ToString()?.Trim() ?? "",
+                    Salt = r["SALT"].ToString()?.Trim() ?? "",
+                    VaiTro = vaiTro,
+                    MaKhoa = r["MAKHOA"] == DBNull.Value ? null : r["MAKHOA"].ToString()?.Trim(),
+                    MaGV = r["MAGV"] == DBNull.Value ? null : r["MAGV"].ToString()?.Trim(),
+                    MaSV = r["MASV"] == DBNull.Value ? null : r["MASV"].ToString()?.Trim(),
+                    HoatDong = Convert.ToBoolean(r["HOATDONG"])
+                };
+            }
+            return null;
+        }
+
+        public static bool TonTai(string tenDangNhap)
+        {
+            string sql = "SELECT TENDANGNHAP FROM TaiKhoan WHERE TENDANGNHAP = '" + tenDangNhap.Trim() + "'";
+            DataTable dt = dtbase.DataReader(sql);
+            return dt.Rows.Count > 0;
+        }
+
+        public static int DoiMatKhau(string tenDangNhap, string hash, string salt)
+        {
+            string sql = "UPDATE TaiKhoan SET MATKHAUHASH = '" + hash + "', SALT = '" + salt + "' WHERE TENDANGNHAP = '" + tenDangNhap.Trim() + "'";
+            dtbase.DataChange(sql);
+            return 1;
+        }
+
+        public static void Them(TaiKhoan tk)
+        {
+            string mkVal = string.IsNullOrEmpty(tk.MaKhoa) ? "NULL" : "'" + tk.MaKhoa.Trim() + "'";
+            string gvVal = string.IsNullOrEmpty(tk.MaGV) ? "NULL" : "'" + tk.MaGV.Trim() + "'";
+            string svVal = string.IsNullOrEmpty(tk.MaSV) ? "NULL" : "'" + tk.MaSV.Trim() + "'";
+            string sql = "INSERT INTO TaiKhoan (TENDANGNHAP, MATKHAUHASH, SALT, VAITRO, MAKHOA, MAGV, MASV, HOATDONG) VALUES (" +
+                         "'" + tk.TenDangNhap.Trim() + "', '" + tk.MatKhauHash + "', '" + tk.Salt + "', '" + tk.VaiTro.ToString() + "', " +
+                         mkVal + ", " + gvVal + ", " + svVal + ", 1)";
+            dtbase.DataChange(sql);
+        }
     }
-
-    public static TaiKhoan? LayTheoTen(string tenDangNhap) =>
-        Db.Query<TaiKhoan>(
-            "SELECT TENDANGNHAP, MATKHAUHASH, SALT, VAITRO, MAKHOA, MAGV, MASV, HOATDONG FROM TaiKhoan WHERE TENDANGNHAP = @ten",
-            Map, Db.P("@ten", tenDangNhap)).FirstOrDefault();
-
-    public static bool TonTai(string tenDangNhap) =>
-        Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM TaiKhoan WHERE TENDANGNHAP = @ten", Db.P("@ten", tenDangNhap))) > 0;
-
-    public static int DoiMatKhau(string tenDangNhap, string hash, string salt) =>
-        Db.Execute("UPDATE TaiKhoan SET MATKHAUHASH = @h, SALT = @s WHERE TENDANGNHAP = @ten",
-            Db.P("@h", hash), Db.P("@s", salt), Db.P("@ten", tenDangNhap));
-
-    /// <summary>Thêm tài khoản bên trong một transaction đang mở.</summary>
-    public static void Them(SqlConnection conn, SqlTransaction tx, TaiKhoan tk) =>
-        DalUtil.Exec(conn, tx,
-            @"INSERT INTO TaiKhoan (TENDANGNHAP, MATKHAUHASH, SALT, VAITRO, MAKHOA, MAGV, MASV, HOATDONG)
-              VALUES (@ten, @h, @s, @vt, @mk, @gv, @sv, 1)",
-            Db.P("@ten", tk.TenDangNhap), Db.P("@h", tk.MatKhauHash), Db.P("@s", tk.Salt),
-            Db.P("@vt", tk.VaiTro.ToString()), Db.P("@mk", tk.MaKhoa), Db.P("@gv", tk.MaGV), Db.P("@sv", tk.MaSV));
 }

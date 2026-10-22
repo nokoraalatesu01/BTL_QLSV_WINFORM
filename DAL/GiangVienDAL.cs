@@ -1,68 +1,117 @@
-using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using QLDSV_HTC.Helpers;
 using QLDSV_HTC.Models;
 
-namespace QLDSV_HTC.DAL;
-
-public static class GiangVienDAL
+namespace QLDSV_HTC.DAL
 {
-    private const string SelectSql =
-        @"SELECT g.MAGV, g.HO, g.TEN, g.HOCVI, g.HOCHAM, g.CHUYENMON, g.MAKHOA, k.TENKHOA
-          FROM GIANGVIEN g JOIN Khoa k ON k.MAKHOA = g.MAKHOA ";
-
-    private static GiangVien Map(SqlDataReader r) => new()
+    public static class GiangVienDAL
     {
-        MaGV = Db.Str(r, "MAGV"),
-        Ho = Db.Str(r, "HO"),
-        Ten = Db.Str(r, "TEN"),
-        HocVi = Db.StrN(r, "HOCVI"),
-        HocHam = Db.StrN(r, "HOCHAM"),
-        ChuyenMon = Db.StrN(r, "CHUYENMON"),
-        MaKhoa = Db.Str(r, "MAKHOA"),
-        TenKhoa = Db.Str(r, "TENKHOA"),
-    };
+        private static DataBaseProcess dtbase = new DataBaseProcess();
 
-    public static List<GiangVien> Tim(string? keyword, string? maKhoa) =>
-        Db.Query<GiangVien>(
-            SelectSql +
-            @"WHERE (@mk IS NULL OR g.MAKHOA = @mk)
-                AND (@kw IS NULL OR g.MAGV LIKE @kw OR g.HO LIKE @kw OR g.TEN LIKE @kw
-                     OR (g.HO + N' ' + g.TEN) LIKE @kw OR g.CHUYENMON LIKE @kw)
-              ORDER BY g.MAKHOA, g.TEN, g.HO",
-            Map, Db.P("@mk", maKhoa), Db.P("@kw", Db.Like(keyword)));
-
-    public static GiangVien? LayTheoMa(string maGV) =>
-        Db.Query<GiangVien>(SelectSql + "WHERE g.MAGV = @ma", Map, Db.P("@ma", maGV)).FirstOrDefault();
-
-    public static bool TonTai(string maGV) =>
-        Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM GIANGVIEN WHERE MAGV = @ma", Db.P("@ma", maGV))) > 0;
-
-    /// <summary>Thêm giảng viên và tài khoản đăng nhập của giảng viên trong cùng một transaction.</summary>
-    public static void Them(GiangVien g, TaiKhoan taiKhoan)
-    {
-        Db.InTransaction((conn, tx) =>
+        public static List<GiangVien> Tim(string? keyword, string? maKhoa)
         {
-            DalUtil.Exec(conn, tx,
-                @"INSERT INTO GIANGVIEN (MAGV, HO, TEN, HOCVI, HOCHAM, CHUYENMON, MAKHOA)
-                  VALUES (@ma, @ho, @ten, @hv, @hh, @cm, @mk)",
-                Db.P("@ma", g.MaGV), Db.P("@ho", g.Ho), Db.P("@ten", g.Ten), Db.P("@hv", g.HocVi),
-                Db.P("@hh", g.HocHam), Db.P("@cm", g.ChuyenMon), Db.P("@mk", g.MaKhoa));
-            TaiKhoanDAL.Them(conn, tx, taiKhoan);
-        });
+            string sql = @"SELECT g.MAGV, g.HO, g.TEN, g.HOCVI, g.HOCHAM, g.CHUYENMON, g.MAKHOA, k.TENKHOA
+                           FROM GIANGVIEN g JOIN Khoa k ON k.MAKHOA = g.MAKHOA WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(maKhoa))
+            {
+                sql += " AND g.MAKHOA = '" + maKhoa.Trim() + "'";
+            }
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                string kw = keyword.Trim();
+                sql += " AND (g.MAGV LIKE '%" + kw + "%' OR g.HO LIKE N'%" + kw + "%' OR g.TEN LIKE N'%" + kw + "%' OR (g.HO + N' ' + g.TEN) LIKE N'%" + kw + "%' OR g.CHUYENMON LIKE N'%" + kw + "%')";
+            }
+            sql += " ORDER BY g.MAKHOA, g.TEN, g.HO";
+
+            DataTable dt = dtbase.DataReader(sql);
+            List<GiangVien> list = new List<GiangVien>();
+            foreach (DataRow r in dt.Rows)
+            {
+                list.Add(new GiangVien
+                {
+                    MaGV = r["MAGV"].ToString()?.Trim() ?? "",
+                    Ho = r["HO"].ToString()?.Trim() ?? "",
+                    Ten = r["TEN"].ToString()?.Trim() ?? "",
+                    HocVi = r["HOCVI"] == DBNull.Value ? null : r["HOCVI"].ToString()?.Trim(),
+                    HocHam = r["HOCHAM"] == DBNull.Value ? null : r["HOCHAM"].ToString()?.Trim(),
+                    ChuyenMon = r["CHUYENMON"] == DBNull.Value ? null : r["CHUYENMON"].ToString()?.Trim(),
+                    MaKhoa = r["MAKHOA"].ToString()?.Trim() ?? "",
+                    TenKhoa = r["TENKHOA"].ToString()?.Trim() ?? ""
+                });
+            }
+            return list;
+        }
+
+        public static GiangVien? LayTheoMa(string maGV)
+        {
+            string sql = @"SELECT g.MAGV, g.HO, g.TEN, g.HOCVI, g.HOCHAM, g.CHUYENMON, g.MAKHOA, k.TENKHOA
+                           FROM GIANGVIEN g JOIN Khoa k ON k.MAKHOA = g.MAKHOA WHERE g.MAGV = '" + maGV.Trim() + "'";
+            DataTable dt = dtbase.DataReader(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow r = dt.Rows[0];
+                return new GiangVien
+                {
+                    MaGV = r["MAGV"].ToString()?.Trim() ?? "",
+                    Ho = r["HO"].ToString()?.Trim() ?? "",
+                    Ten = r["TEN"].ToString()?.Trim() ?? "",
+                    HocVi = r["HOCVI"] == DBNull.Value ? null : r["HOCVI"].ToString()?.Trim(),
+                    HocHam = r["HOCHAM"] == DBNull.Value ? null : r["HOCHAM"].ToString()?.Trim(),
+                    ChuyenMon = r["CHUYENMON"] == DBNull.Value ? null : r["CHUYENMON"].ToString()?.Trim(),
+                    MaKhoa = r["MAKHOA"].ToString()?.Trim() ?? "",
+                    TenKhoa = r["TENKHOA"].ToString()?.Trim() ?? ""
+                };
+            }
+            return null;
+        }
+
+        public static bool TonTai(string maGV)
+        {
+            string sql = "SELECT MAGV FROM GIANGVIEN WHERE MAGV = '" + maGV.Trim() + "'";
+            DataTable dt = dtbase.DataReader(sql);
+            return dt.Rows.Count > 0;
+        }
+
+        public static void Them(GiangVien g, TaiKhoan taiKhoan)
+        {
+            string sql = "INSERT INTO GIANGVIEN (MAGV, HO, TEN, HOCVI, HOCHAM, CHUYENMON, MAKHOA) VALUES (" +
+                         "'" + g.MaGV.Trim() + "', N'" + g.Ho.Trim() + "', N'" + g.Ten.Trim() + "', " +
+                         (string.IsNullOrEmpty(g.HocVi) ? "NULL" : "N'" + g.HocVi.Trim() + "'") + ", " +
+                         (string.IsNullOrEmpty(g.HocHam) ? "NULL" : "N'" + g.HocHam.Trim() + "'") + ", " +
+                         (string.IsNullOrEmpty(g.ChuyenMon) ? "NULL" : "N'" + g.ChuyenMon.Trim() + "'") + ", " +
+                         "'" + g.MaKhoa.Trim() + "')";
+            dtbase.DataChange(sql);
+            TaiKhoanDAL.Them(taiKhoan);
+        }
+
+        public static int Sua(GiangVien g)
+        {
+            string sql = "UPDATE GIANGVIEN SET " +
+                         "HO = N'" + g.Ho.Trim() + "', " +
+                         "TEN = N'" + g.Ten.Trim() + "', " +
+                         "HOCVI = " + (string.IsNullOrEmpty(g.HocVi) ? "NULL" : "N'" + g.HocVi.Trim() + "'") + ", " +
+                         "HOCHAM = " + (string.IsNullOrEmpty(g.HocHam) ? "NULL" : "N'" + g.HocHam.Trim() + "'") + ", " +
+                         "CHUYENMON = " + (string.IsNullOrEmpty(g.ChuyenMon) ? "NULL" : "N'" + g.ChuyenMon.Trim() + "'") + ", " +
+                         "MAKHOA = '" + g.MaKhoa.Trim() + "' " +
+                         "WHERE MAGV = '" + g.MaGV.Trim() + "'";
+            dtbase.DataChange(sql);
+            return 1;
+        }
+
+        public static int Xoa(string maGV)
+        {
+            string sql = "DELETE FROM GIANGVIEN WHERE MAGV = '" + maGV.Trim() + "'";
+            dtbase.DataChange(sql);
+            return 1;
+        }
+
+        public static int DemLopTinChi(string maGV)
+        {
+            string sql = "SELECT COUNT(*) FROM LOPTINCHI WHERE MAGV = '" + maGV.Trim() + "'";
+            DataTable dt = dtbase.DataReader(sql);
+            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0][0]) : 0;
+        }
     }
-
-    public static int Sua(GiangVien g) =>
-        Db.Execute(
-            @"UPDATE GIANGVIEN
-              SET HO = @ho, TEN = @ten, HOCVI = @hv, HOCHAM = @hh, CHUYENMON = @cm, MAKHOA = @mk
-              WHERE MAGV = @ma",
-            Db.P("@ho", g.Ho), Db.P("@ten", g.Ten), Db.P("@hv", g.HocVi), Db.P("@hh", g.HocHam),
-            Db.P("@cm", g.ChuyenMon), Db.P("@mk", g.MaKhoa), Db.P("@ma", g.MaGV));
-
-    /// <summary>Xóa giảng viên; tài khoản của giảng viên bị xóa theo (ON DELETE CASCADE).</summary>
-    public static int Xoa(string maGV) =>
-        Db.Execute("DELETE FROM GIANGVIEN WHERE MAGV = @ma", Db.P("@ma", maGV));
-
-    public static int DemLopTinChi(string maGV) =>
-        Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM LOPTINCHI WHERE MAGV = @ma", Db.P("@ma", maGV)));
 }

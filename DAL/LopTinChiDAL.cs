@@ -1,79 +1,159 @@
-using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using QLDSV_HTC.Helpers;
 using QLDSV_HTC.Models;
 
-namespace QLDSV_HTC.DAL;
-
-public static class LopTinChiDAL
+namespace QLDSV_HTC.DAL
 {
-    private const string SelectSql =
-        @"SELECT t.MALTC, t.NIENKHOA, t.HOCKY, t.MAMH, m.TENMH, t.NHOM, t.MAGV,
-                 (g.HO + N' ' + g.TEN) AS TENGV, t.MAKHOA, t.SOSVTOITHIEU, t.HUYLOP,
-                 (SELECT COUNT(*) FROM DANGKY d WHERE d.MALTC = t.MALTC AND d.HUYDANGKY = 0) AS SOSV
-          FROM LOPTINCHI t
-          JOIN Monhoc m ON m.MAMH = t.MAMH
-          JOIN GIANGVIEN g ON g.MAGV = t.MAGV ";
-
-    private static LopTinChi Map(SqlDataReader r) => new()
+    public static class LopTinChiDAL
     {
-        MaLTC = Db.Int(r, "MALTC"),
-        NienKhoa = Db.Str(r, "NIENKHOA"),
-        HocKy = Db.Int(r, "HOCKY"),
-        MaMH = Db.Str(r, "MAMH"),
-        TenMH = Db.Str(r, "TENMH"),
-        Nhom = Db.Int(r, "NHOM"),
-        MaGV = Db.Str(r, "MAGV"),
-        TenGV = Db.Str(r, "TENGV"),
-        MaKhoa = Db.Str(r, "MAKHOA"),
-        SoSVToiThieu = Db.Int(r, "SOSVTOITHIEU"),
-        HuyLop = Db.Bool(r, "HUYLOP"),
-        SoSV = Db.Int(r, "SOSV"),
-    };
+        private static DataBaseProcess dtbase = new DataBaseProcess();
 
-    /// <summary>Các tham số null = không lọc.</summary>
-    public static List<LopTinChi> Tim(string? maKhoa, string? nienKhoa, int? hocKy) =>
-        Db.Query<LopTinChi>(
-            SelectSql +
-            @"WHERE (@mk IS NULL OR t.MAKHOA = @mk)
-                AND (@nk IS NULL OR t.NIENKHOA = @nk)
-                AND (@hk IS NULL OR t.HOCKY = @hk)
-              ORDER BY t.NIENKHOA DESC, t.HOCKY, m.TENMH, t.NHOM",
-            Map, Db.P("@mk", maKhoa), Db.P("@nk", nienKhoa), Db.P("@hk", hocKy));
+        private const string SelectSql =
+            @"SELECT t.MALTC, t.NIENKHOA, t.HOCKY, t.MAMH, m.TENMH, t.NHOM, t.MAGV,
+                     (g.HO + N' ' + g.TEN) AS TENGV, t.MAKHOA, t.SOSVTOITHIEU, t.HUYLOP,
+                     (SELECT COUNT(*) FROM DANGKY d WHERE d.MALTC = t.MALTC AND d.HUYDANGKY = 0) AS SOSV
+              FROM LOPTINCHI t
+              JOIN Monhoc m ON m.MAMH = t.MAMH
+              JOIN GIANGVIEN g ON g.MAGV = t.MAGV ";
 
-    public static LopTinChi? LayTheoMa(int maLTC) =>
-        Db.Query<LopTinChi>(SelectSql + "WHERE t.MALTC = @ma", Map, Db.P("@ma", maLTC)).FirstOrDefault();
+        public static List<LopTinChi> Tim(string? maKhoa, string? nienKhoa, int? hocKy)
+        {
+            string sql = SelectSql + " WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(maKhoa))
+            {
+                sql += " AND t.MAKHOA = '" + maKhoa.Trim() + "'";
+            }
+            if (!string.IsNullOrEmpty(nienKhoa))
+            {
+                sql += " AND t.NIENKHOA = '" + nienKhoa.Trim() + "'";
+            }
+            if (hocKy.HasValue)
+            {
+                sql += " AND t.HOCKY = " + hocKy.Value;
+            }
+            sql += " ORDER BY t.NIENKHOA DESC, t.HOCKY, m.TENMH, t.NHOM";
 
-    public static List<string> LayNienKhoa(string? maKhoa) =>
-        Db.Query<string>(
-            "SELECT DISTINCT NIENKHOA FROM LOPTINCHI WHERE (@mk IS NULL OR MAKHOA = @mk) ORDER BY NIENKHOA DESC",
-            r => Db.Str(r, "NIENKHOA"), Db.P("@mk", maKhoa));
+            DataTable dt = dtbase.DataReader(sql);
+            List<LopTinChi> list = new List<LopTinChi>();
+            foreach (DataRow r in dt.Rows)
+            {
+                list.Add(new LopTinChi
+                {
+                    MaLTC = Convert.ToInt32(r["MALTC"]),
+                    NienKhoa = r["NIENKHOA"].ToString()?.Trim() ?? "",
+                    HocKy = Convert.ToInt32(r["HOCKY"]),
+                    MaMH = r["MAMH"].ToString()?.Trim() ?? "",
+                    TenMH = r["TENMH"].ToString()?.Trim() ?? "",
+                    Nhom = Convert.ToInt32(r["NHOM"]),
+                    MaGV = r["MAGV"].ToString()?.Trim() ?? "",
+                    TenGV = r["TENGV"].ToString()?.Trim() ?? "",
+                    MaKhoa = r["MAKHOA"].ToString()?.Trim() ?? "",
+                    SoSVToiThieu = Convert.ToInt32(r["SOSVTOITHIEU"]),
+                    HuyLop = Convert.ToBoolean(r["HUYLOP"]),
+                    SoSV = Convert.ToInt32(r["SOSV"])
+                });
+            }
+            return list;
+        }
 
-    /// <summary>Thêm lớp tín chỉ, trả về MALTC mới.</summary>
-    public static int Them(LopTinChi t)
-    {
-        var id = Db.Scalar(
-            @"INSERT INTO LOPTINCHI (NIENKHOA, HOCKY, MAMH, NHOM, MAGV, MAKHOA, SOSVTOITHIEU, HUYLOP)
-              OUTPUT INSERTED.MALTC
-              VALUES (@nk, @hk, @mh, @nhom, @gv, @mk, @sv, @huy)",
-            Db.P("@nk", t.NienKhoa), Db.P("@hk", t.HocKy), Db.P("@mh", t.MaMH), Db.P("@nhom", t.Nhom),
-            Db.P("@gv", t.MaGV), Db.P("@mk", t.MaKhoa), Db.P("@sv", t.SoSVToiThieu), Db.P("@huy", t.HuyLop));
-        return Convert.ToInt32(id);
+        public static LopTinChi? LayTheoMa(int maLTC)
+        {
+            string sql = SelectSql + " WHERE t.MALTC = " + maLTC;
+            DataTable dt = dtbase.DataReader(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow r = dt.Rows[0];
+                return new LopTinChi
+                {
+                    MaLTC = Convert.ToInt32(r["MALTC"]),
+                    NienKhoa = r["NIENKHOA"].ToString()?.Trim() ?? "",
+                    HocKy = Convert.ToInt32(r["HOCKY"]),
+                    MaMH = r["MAMH"].ToString()?.Trim() ?? "",
+                    TenMH = r["TENMH"].ToString()?.Trim() ?? "",
+                    Nhom = Convert.ToInt32(r["NHOM"]),
+                    MaGV = r["MAGV"].ToString()?.Trim() ?? "",
+                    TenGV = r["TENGV"].ToString()?.Trim() ?? "",
+                    MaKhoa = r["MAKHOA"].ToString()?.Trim() ?? "",
+                    SoSVToiThieu = Convert.ToInt32(r["SOSVTOITHIEU"]),
+                    HuyLop = Convert.ToBoolean(r["HUYLOP"]),
+                    SoSV = Convert.ToInt32(r["SOSV"])
+                };
+            }
+            return null;
+        }
+
+        public static List<string> LayNienKhoa(string? maKhoa)
+        {
+            string sql = "SELECT DISTINCT NIENKHOA FROM LOPTINCHI";
+            if (!string.IsNullOrEmpty(maKhoa))
+            {
+                sql += " WHERE MAKHOA = '" + maKhoa.Trim() + "'";
+            }
+            sql += " ORDER BY NIENKHOA DESC";
+
+            DataTable dt = dtbase.DataReader(sql);
+            List<string> list = new List<string>();
+            foreach (DataRow r in dt.Rows)
+            {
+                list.Add(r["NIENKHOA"].ToString()?.Trim() ?? "");
+            }
+            return list;
+        }
+
+        public static int Them(LopTinChi t)
+        {
+            string sql = "INSERT INTO LOPTINCHI (NIENKHOA, HOCKY, MAMH, NHOM, MAGV, MAKHOA, SOSVTOITHIEU, HUYLOP) VALUES (" +
+                         "'" + t.NienKhoa.Trim() + "', " + t.HocKy + ", '" + t.MaMH.Trim() + "', " + t.Nhom + ", " +
+                         "'" + t.MaGV.Trim() + "', '" + t.MaKhoa.Trim() + "', " + t.SoSVToiThieu + ", " + (t.HuyLop ? "1" : "0") + ")";
+            dtbase.DataChange(sql);
+
+            // Lấy ID mới nhất
+            string sqlId = "SELECT MAX(MALTC) FROM LOPTINCHI";
+            DataTable dt = dtbase.DataReader(sqlId);
+            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0][0]) : 0;
+        }
+
+        public static int Sua(LopTinChi t)
+        {
+            string sql = "UPDATE LOPTINCHI SET " +
+                         "NIENKHOA = '" + t.NienKhoa.Trim() + "', " +
+                         "HOCKY = " + t.HocKy + ", " +
+                         "MAMH = '" + t.MaMH.Trim() + "', " +
+                         "NHOM = " + t.Nhom + ", " +
+                         "MAGV = '" + t.MaGV.Trim() + "', " +
+                         "MAKHOA = '" + t.MaKhoa.Trim() + "', " +
+                         "SOSVTOITHIEU = " + t.SoSVToiThieu + ", " +
+                         "HUYLOP = " + (t.HuyLop ? "1" : "0") + " " +
+                         "WHERE MALTC = " + t.MaLTC;
+            dtbase.DataChange(sql);
+            return 1;
+        }
+
+        public static int Xoa(int maLTC)
+        {
+            string sql = "DELETE FROM LOPTINCHI WHERE MALTC = " + maLTC;
+            dtbase.DataChange(sql);
+            return 1;
+        }
+
+        public static bool TrungThongTin(string nienKhoa, int hocKy, string maMH, int nhom, int? boQuaMaLTC = null)
+        {
+            string sql = "SELECT MALTC FROM LOPTINCHI WHERE NIENKHOA = '" + nienKhoa.Trim() + "' AND HOCKY = " + hocKy + " AND MAMH = '" + maMH.Trim() + "' AND NHOM = " + nhom;
+            if (boQuaMaLTC.HasValue)
+            {
+                sql += " AND MALTC <> " + boQuaMaLTC.Value;
+            }
+            DataTable dt = dtbase.DataReader(sql);
+            return dt.Rows.Count > 0;
+        }
+
+        public static int DemDangKy(int maLTC)
+        {
+            string sql = "SELECT COUNT(*) FROM DANGKY WHERE MALTC = " + maLTC + " AND HUYDANGKY = 0";
+            DataTable dt = dtbase.DataReader(sql);
+            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0][0]) : 0;
+        }
     }
-
-    public static int Sua(LopTinChi t) =>
-        Db.Execute(
-            @"UPDATE LOPTINCHI
-              SET NIENKHOA = @nk, HOCKY = @hk, MAMH = @mh, NHOM = @nhom, MAGV = @gv,
-                  MAKHOA = @mk, SOSVTOITHIEU = @sv, HUYLOP = @huy
-              WHERE MALTC = @ma",
-            Db.P("@nk", t.NienKhoa), Db.P("@hk", t.HocKy), Db.P("@mh", t.MaMH), Db.P("@nhom", t.Nhom),
-            Db.P("@gv", t.MaGV), Db.P("@mk", t.MaKhoa), Db.P("@sv", t.SoSVToiThieu), Db.P("@huy", t.HuyLop),
-            Db.P("@ma", t.MaLTC));
-
-    public static int Xoa(int maLTC) =>
-        Db.Execute("DELETE FROM LOPTINCHI WHERE MALTC = @ma", Db.P("@ma", maLTC));
-
-    /// <summary>Số bản ghi DANGKY (kể cả đã hủy) của lớp tín chỉ.</summary>
-    public static int DemDangKy(int maLTC) =>
-        Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM DANGKY WHERE MALTC = @ma", Db.P("@ma", maLTC)));
 }

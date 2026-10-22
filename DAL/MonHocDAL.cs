@@ -1,44 +1,90 @@
-using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using QLDSV_HTC.Helpers;
 using QLDSV_HTC.Models;
 
-namespace QLDSV_HTC.DAL;
-
-public static class MonHocDAL
+namespace QLDSV_HTC.DAL
 {
-    private static MonHoc Map(SqlDataReader r) => new()
+    public static class MonHocDAL
     {
-        MaMH = Db.Str(r, "MAMH"),
-        TenMH = Db.Str(r, "TENMH"),
-        SoTietLT = Db.Int(r, "SOTIET_LT"),
-        SoTietTH = Db.Int(r, "SOTIET_TH"),
-    };
+        private static DataBaseProcess dtbase = new DataBaseProcess();
 
-    public static List<MonHoc> Tim(string? keyword) =>
-        Db.Query<MonHoc>(
-            @"SELECT MAMH, TENMH, SOTIET_LT, SOTIET_TH FROM Monhoc
-              WHERE (@kw IS NULL OR MAMH LIKE @kw OR TENMH LIKE @kw)
-              ORDER BY MAMH",
-            Map, Db.P("@kw", Db.Like(keyword)));
+        public static List<MonHoc> Tim(string? keyword)
+        {
+            string sql = "SELECT MAMH, TENMH, SOTIET_LT, SOTIET_TH FROM Monhoc";
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                string kw = keyword.Trim();
+                sql += " WHERE MAMH LIKE '%" + kw + "%' OR TENMH LIKE N'%" + kw + "%'";
+            }
+            sql += " ORDER BY MAMH";
 
-    public static MonHoc? LayTheoMa(string maMH) =>
-        Db.Query<MonHoc>("SELECT MAMH, TENMH, SOTIET_LT, SOTIET_TH FROM Monhoc WHERE MAMH = @ma",
-            Map, Db.P("@ma", maMH)).FirstOrDefault();
+            DataTable dt = dtbase.DataReader(sql);
+            List<MonHoc> list = new List<MonHoc>();
+            foreach (DataRow r in dt.Rows)
+            {
+                list.Add(new MonHoc
+                {
+                    MaMH = r["MAMH"].ToString()?.Trim() ?? "",
+                    TenMH = r["TENMH"].ToString()?.Trim() ?? "",
+                    SoTietLT = Convert.ToInt32(r["SOTIET_LT"]),
+                    SoTietTH = Convert.ToInt32(r["SOTIET_TH"])
+                });
+            }
+            return list;
+        }
 
-    public static bool TonTai(string maMH) =>
-        Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM Monhoc WHERE MAMH = @ma", Db.P("@ma", maMH))) > 0;
+        public static MonHoc? LayTheoMa(string maMH)
+        {
+            string sql = "SELECT MAMH, TENMH, SOTIET_LT, SOTIET_TH FROM Monhoc WHERE MAMH = '" + maMH.Trim() + "'";
+            DataTable dt = dtbase.DataReader(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow r = dt.Rows[0];
+                return new MonHoc
+                {
+                    MaMH = r["MAMH"].ToString()?.Trim() ?? "",
+                    TenMH = r["TENMH"].ToString()?.Trim() ?? "",
+                    SoTietLT = Convert.ToInt32(r["SOTIET_LT"]),
+                    SoTietTH = Convert.ToInt32(r["SOTIET_TH"])
+                };
+            }
+            return null;
+        }
 
-    public static void Them(MonHoc m) =>
-        Db.Execute("INSERT INTO Monhoc (MAMH, TENMH, SOTIET_LT, SOTIET_TH) VALUES (@ma, @ten, @lt, @th)",
-            Db.P("@ma", m.MaMH), Db.P("@ten", m.TenMH), Db.P("@lt", m.SoTietLT), Db.P("@th", m.SoTietTH));
+        public static bool TonTai(string maMH)
+        {
+            string sql = "SELECT MAMH FROM Monhoc WHERE MAMH = '" + maMH.Trim() + "'";
+            DataTable dt = dtbase.DataReader(sql);
+            return dt.Rows.Count > 0;
+        }
 
-    public static int Sua(MonHoc m) =>
-        Db.Execute("UPDATE Monhoc SET TENMH = @ten, SOTIET_LT = @lt, SOTIET_TH = @th WHERE MAMH = @ma",
-            Db.P("@ten", m.TenMH), Db.P("@lt", m.SoTietLT), Db.P("@th", m.SoTietTH), Db.P("@ma", m.MaMH));
+        public static void Them(MonHoc m)
+        {
+            string sql = "INSERT INTO Monhoc (MAMH, TENMH, SOTIET_LT, SOTIET_TH) VALUES ('" + m.MaMH.Trim() + "', N'" + m.TenMH.Trim() + "', " + m.SoTietLT + ", " + m.SoTietTH + ")";
+            dtbase.DataChange(sql);
+        }
 
-    public static int Xoa(string maMH) =>
-        Db.Execute("DELETE FROM Monhoc WHERE MAMH = @ma", Db.P("@ma", maMH));
+        public static int Sua(MonHoc m)
+        {
+            string sql = "UPDATE Monhoc SET TENMH = N'" + m.TenMH.Trim() + "', SOTIET_LT = " + m.SoTietLT + ", SOTIET_TH = " + m.SoTietTH + " WHERE MAMH = '" + m.MaMH.Trim() + "'";
+            dtbase.DataChange(sql);
+            return 1;
+        }
 
-    public static int DemLopTinChi(string maMH) =>
-        Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM LOPTINCHI WHERE MAMH = @ma", Db.P("@ma", maMH)));
+        public static int Xoa(string maMH)
+        {
+            string sql = "DELETE FROM Monhoc WHERE MAMH = '" + maMH.Trim() + "'";
+            dtbase.DataChange(sql);
+            return 1;
+        }
+
+        public static int DemLopTinChi(string maMH)
+        {
+            string sql = "SELECT COUNT(*) FROM LOPTINCHI WHERE MAMH = '" + maMH.Trim() + "'";
+            DataTable dt = dtbase.DataReader(sql);
+            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0][0]) : 0;
+        }
+    }
 }

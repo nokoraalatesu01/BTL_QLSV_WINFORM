@@ -1,66 +1,106 @@
-using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using QLDSV_HTC.Helpers;
 using QLDSV_HTC.Models;
 
-namespace QLDSV_HTC.DAL;
-
-public static class KhoaDAL
+namespace QLDSV_HTC.DAL
 {
-    private static Khoa Map(SqlDataReader r) => new()
+    public static class KhoaDAL
     {
-        MaKhoa = Db.Str(r, "MAKHOA"),
-        TenKhoa = Db.Str(r, "TENKHOA"),
-    };
+        private static DataBaseProcess dtbase = new DataBaseProcess();
 
-    /// <summary>maKhoa = null: lấy tất cả khoa.</summary>
-    public static List<Khoa> LayTatCa(string? maKhoa = null) =>
-        Db.Query<Khoa>(
-            "SELECT MAKHOA, TENKHOA FROM Khoa WHERE (@mk IS NULL OR MAKHOA = @mk) ORDER BY TENKHOA",
-            Map, Db.P("@mk", maKhoa));
-
-    public static Khoa? LayTheoMa(string maKhoa) =>
-        Db.Query<Khoa>("SELECT MAKHOA, TENKHOA FROM Khoa WHERE MAKHOA = @mk", Map, Db.P("@mk", maKhoa)).FirstOrDefault();
-
-    public static bool TonTai(string maKhoa) =>
-        Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM Khoa WHERE MAKHOA = @mk", Db.P("@mk", maKhoa))) > 0;
-
-    /// <summary>Thêm khoa; nếu có tài khoản kèm theo thì thêm trong cùng một transaction.</summary>
-    public static void Them(Khoa k, TaiKhoan? taiKhoanKhoa)
-    {
-        Db.InTransaction((conn, tx) =>
+        /// <summary>maKhoa = null: lấy tất cả khoa.</summary>
+        public static List<Khoa> LayTatCa(string? maKhoa = null)
         {
-            DalUtil.Exec(conn, tx, "INSERT INTO Khoa (MAKHOA, TENKHOA) VALUES (@ma, @ten)",
-                Db.P("@ma", k.MaKhoa), Db.P("@ten", k.TenKhoa));
+            string sql = "SELECT MAKHOA, TENKHOA FROM Khoa";
+            if (!string.IsNullOrEmpty(maKhoa))
+            {
+                sql += " WHERE MAKHOA = '" + maKhoa.Trim() + "'";
+            }
+            sql += " ORDER BY TENKHOA";
+
+            DataTable dt = dtbase.DataReader(sql);
+            List<Khoa> list = new List<Khoa>();
+            foreach (DataRow r in dt.Rows)
+            {
+                list.Add(new Khoa
+                {
+                    MaKhoa = r["MAKHOA"].ToString()?.Trim() ?? "",
+                    TenKhoa = r["TENKHOA"].ToString()?.Trim() ?? ""
+                });
+            }
+            return list;
+        }
+
+        public static Khoa? LayTheoMa(string maKhoa)
+        {
+            string sql = "SELECT MAKHOA, TENKHOA FROM Khoa WHERE MAKHOA = '" + maKhoa.Trim() + "'";
+            DataTable dt = dtbase.DataReader(sql);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow r = dt.Rows[0];
+                return new Khoa
+                {
+                    MaKhoa = r["MAKHOA"].ToString()?.Trim() ?? "",
+                    TenKhoa = r["TENKHOA"].ToString()?.Trim() ?? ""
+                };
+            }
+            return null;
+        }
+
+        public static bool TonTai(string maKhoa)
+        {
+            string sql = "SELECT MAKHOA FROM Khoa WHERE MAKHOA = '" + maKhoa.Trim() + "'";
+            DataTable dt = dtbase.DataReader(sql);
+            return dt.Rows.Count > 0;
+        }
+
+        /// <summary>Thêm khoa; nếu có tài khoản kèm theo thì thêm luôn tài khoản.</summary>
+        public static void Them(Khoa k, TaiKhoan? taiKhoanKhoa)
+        {
+            string sql = "INSERT INTO Khoa (MAKHOA, TENKHOA) VALUES (N'" + k.MaKhoa.Trim() + "', N'" + k.TenKhoa.Trim() + "')";
+            dtbase.DataChange(sql);
             if (taiKhoanKhoa != null)
-                TaiKhoanDAL.Them(conn, tx, taiKhoanKhoa);
-        });
-    }
+            {
+                TaiKhoanDAL.Them(taiKhoanKhoa);
+            }
+        }
 
-    public static int Sua(Khoa k) =>
-        Db.Execute("UPDATE Khoa SET TENKHOA = @ten WHERE MAKHOA = @ma",
-            Db.P("@ten", k.TenKhoa), Db.P("@ma", k.MaKhoa));
-
-    /// <summary>Số lớp, giảng viên, lớp tín chỉ đang thuộc khoa.</summary>
-    public static (int Lop, int GiangVien, int LopTinChi) DemThamChieu(string maKhoa)
-    {
-        var rows = Db.Query<(int, int, int)>(
-            @"SELECT (SELECT COUNT(*) FROM Lop WHERE MAKHOA = @mk) AS L,
-                     (SELECT COUNT(*) FROM GIANGVIEN WHERE MAKHOA = @mk) AS G,
-                     (SELECT COUNT(*) FROM LOPTINCHI WHERE MAKHOA = @mk) AS T",
-            r => (Db.Int(r, "L"), Db.Int(r, "G"), Db.Int(r, "T")),
-            Db.P("@mk", maKhoa));
-        return rows.Count > 0 ? rows[0] : (0, 0, 0);
-    }
-
-    /// <summary>Xóa khoa cùng tài khoản đăng nhập vai trò KHOA của khoa đó (một transaction).</summary>
-    public static int Xoa(string maKhoa)
-    {
-        int rows = 0;
-        Db.InTransaction((conn, tx) =>
+        public static int Sua(Khoa k)
         {
-            DalUtil.Exec(conn, tx, "DELETE FROM TaiKhoan WHERE MAKHOA = @mk AND VAITRO = 'KHOA'", Db.P("@mk", maKhoa));
-            rows = DalUtil.Exec(conn, tx, "DELETE FROM Khoa WHERE MAKHOA = @mk", Db.P("@mk", maKhoa));
-        });
-        return rows;
+            string sql = "UPDATE Khoa SET TENKHOA = N'" + k.TenKhoa.Trim() + "' WHERE MAKHOA = '" + k.MaKhoa.Trim() + "'";
+            dtbase.DataChange(sql);
+            return 1;
+        }
+
+        /// <summary>Số lớp, giảng viên, lớp tín chỉ đang thuộc khoa.</summary>
+        public static (int Lop, int GiangVien, int LopTinChi) DemThamChieu(string maKhoa)
+        {
+            string sqlLop = "SELECT COUNT(*) FROM Lop WHERE MAKHOA = '" + maKhoa.Trim() + "'";
+            string sqlGV = "SELECT COUNT(*) FROM GIANGVIEN WHERE MAKHOA = '" + maKhoa.Trim() + "'";
+            string sqlLTC = "SELECT COUNT(*) FROM LOPTINCHI WHERE MAKHOA = '" + maKhoa.Trim() + "'";
+
+            DataTable dtLop = dtbase.DataReader(sqlLop);
+            DataTable dtGV = dtbase.DataReader(sqlGV);
+            DataTable dtLTC = dtbase.DataReader(sqlLTC);
+
+            int lop = dtLop.Rows.Count > 0 ? Convert.ToInt32(dtLop.Rows[0][0]) : 0;
+            int gv = dtGV.Rows.Count > 0 ? Convert.ToInt32(dtGV.Rows[0][0]) : 0;
+            int ltc = dtLTC.Rows.Count > 0 ? Convert.ToInt32(dtLTC.Rows[0][0]) : 0;
+
+            return (lop, gv, ltc);
+        }
+
+        /// <summary>Xóa khoa cùng tài khoản đăng nhập vai trò KHOA của khoa đó.</summary>
+        public static int Xoa(string maKhoa)
+        {
+            string sqlTK = "DELETE FROM TaiKhoan WHERE MAKHOA = '" + maKhoa.Trim() + "' AND VAITRO = 'KHOA'";
+            dtbase.DataChange(sqlTK);
+
+            string sql = "DELETE FROM Khoa WHERE MAKHOA = '" + maKhoa.Trim() + "'";
+            dtbase.DataChange(sql);
+            return 1;
+        }
     }
 }

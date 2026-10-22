@@ -1,87 +1,92 @@
+using System;
+using System.Collections.Generic;
 using System.Data;
-using Microsoft.Data.SqlClient;
 using QLDSV_HTC.Helpers;
 using QLDSV_HTC.Models;
 
-namespace QLDSV_HTC.DAL;
-
-public static class DiemDAL
+namespace QLDSV_HTC.DAL
 {
-    /// <summary>Danh sách sinh viên (đăng ký chưa hủy) của một lớp tín chỉ cùng điểm.</summary>
-    public static List<DiemSinhVien> LayDanhSach(int maLTC) =>
-        Db.Query<DiemSinhVien>(
-            @"SELECT d.MALTC, d.MASV, s.HO, s.TEN, s.MALOP, d.DIEM_CC, d.DIEM_GK, d.DIEM_CK, d.DIEM_TK
-              FROM DANGKY d JOIN Sinhvien s ON s.MASV = d.MASV
-              WHERE d.MALTC = @ma AND d.HUYDANGKY = 0
-              ORDER BY s.TEN, s.HO, d.MASV",
-            r => new DiemSinhVien
-            {
-                MaLTC = Db.Int(r, "MALTC"),
-                MaSV = Db.Str(r, "MASV"),
-                HoTen = (Db.Str(r, "HO") + " " + Db.Str(r, "TEN")).Trim(),
-                MaLop = Db.Str(r, "MALOP"),
-                DiemCC = Db.IntN(r, "DIEM_CC"),
-                DiemGK = Db.DecN(r, "DIEM_GK"),
-                DiemCK = Db.DecN(r, "DIEM_CK"),
-                DiemTK = Db.DecN(r, "DIEM_TK"),
-            },
-            Db.P("@ma", maLTC));
-
-    /// <summary>Lưu điểm cả lớp trong một transaction; lỗi bất kỳ sẽ rollback toàn bộ.</summary>
-    public static void CapNhat(int maLTC, IEnumerable<DiemSinhVien> danhSach)
+    public static class DiemDAL
     {
-        Db.InTransaction((conn, tx) =>
+        private static DataBaseProcess dtbase = new DataBaseProcess();
+
+        /// <summary>Danh sách sinh viên (đăng ký chưa hủy) của một lớp tín chỉ cùng điểm.</summary>
+        public static List<DiemSinhVien> LayDanhSach(int maLTC)
+        {
+            string sql = @"SELECT d.MALTC, d.MASV, s.HO, s.TEN, s.MALOP, d.DIEM_CC, d.DIEM_GK, d.DIEM_CK, d.DIEM_TK
+                           FROM DANGKY d JOIN Sinhvien s ON s.MASV = d.MASV
+                           WHERE d.MALTC = " + maLTC + @" AND d.HUYDANGKY = 0
+                           ORDER BY s.TEN, s.HO, d.MASV";
+            DataTable dt = dtbase.DataReader(sql);
+            List<DiemSinhVien> list = new List<DiemSinhVien>();
+            foreach (DataRow r in dt.Rows)
+            {
+                list.Add(new DiemSinhVien
+                {
+                    MaLTC = Convert.ToInt32(r["MALTC"]),
+                    MaSV = r["MASV"].ToString()?.Trim() ?? "",
+                    HoTen = (r["HO"].ToString()?.Trim() + " " + r["TEN"].ToString()?.Trim()).Trim(),
+                    MaLop = r["MALOP"].ToString()?.Trim() ?? "",
+                    DiemCC = r["DIEM_CC"] == DBNull.Value ? null : (int?)Convert.ToInt32(r["DIEM_CC"]),
+                    DiemGK = r["DIEM_GK"] == DBNull.Value ? null : (decimal?)Convert.ToDecimal(r["DIEM_GK"]),
+                    DiemCK = r["DIEM_CK"] == DBNull.Value ? null : (decimal?)Convert.ToDecimal(r["DIEM_CK"]),
+                    DiemTK = r["DIEM_TK"] == DBNull.Value ? null : (decimal?)Convert.ToDecimal(r["DIEM_TK"])
+                });
+            }
+            return list;
+        }
+
+        /// <summary>Lưu điểm cả lớp.</summary>
+        public static void CapNhat(int maLTC, IEnumerable<DiemSinhVien> danhSach)
         {
             foreach (var d in danhSach)
             {
-                int rows = DalUtil.Exec(conn, tx,
-                    @"UPDATE DANGKY SET DIEM_CC = @cc, DIEM_GK = @gk, DIEM_CK = @ck
-                      WHERE MALTC = @ltc AND MASV = @sv AND HUYDANGKY = 0",
-                    IntParam("@cc", d.DiemCC),
-                    DecParam("@gk", d.DiemGK),
-                    DecParam("@ck", d.DiemCK),
-                    Db.P("@ltc", maLTC),
-                    Db.P("@sv", d.MaSV));
+                string ccVal = d.DiemCC.HasValue ? d.DiemCC.Value.ToString() : "NULL";
+                string gkVal = d.DiemGK.HasValue ? d.DiemGK.Value.ToString(System.Globalization.CultureInfo.InvariantCulture) : "NULL";
+                string ckVal = d.DiemCK.HasValue ? d.DiemCK.Value.ToString(System.Globalization.CultureInfo.InvariantCulture) : "NULL";
 
-                if (rows != 1)
-                    throw new BusinessException($"Sinh viên {d.MaSV} không thuộc lớp tín chỉ này (hoặc đã hủy đăng ký).");
+                string sql = "UPDATE DANGKY SET DIEM_CC = " + ccVal + ", DIEM_GK = " + gkVal + ", DIEM_CK = " + ckVal +
+                             " WHERE MALTC = " + maLTC + " AND MASV = '" + d.MaSV.Trim() + "' AND HUYDANGKY = 0";
+                dtbase.DataChange(sql);
             }
-        });
-    }
+        }
 
-    /// <summary>Bảng điểm của một sinh viên (các lớp tín chỉ chưa hủy).</summary>
-    public static List<BangDiemDong> LayBangDiemSinhVien(string maSV) =>
-        Db.Query<BangDiemDong>(
-            @"SELECT t.MALTC, t.NIENKHOA, t.HOCKY, t.MAMH, m.TENMH, t.NHOM,
-                     d.DIEM_CC, d.DIEM_GK, d.DIEM_CK, d.DIEM_TK
-              FROM DANGKY d
-              JOIN LOPTINCHI t ON t.MALTC = d.MALTC
-              JOIN Monhoc m ON m.MAMH = t.MAMH
-              WHERE d.MASV = @sv AND d.HUYDANGKY = 0 AND t.HUYLOP = 0
-              ORDER BY t.NIENKHOA, t.HOCKY, m.TENMH",
-            r => new BangDiemDong
-            {
-                MaLTC = Db.Int(r, "MALTC"),
-                NienKhoa = Db.Str(r, "NIENKHOA"),
-                HocKy = Db.Int(r, "HOCKY"),
-                MaMH = Db.Str(r, "MAMH"),
-                TenMH = Db.Str(r, "TENMH"),
-                Nhom = Db.Int(r, "NHOM"),
-                DiemCC = Db.IntN(r, "DIEM_CC"),
-                DiemGK = Db.DecN(r, "DIEM_GK"),
-                DiemCK = Db.DecN(r, "DIEM_CK"),
-                DiemTK = Db.DecN(r, "DIEM_TK"),
-            },
-            Db.P("@sv", maSV));
-
-    private static SqlParameter IntParam(string name, decimal? value) =>
-        new(name, SqlDbType.Int) { Value = value.HasValue ? (object)(int)value.Value : DBNull.Value };
-
-    private static SqlParameter DecParam(string name, decimal? value) =>
-        new(name, SqlDbType.Decimal)
+        /// <summary>Bảng điểm của một sinh viên (các lớp tín chỉ chưa hủy).</summary>
+        public static List<BangDiemDong> LayBangDiemSinhVien(string maSV)
         {
-            Precision = 3,
-            Scale = 1,
-            Value = value.HasValue ? (object)value.Value : DBNull.Value,
-        };
+            string sql = @"SELECT t.MALTC, t.NIENKHOA, t.HOCKY, t.MAMH, m.TENMH, t.NHOM,
+                                  d.DIEM_CC, d.DIEM_GK, d.DIEM_CK, d.DIEM_TK
+                           FROM DANGKY d
+                           JOIN LOPTINCHI t ON t.MALTC = d.MALTC
+                           JOIN Monhoc m ON m.MAMH = t.MAMH
+                           WHERE d.MASV = '" + maSV.Trim() + @"' AND d.HUYDANGKY = 0 AND t.HUYLOP = 0
+                           ORDER BY t.NIENKHOA, t.HOCKY, m.TENMH";
+            DataTable dt = dtbase.DataReader(sql);
+            List<BangDiemDong> list = new List<BangDiemDong>();
+            foreach (DataRow r in dt.Rows)
+            {
+                list.Add(new BangDiemDong
+                {
+                    MaLTC = Convert.ToInt32(r["MALTC"]),
+                    NienKhoa = r["NIENKHOA"].ToString()?.Trim() ?? "",
+                    HocKy = Convert.ToInt32(r["HOCKY"]),
+                    MaMH = r["MAMH"].ToString()?.Trim() ?? "",
+                    TenMH = r["TENMH"].ToString()?.Trim() ?? "",
+                    Nhom = Convert.ToInt32(r["NHOM"]),
+                    DiemCC = r["DIEM_CC"] == DBNull.Value ? null : (int?)Convert.ToInt32(r["DIEM_CC"]),
+                    DiemGK = r["DIEM_GK"] == DBNull.Value ? null : (decimal?)Convert.ToDecimal(r["DIEM_GK"]),
+                    DiemCK = r["DIEM_CK"] == DBNull.Value ? null : (decimal?)Convert.ToDecimal(r["DIEM_CK"]),
+                    DiemTK = r["DIEM_TK"] == DBNull.Value ? null : (decimal?)Convert.ToDecimal(r["DIEM_TK"])
+                });
+            }
+            return list;
+        }
+
+        public static int DemDangKy(int maLTC)
+        {
+            string sql = "SELECT COUNT(*) FROM DANGKY WHERE MALTC = " + maLTC + " AND HUYDANGKY = 0";
+            DataTable dt = dtbase.DataReader(sql);
+            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0][0]) : 0;
+        }
+    }
 }

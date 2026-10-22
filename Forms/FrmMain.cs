@@ -1,39 +1,41 @@
 using System;
-using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using QLDSV_HTC.BLL;
 using QLDSV_HTC.UI;
 
 namespace QLDSV_HTC.Forms
 {
-    /// <summary>Form chính (MDI): menu hiển thị theo quyền của người dùng đang đăng nhập.</summary>
+    /// <summary>
+    /// Form chính UTC Portal: sidebar cố định Navy, header, content panel.
+    /// Form con được nhúng TopLevel=false vào pnlContent, không dùng MDI.
+    /// </summary>
     public partial class FrmMain : BaseForm
     {
-        private readonly Dictionary<Type, Form> _formDangMo = new Dictionary<Type, Form>();
-
-        /// <summary>true nếu người dùng chọn "Đăng xuất" (Program sẽ hiện lại màn hình đăng nhập).</summary>
+        /// <summary>true nếu người dùng chọn "Đăng xuất".</summary>
         public bool DangXuat { get; private set; }
+
+        private FrmDashboard? _dashboard;
+        private SidebarButton? _nutDangChon;
+        private Control? _controlHienTai;
 
         public FrmMain()
         {
             InitializeComponent();
-            foreach (Control c in this.Controls)
-            {
-                if (c is MdiClient mc)
-                    mc.BackColor = Palette.Canvas;
-            }
-            this.lblNguoiDung.Font = Palette.FontSmall;
-            this.lblNguoiDung.ForeColor = Palette.Muted;
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
             try
             {
-                var nd = Quyen.HienTai;
-                this.lblNguoiDung.Text = "Người dùng: " + nd.TenHienThi + "  |  Vai trò: " + nd.VaiTroText + "  |  Tài khoản: " + nd.TenDangNhap;
+                TaiLogo();
 
-                // Ẩn menu theo quyền (tầng BLL vẫn kiểm tra lại mỗi khi gọi dữ liệu).
+                var nd = Quyen.HienTai;
+                this.lblNguoiDung.Text = "  " + nd.TenHienThi + "   |   " + nd.VaiTroText + "  ";
+                CenNguoiDung();
+
+                // Ẩn/hiện menu theo quyền
                 bool coKhoa = Quyen.CoQuyen(ChucNang.Khoa, HanhDong.Xem);
                 bool coLop = Quyen.CoQuyen(ChucNang.Lop, HanhDong.Xem);
                 bool coSinhVien = Quyen.CoQuyen(ChucNang.SinhVien, HanhDong.Xem);
@@ -43,18 +45,17 @@ namespace QLDSV_HTC.Forms
                 bool coNhapDiem = Quyen.CoQuyen(ChucNang.NhapDiem, HanhDong.Xem);
                 bool coDiemCaNhan = Quyen.CoQuyen(ChucNang.DiemCaNhan, HanhDong.Xem);
 
-                this.mnuKhoa.Available = coKhoa;
-                this.mnuLop.Available = coLop;
-                this.mnuSinhVien.Available = coSinhVien;
-                this.mnuMonHoc.Available = coMonHoc;
-                this.mnuGiangVien.Available = coGiangVien;
-                this.mnuLopTinChi.Available = coLopTinChi;
-                this.mnuNhapDiem.Available = coNhapDiem;
-                this.mnuBangDiemCaNhan.Available = coDiemCaNhan;
+                this.btnNavKhoa.Visible = coKhoa;
+                this.btnNavLop.Visible = coLop;
+                this.btnNavSinhVien.Visible = coSinhVien;
+                this.btnNavMonHoc.Visible = coMonHoc;
+                this.btnNavGiangVien.Visible = coGiangVien;
+                this.btnNavLopTinChi.Visible = coLopTinChi;
+                this.btnNavNhapDiem.Visible = coNhapDiem;
+                this.btnNavBangDiem.Visible = coDiemCaNhan;
 
-                this.mnuDanhMuc.Available = coKhoa || coLop || coSinhVien || coMonHoc || coGiangVien;
-                this.mnuDaoTao.Available = coLopTinChi || coNhapDiem;
-                this.mnuTaiKhoanSV.Available = coDiemCaNhan;
+                // Mở Dashboard mặc định
+                DenTrangDashboard();
             }
             catch (Exception ex)
             {
@@ -62,15 +63,23 @@ namespace QLDSV_HTC.Forms
             }
         }
 
-        // ---------------- Menu Hệ thống ----------------
-        private void mnuDoiMatKhau_Click(object sender, EventArgs e)
+        // ── Điều hướng sidebar ──────────────────────────────────────────────
+        private void btnNavDashboard_Click(object sender, EventArgs e) => DenTrangDashboard();
+        private void btnNavKhoa_Click(object sender, EventArgs e) => DenTrangForm("Quản lý khoa", this.btnNavKhoa, () => new FrmKhoa());
+        private void btnNavLop_Click(object sender, EventArgs e) => DenTrangForm("Quản lý lớp", this.btnNavLop, () => new FrmLop());
+        private void btnNavSinhVien_Click(object sender, EventArgs e) => DenTrangForm("Quản lý sinh viên", this.btnNavSinhVien, () => new FrmSinhVien());
+        private void btnNavMonHoc_Click(object sender, EventArgs e) => DenTrangForm("Quản lý môn học", this.btnNavMonHoc, () => new FrmMonHoc());
+        private void btnNavGiangVien_Click(object sender, EventArgs e) => DenTrangForm("Quản lý giảng viên", this.btnNavGiangVien, () => new FrmGiangVien());
+        private void btnNavLopTinChi_Click(object sender, EventArgs e) => DenTrangForm("Lớp tín chỉ", this.btnNavLopTinChi, () => new FrmLopTinChi());
+        private void btnNavNhapDiem_Click(object sender, EventArgs e) => DenTrangForm("Nhập điểm", this.btnNavNhapDiem, () => new FrmNhapDiem());
+        private void btnNavBangDiem_Click(object sender, EventArgs e) => DenTrangForm("Bảng điểm cá nhân", this.btnNavBangDiem, () => new FrmBangDiemSV());
+
+        private void btnNavDoiMatKhau_Click(object sender, EventArgs e)
         {
             try
             {
-                using (FrmDoiMatKhau f = new FrmDoiMatKhau())
-                {
-                    f.ShowDialog(this);
-                }
+                using var f = new FrmDoiMatKhau();
+                f.ShowDialog(this);
             }
             catch (Exception ex)
             {
@@ -78,109 +87,80 @@ namespace QLDSV_HTC.Forms
             }
         }
 
-        private void mnuDangXuat_Click(object sender, EventArgs e)
+        private void btnNavDangXuat_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Bạn có muốn đăng xuất khỏi tài khoản hiện tại không?", "Xác nhận đăng xuất", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Bạn có muốn đăng xuất khỏi tài khoản hiện tại không?",
+                "Xác nhận đăng xuất", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                this.DongTatCaCuaSoCon();
-                if (this.MdiChildren.Length > 0)
-                {
-                    return; // Một cửa sổ con từ chối đóng (ví dụ còn điểm chưa lưu)
-                }
-
                 AuthBLL.DangXuat();
                 this.DangXuat = true;
                 this.Close();
             }
         }
 
-        private void mnuThoat_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Bạn có muốn thoát chương trình không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                this.Close();
-            }
-        }
+        // ── Lõi điều hướng ─────────────────────────────────────────────────
 
-        // ---------------- Menu chức năng ----------------
-        private void mnuKhoa_Click(object sender, EventArgs e)
-        {
-            this.MoForm(typeof(FrmKhoa), () => new FrmKhoa());
-        }
-
-        private void mnuLop_Click(object sender, EventArgs e)
-        {
-            this.MoForm(typeof(FrmLop), () => new FrmLop());
-        }
-
-        private void mnuSinhVien_Click(object sender, EventArgs e)
-        {
-            this.MoForm(typeof(FrmSinhVien), () => new FrmSinhVien());
-        }
-
-        private void mnuMonHoc_Click(object sender, EventArgs e)
-        {
-            this.MoForm(typeof(FrmMonHoc), () => new FrmMonHoc());
-        }
-
-        private void mnuGiangVien_Click(object sender, EventArgs e)
-        {
-            this.MoForm(typeof(FrmGiangVien), () => new FrmGiangVien());
-        }
-
-        private void mnuLopTinChi_Click(object sender, EventArgs e)
-        {
-            this.MoForm(typeof(FrmLopTinChi), () => new FrmLopTinChi());
-        }
-
-        private void mnuNhapDiem_Click(object sender, EventArgs e)
-        {
-            this.MoForm(typeof(FrmNhapDiem), () => new FrmNhapDiem());
-        }
-
-        private void mnuBangDiemCaNhan_Click(object sender, EventArgs e)
-        {
-            this.MoForm(typeof(FrmBangDiemSV), () => new FrmBangDiemSV());
-        }
-
-        // ---------------- Menu Cửa sổ ----------------
-        private void mnuXepTang_Click(object sender, EventArgs e)
-        {
-            this.LayoutMdi(MdiLayout.Cascade);
-        }
-
-        private void mnuChiaNgang_Click(object sender, EventArgs e)
-        {
-            this.LayoutMdi(MdiLayout.TileHorizontal);
-        }
-
-        private void mnuChiaDoc_Click(object sender, EventArgs e)
-        {
-            this.LayoutMdi(MdiLayout.TileVertical);
-        }
-
-        private void mnuDongTatCa_Click(object sender, EventArgs e)
-        {
-            this.DongTatCaCuaSoCon();
-        }
-
-        /// <summary>Mở form con; nếu loại form đó đã mở thì đưa lên phía trước.</summary>
-        private void MoForm(Type loai, Func<Form> tao)
+        /// <summary>Chuyển sang Dashboard, tạo nếu chưa có.</summary>
+        private void DenTrangDashboard()
         {
             try
             {
-                if (this._formDangMo.TryGetValue(loai, out var daMo) && !daMo.IsDisposed)
+                DatActiveNut(this.btnNavDashboard);
+                this.lblPageTitle.Text = "Tổng quan hệ thống";
+
+                // Xóa control đang hiển thị (nếu không phải dashboard)
+                XoaControlHienTai(giu: false);
+
+                // Tạo hoặc tái dùng dashboard
+                if (_dashboard == null || _dashboard.IsDisposed)
                 {
-                    daMo.Activate();
-                    return;
+                    _dashboard = new FrmDashboard { Dock = DockStyle.Fill };
                 }
 
-                Form form = tao();
-                form.MdiParent = this;
-                form.WindowState = FormWindowState.Maximized;
-                form.FormClosed += (s, e) => this._formDangMo.Remove(loai);
-                this._formDangMo[loai] = form;
+                if (!this.pnlContent.Controls.Contains(_dashboard))
+                    this.pnlContent.Controls.Add(_dashboard);
+
+                _dashboard.Visible = true;
+                _dashboard.BringToFront();
+                _dashboard.TaiDuLieu();
+                _controlHienTai = _dashboard;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Lỗi mở dashboard", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Nhúng Form con vào pnlContent với TopLevel=false.
+        /// Form con giữ nguyên toàn bộ logic nghiệp vụ, chỉ bỏ border Form.
+        /// </summary>
+        private void DenTrangForm(string tieuDe, SidebarButton nut, Func<Form> taoForm)
+        {
+            try
+            {
+                DatActiveNut(nut);
+                this.lblPageTitle.Text = tieuDe;
+
+                // Xóa control hiện tại
+                XoaControlHienTai(giu: false);
+
+                // Ẩn dashboard nếu đang hiện
+                if (_dashboard != null && !_dashboard.IsDisposed)
+                    _dashboard.Visible = false;
+
+                // Tạo form mới, nhúng vào content panel
+                var form = taoForm();
+                form.TopLevel = false;
+                form.FormBorderStyle = FormBorderStyle.None;
+                form.Dock = DockStyle.Fill;
+                form.BackColor = Palette.Canvas;
+                // Xóa padding mặc định của form con nếu có (để content panel quản lý)
+                form.Padding = new Padding(20, 16, 20, 8);
+
+                this.pnlContent.Controls.Add(form);
                 form.Show();
+                _controlHienTai = form;
             }
             catch (Exception ex)
             {
@@ -188,27 +168,84 @@ namespace QLDSV_HTC.Forms
             }
         }
 
-        private void DongTatCaCuaSoCon()
+        private void DatActiveNut(SidebarButton nut)
         {
-            foreach (var con in this.MdiChildren)
+            if (_nutDangChon != null && !_nutDangChon.IsDisposed)
+                _nutDangChon.Active = false;
+            nut.Active = true;
+            _nutDangChon = nut;
+        }
+
+        private void XoaControlHienTai(bool giu)
+        {
+            if (_controlHienTai == null || _controlHienTai.IsDisposed) return;
+            if (_controlHienTai is FrmDashboard)
             {
-                con.Close();
+                _controlHienTai.Visible = false;
+                return;
             }
+            this.pnlContent.Controls.Remove(_controlHienTai);
+            if (!giu) _controlHienTai.Dispose();
+            _controlHienTai = null;
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Đóng chương trình/đăng xuất: nếu cửa sổ con còn việc dở (nhập điểm chưa lưu) thì hủy thoát.
-            foreach (var con in this.MdiChildren)
+            // Dispose control hiện tại khi đóng
+            XoaControlHienTai(giu: false);
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            CenNguoiDung();
+        }
+
+        private void CenNguoiDung()
+        {
+            if (lblNguoiDung == null || pnlHeader == null) return;
+            lblNguoiDung.Location = new Point(
+                pnlHeader.Width - lblNguoiDung.Width - 16, 0);
+        }
+
+        private void TaiLogo()
+        {
+            try
             {
-                con.Close();
-                if (!con.IsDisposed)
+                var logo = LayHinhAnh("LogoUTC.png") ?? LayHinhAnh("logo_login.png");
+                if (logo != null && this.picLogo != null)
                 {
-                    e.Cancel = true;
-                    this.DangXuat = false;
-                    return;
+                    this.picLogo.Image = logo;
                 }
             }
+            catch { }
+        }
+
+        private static Image? LayHinhAnh(string tenTep)
+        {
+            try
+            {
+                string[] cacDuongDan = new string[]
+                {
+                    Path.Combine(Application.StartupPath, "Resources", "img", tenTep),
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "img", tenTep),
+                    Path.Combine(Application.StartupPath, "..", "..", "..", "Resources", "img", tenTep),
+                    Path.Combine(Directory.GetCurrentDirectory(), "Resources", "img", tenTep)
+                };
+
+                foreach (var duongDan in cacDuongDan)
+                {
+                    if (File.Exists(duongDan))
+                    {
+                        using (var fs = new FileStream(duongDan, FileMode.Open, FileAccess.Read))
+                        {
+                            return Image.FromStream(fs);
+                        }
+                    }
+                }
+            }
+            catch { }
+            return null;
         }
     }
 }

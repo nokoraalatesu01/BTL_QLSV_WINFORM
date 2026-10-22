@@ -21,358 +21,532 @@ namespace QLDSV_HTC.Forms
         /// <summary>Required method for Designer support - do not modify the contents of this method with the code editor.</summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle cellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dgv = new System.Windows.Forms.DataGridView();
-            this.colMaSV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTrangThai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.lblTrangThai = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pnlTim = new System.Windows.Forms.Panel();
-            this.lblTim = new System.Windows.Forms.Label();
-            this.txtTim = new System.Windows.Forms.TextBox();
-            this.lblLocLop = new System.Windows.Forms.Label();
-            this.cboLocLop = new System.Windows.Forms.ComboBox();
-            this.btnTim = new QLDSV_HTC.UI.ModernButton();
-            this.pnlNut = new System.Windows.Forms.Panel();
-            this.btnNhapMoi = new QLDSV_HTC.UI.ModernButton();
-            this.btnThem = new QLDSV_HTC.UI.ModernButton();
-            this.btnSua = new QLDSV_HTC.UI.ModernButton();
-            this.btnXoa = new QLDSV_HTC.UI.ModernButton();
-            this.btnTaiLai = new QLDSV_HTC.UI.ModernButton();
-            this.pnlNhap = new System.Windows.Forms.Panel();
-            this.lblMaSV = new System.Windows.Forms.Label();
-            this.txtMaSV = new System.Windows.Forms.TextBox();
-            this.lblLop = new System.Windows.Forms.Label();
-            this.cboLop = new System.Windows.Forms.ComboBox();
-            this.lblHo = new System.Windows.Forms.Label();
-            this.txtHo = new System.Windows.Forms.TextBox();
-            this.lblTen = new System.Windows.Forms.Label();
-            this.txtTen = new System.Windows.Forms.TextBox();
-            this.lblGioiTinh = new System.Windows.Forms.Label();
-            this.cboGioiTinh = new System.Windows.Forms.ComboBox();
-            this.lblNgaySinh = new System.Windows.Forms.Label();
-            this.dtpNgaySinh = new System.Windows.Forms.DateTimePicker();
-            this.lblDiaChi = new System.Windows.Forms.Label();
-            this.txtDiaChi = new System.Windows.Forms.TextBox();
-            this.lblNghiHoc = new System.Windows.Forms.Label();
-            this.chkNghiHoc = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
-            this.pnlTim.SuspendLayout();
-            this.pnlNut.SuspendLayout();
-            this.pnlNhap.SuspendLayout();
-            this.SuspendLayout();
+            dgv = new DataGridView();
+            colMaSV = new DataGridViewTextBoxColumn();
+            colHoTen = new DataGridViewTextBoxColumn();
+            colTenLop = new DataGridViewTextBoxColumn();
+            colGioiTinh = new DataGridViewTextBoxColumn();
+            colNgaySinh = new DataGridViewTextBoxColumn();
+            colDiaChi = new DataGridViewTextBoxColumn();
+            colTrangThai = new DataGridViewTextBoxColumn();
+            statusStrip = new StatusStrip();
+            lblTrangThai = new ToolStripStatusLabel();
+            pnlTim = new Panel();
+            lblTim = new Label();
+            txtTim = new TextBox();
+            lblLocLop = new Label();
+            cboLocLop = new ComboBox();
+            btnTim = new QLDSV_HTC.UI.ModernButton();
+            pnlNut = new Panel();
+            btnNhapMoi = new QLDSV_HTC.UI.ModernButton();
+            btnThem = new QLDSV_HTC.UI.ModernButton();
+            btnSua = new QLDSV_HTC.UI.ModernButton();
+            btnXoa = new QLDSV_HTC.UI.ModernButton();
+            btnTaiLai = new QLDSV_HTC.UI.ModernButton();
+            pnlNhap = new Panel();
+            lblMaSV = new Label();
+            txtMaSV = new TextBox();
+            lblLop = new Label();
+            cboLop = new ComboBox();
+            lblHo = new Label();
+            txtHo = new TextBox();
+            lblTen = new Label();
+            txtTen = new TextBox();
+            lblGioiTinh = new Label();
+            cboGioiTinh = new ComboBox();
+            lblNgaySinh = new Label();
+            dtpNgaySinh = new DateTimePicker();
+            lblDiaChi = new Label();
+            txtDiaChi = new TextBox();
+            lblNghiHoc = new Label();
+            chkNghiHoc = new CheckBox();
+            ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
+            statusStrip.SuspendLayout();
+            pnlTim.SuspendLayout();
+            pnlNut.SuspendLayout();
+            pnlNhap.SuspendLayout();
+            SuspendLayout();
+            // 
             // dgv
-            this.dgv.Name = "dgv";
-            this.dgv.AllowUserToAddRows = false;
-            this.dgv.AllowUserToDeleteRows = false;
-            this.dgv.AllowUserToResizeRows = false;
-            this.dgv.AutoGenerateColumns = false;
-            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.dgv.MultiSelect = false;
-            this.dgv.ReadOnly = true;
-            this.dgv.RowHeadersVisible = false;
-            this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv.TabIndex = 3;
-            this.dgv.SelectionChanged += new System.EventHandler(this.dgv_SelectionChanged);
+            // 
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.ColumnHeadersHeight = 29;
+            dgv.Dock = DockStyle.Fill;
+            dgv.Location = new Point(0, 338);
+            dgv.Margin = new Padding(4, 5, 4, 5);
+            dgv.MultiSelect = false;
+            dgv.Name = "dgv";
+            dgv.ReadOnly = true;
+            dgv.RowHeadersVisible = false;
+            dgv.RowHeadersWidth = 51;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.Size = new Size(1286, 648);
+            dgv.TabIndex = 3;
+            dgv.AutoGenerateColumns = false;
+            dgv.SelectionChanged += dgv_SelectionChanged;
+            dgv.Columns.AddRange(new DataGridViewColumn[] {
+                colMaSV,
+                colHoTen,
+                colTenLop,
+                colGioiTinh,
+                colNgaySinh,
+                colDiaChi,
+                colTrangThai
+            });
+            // 
             // colMaSV
-            this.colMaSV.Name = "colMaSV";
-            this.colMaSV.DataPropertyName = "MaSV";
-            this.colMaSV.HeaderText = "Mã SV";
-            this.colMaSV.FillWeight = 12F;
-            this.colMaSV.ReadOnly = true;
+            // 
+            colMaSV.Name = "colMaSV";
+            colMaSV.DataPropertyName = "MaSV";
+            colMaSV.HeaderText = "Mã SV";
+            colMaSV.FillWeight = 15F;
+            colMaSV.MinimumWidth = 90;
+            colMaSV.ReadOnly = true;
+            // 
             // colHoTen
-            this.colHoTen.Name = "colHoTen";
-            this.colHoTen.DataPropertyName = "HoTen";
-            this.colHoTen.HeaderText = "Họ và tên";
-            this.colHoTen.FillWeight = 22F;
-            this.colHoTen.ReadOnly = true;
+            // 
+            colHoTen.Name = "colHoTen";
+            colHoTen.DataPropertyName = "HoTen";
+            colHoTen.HeaderText = "Họ và tên";
+            colHoTen.FillWeight = 25F;
+            colHoTen.MinimumWidth = 140;
+            colHoTen.ReadOnly = true;
+            // 
             // colTenLop
-            this.colTenLop.Name = "colTenLop";
-            this.colTenLop.DataPropertyName = "TenLop";
-            this.colTenLop.HeaderText = "Lớp";
-            this.colTenLop.FillWeight = 22F;
-            this.colTenLop.ReadOnly = true;
+            // 
+            colTenLop.Name = "colTenLop";
+            colTenLop.DataPropertyName = "TenLop";
+            colTenLop.HeaderText = "Lớp";
+            colTenLop.FillWeight = 18F;
+            colTenLop.MinimumWidth = 110;
+            colTenLop.ReadOnly = true;
+            // 
             // colGioiTinh
-            this.colGioiTinh.Name = "colGioiTinh";
-            this.colGioiTinh.DataPropertyName = "GioiTinh";
-            this.colGioiTinh.HeaderText = "Giới tính";
-            this.colGioiTinh.FillWeight = 9F;
-            this.colGioiTinh.ReadOnly = true;
+            // 
+            colGioiTinh.Name = "colGioiTinh";
+            colGioiTinh.DataPropertyName = "GioiTinh";
+            colGioiTinh.HeaderText = "Giới tính";
+            colGioiTinh.FillWeight = 10F;
+            colGioiTinh.MinimumWidth = 70;
+            colGioiTinh.ReadOnly = true;
+            // 
             // colNgaySinh
-            cellStyle1.Format = "dd/MM/yyyy";
-            this.colNgaySinh.DefaultCellStyle = cellStyle1;
-            this.colNgaySinh.Name = "colNgaySinh";
-            this.colNgaySinh.DataPropertyName = "NgaySinh";
-            this.colNgaySinh.HeaderText = "Ngày sinh";
-            this.colNgaySinh.FillWeight = 12F;
-            this.colNgaySinh.ReadOnly = true;
+            // 
+            colNgaySinh.Name = "colNgaySinh";
+            colNgaySinh.DataPropertyName = "NgaySinh";
+            colNgaySinh.HeaderText = "Ngày sinh";
+            colNgaySinh.FillWeight = 14F;
+            colNgaySinh.MinimumWidth = 95;
+            colNgaySinh.DefaultCellStyle.Format = "dd/MM/yyyy";
+            colNgaySinh.ReadOnly = true;
+            // 
             // colDiaChi
-            this.colDiaChi.Name = "colDiaChi";
-            this.colDiaChi.DataPropertyName = "DiaChi";
-            this.colDiaChi.HeaderText = "Địa chỉ";
-            this.colDiaChi.FillWeight = 15F;
-            this.colDiaChi.ReadOnly = true;
+            // 
+            colDiaChi.Name = "colDiaChi";
+            colDiaChi.DataPropertyName = "DiaChi";
+            colDiaChi.HeaderText = "Địa chỉ";
+            colDiaChi.FillWeight = 22F;
+            colDiaChi.MinimumWidth = 130;
+            colDiaChi.ReadOnly = true;
+            // 
             // colTrangThai
-            this.colTrangThai.Name = "colTrangThai";
-            this.colTrangThai.DataPropertyName = "TrangThai";
-            this.colTrangThai.HeaderText = "Trạng thái";
-            this.colTrangThai.FillWeight = 10F;
-            this.colTrangThai.ReadOnly = true;
+            // 
+            colTrangThai.Name = "colTrangThai";
+            colTrangThai.DataPropertyName = "TrangThai";
+            colTrangThai.HeaderText = "Trạng thái";
+            colTrangThai.FillWeight = 14F;
+            colTrangThai.MinimumWidth = 95;
+            colTrangThai.ReadOnly = true;
+            // 
             // statusStrip
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.TabIndex = 4;
+            // 
+            statusStrip.ImageScalingSize = new Size(20, 20);
+            statusStrip.Items.AddRange(new ToolStripItem[] { lblTrangThai });
+            statusStrip.Location = new Point(0, 986);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Padding = new Padding(10, 0, 10, 0);
+            statusStrip.Size = new Size(1286, 26);
+            statusStrip.TabIndex = 4;
+            // 
             // lblTrangThai
-            this.lblTrangThai.Name = "lblTrangThai";
-            this.lblTrangThai.Text = "Sẵn sàng.";
+            // 
+            lblTrangThai.Name = "lblTrangThai";
+            lblTrangThai.Size = new Size(71, 20);
+            lblTrangThai.Text = "Sẵn sàng.";
+            // 
             // pnlTim
-            this.pnlTim.Name = "pnlTim";
-            this.pnlTim.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTim.Size = new System.Drawing.Size(1034, 44);
-            this.pnlTim.TabIndex = 2;
+            // 
+            pnlTim.BackColor = Color.White;
+            pnlTim.Controls.Add(lblTim);
+            pnlTim.Controls.Add(txtTim);
+            pnlTim.Controls.Add(lblLocLop);
+            pnlTim.Controls.Add(cboLocLop);
+            pnlTim.Controls.Add(btnTim);
+            pnlTim.Dock = DockStyle.Top;
+            pnlTim.Location = new Point(0, 264);
+            pnlTim.Margin = new Padding(4, 5, 4, 5);
+            pnlTim.Name = "pnlTim";
+            pnlTim.Padding = new Padding(10, 12, 10, 12);
+            pnlTim.Size = new Size(1286, 74);
+            pnlTim.TabIndex = 2;
+            // 
             // lblTim
-            this.lblTim.Name = "lblTim";
-            this.lblTim.AutoSize = true;
-            this.lblTim.Location = new System.Drawing.Point(10, 13);
-            this.lblTim.Text = "Từ khóa:";
-            this.lblTim.TabIndex = 21;
+            // 
+            lblTim.AutoSize = true;
+            lblTim.Location = new Point(15, 23);
+            lblTim.Margin = new Padding(4, 0, 4, 0);
+            lblTim.Name = "lblTim";
+            lblTim.Size = new Size(75, 23);
+            lblTim.TabIndex = 0;
+            lblTim.Text = "Từ khóa:";
+            // 
             // txtTim
-            this.txtTim.Name = "txtTim";
-            this.txtTim.Location = new System.Drawing.Point(82, 10);
-            this.txtTim.TabIndex = 22;
-            this.txtTim.Size = new System.Drawing.Size(220, 23);
-            this.txtTim.MaxLength = 100;
-            this.txtTim.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTim_KeyDown);
+            // 
+            txtTim.Location = new Point(96, 18);
+            txtTim.Margin = new Padding(4, 5, 4, 5);
+            txtTim.MaxLength = 100;
+            txtTim.Name = "txtTim";
+            txtTim.PlaceholderText = "Nhập mã SV, họ tên hoặc địa chỉ...";
+            txtTim.Size = new Size(295, 30);
+            txtTim.TabIndex = 1;
+            txtTim.KeyDown += txtTim_KeyDown;
+            // 
             // lblLocLop
-            this.lblLocLop.Name = "lblLocLop";
-            this.lblLocLop.AutoSize = true;
-            this.lblLocLop.Location = new System.Drawing.Point(316, 13);
-            this.lblLocLop.Text = "Lớp:";
-            this.lblLocLop.TabIndex = 23;
+            // 
+            lblLocLop.AutoSize = true;
+            lblLocLop.Location = new Point(418, 23);
+            lblLocLop.Margin = new Padding(4, 0, 4, 0);
+            lblLocLop.Name = "lblLocLop";
+            lblLocLop.Size = new Size(42, 23);
+            lblLocLop.TabIndex = 2;
+            lblLocLop.Text = "Lớp:";
+            // 
             // cboLocLop
-            this.cboLocLop.Name = "cboLocLop";
-            this.cboLocLop.Location = new System.Drawing.Point(356, 10);
-            this.cboLocLop.TabIndex = 24;
-            this.cboLocLop.Size = new System.Drawing.Size(280, 23);
-            this.cboLocLop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLocLop.FormattingEnabled = true;
+            // 
+            cboLocLop.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboLocLop.Location = new Point(469, 18);
+            cboLocLop.Margin = new Padding(4, 5, 4, 5);
+            cboLocLop.Name = "cboLocLop";
+            cboLocLop.Size = new Size(359, 31);
+            cboLocLop.TabIndex = 3;
+            // 
             // btnTim
-            this.btnTim.Name = "btnTim";
-            this.btnTim.Location = new System.Drawing.Point(650, 6);
-            this.btnTim.Size = new System.Drawing.Size(100, 32);
-            this.btnTim.Text = "Tìm kiếm";
-            this.btnTim.TabIndex = 25;
-            this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
+            // 
+            btnTim.CornerRadius = 6;
+            btnTim.FlatStyle = FlatStyle.Flat;
+            btnTim.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnTim.Location = new Point(849, 12);
+            btnTim.Margin = new Padding(4, 5, 4, 5);
+            btnTim.Name = "btnTim";
+            btnTim.Size = new Size(122, 49);
+            btnTim.TabIndex = 4;
+            btnTim.Text = "Tìm kiếm";
+            btnTim.UseVisualStyleBackColor = false;
+            btnTim.Variant = UI.ButtonVariant.Soft;
+            btnTim.Click += btnTim_Click;
+            // 
             // pnlNut
-            this.pnlNut.Name = "pnlNut";
-            this.pnlNut.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNut.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.pnlNut.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
-            this.pnlNut.Size = new System.Drawing.Size(1034, 44);
-            this.pnlNut.TabIndex = 1;
+            // 
+            pnlNut.BackColor = Color.White;
+            pnlNut.Controls.Add(btnNhapMoi);
+            pnlNut.Controls.Add(btnThem);
+            pnlNut.Controls.Add(btnSua);
+            pnlNut.Controls.Add(btnXoa);
+            pnlNut.Controls.Add(btnTaiLai);
+            pnlNut.Dock = DockStyle.Top;
+            pnlNut.Location = new Point(0, 190);
+            pnlNut.Margin = new Padding(4, 5, 4, 5);
+            pnlNut.Name = "pnlNut";
+            pnlNut.Size = new Size(1286, 74);
+            pnlNut.TabIndex = 1;
+            // 
             // btnNhapMoi
-            this.btnNhapMoi.Name = "btnNhapMoi";
-            this.btnNhapMoi.Location = new System.Drawing.Point(10, 6);
-            this.btnNhapMoi.Size = new System.Drawing.Size(100, 32);
-            this.btnNhapMoi.Text = "Nhập mới";
-            this.btnNhapMoi.TabIndex = 16;
-            this.btnNhapMoi.Click += new System.EventHandler(this.btnNhapMoi_Click);
+            // 
+            btnNhapMoi.CornerRadius = 6;
+            btnNhapMoi.FlatStyle = FlatStyle.Flat;
+            btnNhapMoi.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnNhapMoi.Location = new Point(10, 11);
+            btnNhapMoi.Margin = new Padding(4, 5, 4, 5);
+            btnNhapMoi.Name = "btnNhapMoi";
+            btnNhapMoi.Size = new Size(135, 52);
+            btnNhapMoi.TabIndex = 0;
+            btnNhapMoi.Text = "Nhập mới";
+            btnNhapMoi.UseVisualStyleBackColor = false;
+            btnNhapMoi.Variant = UI.ButtonVariant.Secondary;
+            btnNhapMoi.Click += btnNhapMoi_Click;
+            // 
             // btnThem
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Location = new System.Drawing.Point(118, 6);
-            this.btnThem.Size = new System.Drawing.Size(100, 32);
-            this.btnThem.Text = "Thêm";
-            this.btnThem.TabIndex = 17;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            // 
+            btnThem.CornerRadius = 6;
+            btnThem.FlatStyle = FlatStyle.Flat;
+            btnThem.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnThem.Location = new Point(156, 11);
+            btnThem.Margin = new Padding(4, 5, 4, 5);
+            btnThem.Name = "btnThem";
+            btnThem.Size = new Size(135, 52);
+            btnThem.TabIndex = 1;
+            btnThem.Text = "Thêm";
+            btnThem.UseVisualStyleBackColor = false;
+            btnThem.Variant = UI.ButtonVariant.Primary;
+            btnThem.Click += btnThem_Click;
+            // 
             // btnSua
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Location = new System.Drawing.Point(226, 6);
-            this.btnSua.Size = new System.Drawing.Size(100, 32);
-            this.btnSua.Text = "Sửa";
-            this.btnSua.TabIndex = 18;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+            // 
+            btnSua.CornerRadius = 6;
+            btnSua.FlatStyle = FlatStyle.Flat;
+            btnSua.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnSua.Location = new Point(301, 11);
+            btnSua.Margin = new Padding(4, 5, 4, 5);
+            btnSua.Name = "btnSua";
+            btnSua.Size = new Size(135, 52);
+            btnSua.TabIndex = 2;
+            btnSua.Text = "Sửa";
+            btnSua.UseVisualStyleBackColor = false;
+            btnSua.Variant = UI.ButtonVariant.Primary;
+            btnSua.Click += btnSua_Click;
+            // 
             // btnXoa
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Location = new System.Drawing.Point(334, 6);
-            this.btnXoa.Size = new System.Drawing.Size(100, 32);
-            this.btnXoa.Text = "Xóa";
-            this.btnXoa.TabIndex = 19;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            btnXoa.CornerRadius = 6;
+            btnXoa.FlatStyle = FlatStyle.Flat;
+            btnXoa.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnXoa.Location = new Point(446, 11);
+            btnXoa.Margin = new Padding(4, 5, 4, 5);
+            btnXoa.Name = "btnXoa";
+            btnXoa.Size = new Size(135, 52);
+            btnXoa.TabIndex = 3;
+            btnXoa.Text = "Xóa";
+            btnXoa.UseVisualStyleBackColor = false;
+            btnXoa.Variant = UI.ButtonVariant.Danger;
+            btnXoa.Click += btnXoa_Click;
+            // 
             // btnTaiLai
-            this.btnTaiLai.Name = "btnTaiLai";
-            this.btnTaiLai.Location = new System.Drawing.Point(442, 6);
-            this.btnTaiLai.Size = new System.Drawing.Size(100, 32);
-            this.btnTaiLai.Text = "Tải lại";
-            this.btnTaiLai.TabIndex = 20;
-            this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
+            // 
+            btnTaiLai.CornerRadius = 6;
+            btnTaiLai.FlatStyle = FlatStyle.Flat;
+            btnTaiLai.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnTaiLai.Location = new Point(591, 11);
+            btnTaiLai.Margin = new Padding(4, 5, 4, 5);
+            btnTaiLai.Name = "btnTaiLai";
+            btnTaiLai.Size = new Size(135, 52);
+            btnTaiLai.TabIndex = 4;
+            btnTaiLai.Text = "Tải lại";
+            btnTaiLai.UseVisualStyleBackColor = false;
+            btnTaiLai.Variant = UI.ButtonVariant.Ghost;
+            btnTaiLai.Click += btnTaiLai_Click;
+            // 
             // pnlNhap
-            this.pnlNhap.Name = "pnlNhap";
-            this.pnlNhap.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNhap.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.pnlNhap.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
-            this.pnlNhap.Size = new System.Drawing.Size(1034, 154);
-            this.pnlNhap.TabIndex = 0;
+            // 
+            pnlNhap.BackColor = Color.White;
+            pnlNhap.Controls.Add(lblMaSV);
+            pnlNhap.Controls.Add(txtMaSV);
+            pnlNhap.Controls.Add(lblLop);
+            pnlNhap.Controls.Add(cboLop);
+            pnlNhap.Controls.Add(lblHo);
+            pnlNhap.Controls.Add(txtHo);
+            pnlNhap.Controls.Add(lblTen);
+            pnlNhap.Controls.Add(txtTen);
+            pnlNhap.Controls.Add(lblGioiTinh);
+            pnlNhap.Controls.Add(cboGioiTinh);
+            pnlNhap.Controls.Add(lblNgaySinh);
+            pnlNhap.Controls.Add(dtpNgaySinh);
+            pnlNhap.Controls.Add(lblDiaChi);
+            pnlNhap.Controls.Add(txtDiaChi);
+            pnlNhap.Controls.Add(lblNghiHoc);
+            pnlNhap.Controls.Add(chkNghiHoc);
+            pnlNhap.Dock = DockStyle.Top;
+            pnlNhap.Location = new Point(0, 0);
+            pnlNhap.Margin = new Padding(4, 5, 4, 5);
+            pnlNhap.Name = "pnlNhap";
+            pnlNhap.Padding = new Padding(15, 15, 15, 12);
+            pnlNhap.Size = new Size(1286, 190);
+            pnlNhap.TabIndex = 0;
+            // 
             // lblMaSV
-            this.lblMaSV.Name = "lblMaSV";
-            this.lblMaSV.AutoSize = true;
-            this.lblMaSV.Location = new System.Drawing.Point(10, 15);
-            this.lblMaSV.Text = "Mã sinh viên:";
-            this.lblMaSV.TabIndex = 0;
+            // 
+            lblMaSV.AutoSize = true;
+            lblMaSV.Location = new Point(15, 23);
+            lblMaSV.Margin = new Padding(4, 0, 4, 0);
+            lblMaSV.Name = "lblMaSV";
+            lblMaSV.Size = new Size(132, 23);
+            lblMaSV.TabIndex = 0;
+            lblMaSV.Text = "Mã sinh viên (*):";
+            // 
             // txtMaSV
-            this.txtMaSV.Name = "txtMaSV";
-            this.txtMaSV.Location = new System.Drawing.Point(140, 12);
-            this.txtMaSV.TabIndex = 1;
-            this.txtMaSV.Size = new System.Drawing.Size(260, 23);
-            this.txtMaSV.MaxLength = 10;
+            // 
+            txtMaSV.Location = new Point(148, 18);
+            txtMaSV.Margin = new Padding(4, 5, 4, 5);
+            txtMaSV.MaxLength = 10;
+            txtMaSV.Name = "txtMaSV";
+            txtMaSV.Size = new Size(217, 30);
+            txtMaSV.TabIndex = 1;
+            // 
             // lblLop
-            this.lblLop.Name = "lblLop";
-            this.lblLop.AutoSize = true;
-            this.lblLop.Location = new System.Drawing.Point(440, 15);
-            this.lblLop.Text = "Lớp:";
-            this.lblLop.TabIndex = 2;
+            // 
+            lblLop.AutoSize = true;
+            lblLop.Location = new Point(399, 23);
+            lblLop.Margin = new Padding(4, 0, 4, 0);
+            lblLop.Name = "lblLop";
+            lblLop.Size = new Size(64, 23);
+            lblLop.TabIndex = 2;
+            lblLop.Text = "Lớp (*):";
+            // 
             // cboLop
-            this.cboLop.Name = "cboLop";
-            this.cboLop.Location = new System.Drawing.Point(570, 12);
-            this.cboLop.TabIndex = 3;
-            this.cboLop.Size = new System.Drawing.Size(300, 23);
-            this.cboLop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLop.FormattingEnabled = true;
+            // 
+            cboLop.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboLop.Location = new Point(469, 18);
+            cboLop.Margin = new Padding(4, 5, 4, 5);
+            cboLop.Name = "cboLop";
+            cboLop.Size = new Size(397, 31);
+            cboLop.TabIndex = 3;
+            // 
             // lblHo
-            this.lblHo.Name = "lblHo";
-            this.lblHo.AutoSize = true;
-            this.lblHo.Location = new System.Drawing.Point(10, 49);
-            this.lblHo.Text = "Họ:";
-            this.lblHo.TabIndex = 4;
+            // 
+            lblHo.AutoSize = true;
+            lblHo.Location = new Point(15, 78);
+            lblHo.Margin = new Padding(4, 0, 4, 0);
+            lblHo.Name = "lblHo";
+            lblHo.Size = new Size(97, 23);
+            lblHo.TabIndex = 4;
+            lblHo.Text = "Họ đệm (*):";
+            // 
             // txtHo
-            this.txtHo.Name = "txtHo";
-            this.txtHo.Location = new System.Drawing.Point(140, 46);
-            this.txtHo.TabIndex = 5;
-            this.txtHo.Size = new System.Drawing.Size(260, 23);
-            this.txtHo.MaxLength = 50;
+            // 
+            txtHo.Location = new Point(148, 74);
+            txtHo.Margin = new Padding(4, 5, 4, 5);
+            txtHo.MaxLength = 50;
+            txtHo.Name = "txtHo";
+            txtHo.Size = new Size(217, 30);
+            txtHo.TabIndex = 5;
+            // 
             // lblTen
-            this.lblTen.Name = "lblTen";
-            this.lblTen.AutoSize = true;
-            this.lblTen.Location = new System.Drawing.Point(440, 49);
-            this.lblTen.Text = "Tên:";
-            this.lblTen.TabIndex = 6;
+            // 
+            lblTen.AutoSize = true;
+            lblTen.Location = new Point(399, 78);
+            lblTen.Margin = new Padding(4, 0, 4, 0);
+            lblTen.Name = "lblTen";
+            lblTen.Size = new Size(62, 23);
+            lblTen.TabIndex = 6;
+            lblTen.Text = "Tên (*):";
+            // 
             // txtTen
-            this.txtTen.Name = "txtTen";
-            this.txtTen.Location = new System.Drawing.Point(570, 46);
-            this.txtTen.TabIndex = 7;
-            this.txtTen.Size = new System.Drawing.Size(300, 23);
-            this.txtTen.MaxLength = 20;
+            // 
+            txtTen.Location = new Point(469, 74);
+            txtTen.Margin = new Padding(4, 5, 4, 5);
+            txtTen.MaxLength = 20;
+            txtTen.Name = "txtTen";
+            txtTen.Size = new Size(153, 30);
+            txtTen.TabIndex = 7;
+            txtTen.TextChanged += txtTen_TextChanged;
+            // 
             // lblGioiTinh
-            this.lblGioiTinh.Name = "lblGioiTinh";
-            this.lblGioiTinh.AutoSize = true;
-            this.lblGioiTinh.Location = new System.Drawing.Point(10, 83);
-            this.lblGioiTinh.Text = "Giới tính:";
-            this.lblGioiTinh.TabIndex = 8;
+            // 
+            lblGioiTinh.AutoSize = true;
+            lblGioiTinh.Location = new Point(900, 23);
+            lblGioiTinh.Margin = new Padding(4, 0, 4, 0);
+            lblGioiTinh.Name = "lblGioiTinh";
+            lblGioiTinh.Size = new Size(79, 23);
+            lblGioiTinh.TabIndex = 8;
+            lblGioiTinh.Text = "Giới tính:";
+            // 
             // cboGioiTinh
-            this.cboGioiTinh.Name = "cboGioiTinh";
-            this.cboGioiTinh.Location = new System.Drawing.Point(140, 80);
-            this.cboGioiTinh.TabIndex = 9;
-            this.cboGioiTinh.Size = new System.Drawing.Size(100, 23);
-            this.cboGioiTinh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboGioiTinh.FormattingEnabled = true;
+            // 
+            cboGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboGioiTinh.Location = new Point(977, 18);
+            cboGioiTinh.Margin = new Padding(4, 5, 4, 5);
+            cboGioiTinh.Name = "cboGioiTinh";
+            cboGioiTinh.Size = new Size(115, 31);
+            cboGioiTinh.TabIndex = 9;
+            // 
             // lblNgaySinh
-            this.lblNgaySinh.Name = "lblNgaySinh";
-            this.lblNgaySinh.AutoSize = true;
-            this.lblNgaySinh.Location = new System.Drawing.Point(440, 83);
-            this.lblNgaySinh.Text = "Ngày sinh:";
-            this.lblNgaySinh.TabIndex = 10;
+            // 
+            lblNgaySinh.AutoSize = true;
+            lblNgaySinh.Location = new Point(656, 78);
+            lblNgaySinh.Margin = new Padding(4, 0, 4, 0);
+            lblNgaySinh.Name = "lblNgaySinh";
+            lblNgaySinh.Size = new Size(90, 23);
+            lblNgaySinh.TabIndex = 10;
+            lblNgaySinh.Text = "Ngày sinh:";
+            // 
             // dtpNgaySinh
-            this.dtpNgaySinh.Name = "dtpNgaySinh";
-            this.dtpNgaySinh.Location = new System.Drawing.Point(570, 80);
-            this.dtpNgaySinh.TabIndex = 11;
-            this.dtpNgaySinh.Size = new System.Drawing.Size(150, 23);
-            this.dtpNgaySinh.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpNgaySinh.ShowCheckBox = true;
+            // 
+            dtpNgaySinh.Format = DateTimePickerFormat.Short;
+            dtpNgaySinh.Location = new Point(746, 74);
+            dtpNgaySinh.Margin = new Padding(4, 5, 4, 5);
+            dtpNgaySinh.Name = "dtpNgaySinh";
+            dtpNgaySinh.ShowCheckBox = true;
+            dtpNgaySinh.Size = new Size(179, 30);
+            dtpNgaySinh.TabIndex = 11;
+            // 
             // lblDiaChi
-            this.lblDiaChi.Name = "lblDiaChi";
-            this.lblDiaChi.AutoSize = true;
-            this.lblDiaChi.Location = new System.Drawing.Point(10, 117);
-            this.lblDiaChi.Text = "Địa chỉ:";
-            this.lblDiaChi.TabIndex = 12;
+            // 
+            lblDiaChi.AutoSize = true;
+            lblDiaChi.Location = new Point(15, 133);
+            lblDiaChi.Margin = new Padding(4, 0, 4, 0);
+            lblDiaChi.Name = "lblDiaChi";
+            lblDiaChi.Size = new Size(66, 23);
+            lblDiaChi.TabIndex = 12;
+            lblDiaChi.Text = "Địa chỉ:";
+            // 
             // txtDiaChi
-            this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Location = new System.Drawing.Point(140, 114);
-            this.txtDiaChi.TabIndex = 13;
-            this.txtDiaChi.Size = new System.Drawing.Size(260, 23);
-            this.txtDiaChi.MaxLength = 100;
+            // 
+            txtDiaChi.Location = new Point(148, 129);
+            txtDiaChi.Margin = new Padding(4, 5, 4, 5);
+            txtDiaChi.MaxLength = 100;
+            txtDiaChi.Name = "txtDiaChi";
+            txtDiaChi.Size = new Size(719, 30);
+            txtDiaChi.TabIndex = 13;
+            // 
             // lblNghiHoc
-            this.lblNghiHoc.Name = "lblNghiHoc";
-            this.lblNghiHoc.AutoSize = true;
-            this.lblNghiHoc.Location = new System.Drawing.Point(440, 117);
-            this.lblNghiHoc.Text = "Trạng thái:";
-            this.lblNghiHoc.TabIndex = 14;
+            // 
+            lblNghiHoc.AutoSize = true;
+            lblNghiHoc.Location = new Point(958, 78);
+            lblNghiHoc.Margin = new Padding(4, 0, 4, 0);
+            lblNghiHoc.Name = "lblNghiHoc";
+            lblNghiHoc.Size = new Size(91, 23);
+            lblNghiHoc.TabIndex = 14;
+            lblNghiHoc.Text = "Trạng thái:";
+            // 
             // chkNghiHoc
-            this.chkNghiHoc.Name = "chkNghiHoc";
-            this.chkNghiHoc.Location = new System.Drawing.Point(570, 114);
-            this.chkNghiHoc.TabIndex = 15;
-            this.chkNghiHoc.AutoSize = true;
-            this.chkNghiHoc.Text = "Đã nghỉ học";
-            // this
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 621);
-            this.MinimumSize = new System.Drawing.Size(860, 520);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Quản lý sinh viên";
-            this.Padding = new System.Windows.Forms.Padding(16);
-            this.Name = "FrmSinhVien";
-            this.Load += new System.EventHandler(this.FrmSinhVien_Load);
-            this.Shown += new System.EventHandler(this.FrmSinhVien_Shown);
-            this.Controls.Add(this.dgv);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.pnlTim);
-            this.Controls.Add(this.pnlNut);
-            this.Controls.Add(this.pnlNhap);
-            this.dgv.Columns.Add(this.colMaSV);
-            this.dgv.Columns.Add(this.colHoTen);
-            this.dgv.Columns.Add(this.colTenLop);
-            this.dgv.Columns.Add(this.colGioiTinh);
-            this.dgv.Columns.Add(this.colNgaySinh);
-            this.dgv.Columns.Add(this.colDiaChi);
-            this.dgv.Columns.Add(this.colTrangThai);
-            this.statusStrip.Items.Add(this.lblTrangThai);
-            this.pnlTim.Controls.Add(this.lblTim);
-            this.pnlTim.Controls.Add(this.txtTim);
-            this.pnlTim.Controls.Add(this.lblLocLop);
-            this.pnlTim.Controls.Add(this.cboLocLop);
-            this.pnlTim.Controls.Add(this.btnTim);
-            this.pnlNut.Controls.Add(this.btnNhapMoi);
-            this.pnlNut.Controls.Add(this.btnThem);
-            this.pnlNut.Controls.Add(this.btnSua);
-            this.pnlNut.Controls.Add(this.btnXoa);
-            this.pnlNut.Controls.Add(this.btnTaiLai);
-            this.pnlNhap.Controls.Add(this.lblMaSV);
-            this.pnlNhap.Controls.Add(this.txtMaSV);
-            this.pnlNhap.Controls.Add(this.lblLop);
-            this.pnlNhap.Controls.Add(this.cboLop);
-            this.pnlNhap.Controls.Add(this.lblHo);
-            this.pnlNhap.Controls.Add(this.txtHo);
-            this.pnlNhap.Controls.Add(this.lblTen);
-            this.pnlNhap.Controls.Add(this.txtTen);
-            this.pnlNhap.Controls.Add(this.lblGioiTinh);
-            this.pnlNhap.Controls.Add(this.cboGioiTinh);
-            this.pnlNhap.Controls.Add(this.lblNgaySinh);
-            this.pnlNhap.Controls.Add(this.dtpNgaySinh);
-            this.pnlNhap.Controls.Add(this.lblDiaChi);
-            this.pnlNhap.Controls.Add(this.txtDiaChi);
-            this.pnlNhap.Controls.Add(this.lblNghiHoc);
-            this.pnlNhap.Controls.Add(this.chkNghiHoc);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
-            this.pnlTim.ResumeLayout(false);
-            this.pnlNut.ResumeLayout(false);
-            this.pnlNhap.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            chkNghiHoc.AutoSize = true;
+            chkNghiHoc.Location = new Point(1054, 77);
+            chkNghiHoc.Margin = new Padding(4, 5, 4, 5);
+            chkNghiHoc.Name = "chkNghiHoc";
+            chkNghiHoc.Size = new Size(125, 27);
+            chkNghiHoc.TabIndex = 15;
+            chkNghiHoc.Text = "Đã nghỉ học";
+            // 
+            // FrmSinhVien
+            // 
+            AutoScaleDimensions = new SizeF(9F, 23F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1286, 1012);
+            Controls.Add(dgv);
+            Controls.Add(pnlTim);
+            Controls.Add(pnlNut);
+            Controls.Add(pnlNhap);
+            Controls.Add(statusStrip);
+            Margin = new Padding(4, 5, 4, 5);
+            MinimumSize = new Size(1101, 834);
+            Name = "FrmSinhVien";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Quản lý sinh viên";
+            Load += FrmSinhVien_Load;
+            Shown += FrmSinhVien_Shown;
+            ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
+            pnlTim.ResumeLayout(false);
+            pnlTim.PerformLayout();
+            pnlNut.ResumeLayout(false);
+            pnlNhap.ResumeLayout(false);
+            pnlNhap.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

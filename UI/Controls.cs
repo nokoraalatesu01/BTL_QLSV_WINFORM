@@ -5,7 +5,7 @@ namespace QLDSV_HTC.UI;
 /// <summary>Panel bo góc, dùng làm "card" nền cho nội dung.</summary>
 public class RoundedPanel : Panel
 {
-    private int _radius = 14;
+    private int _radius = 10;
     private Color _borderColor = Palette.Border;
     private int _borderSize = 1;
 
@@ -69,7 +69,7 @@ public class RoundedPanel : Panel
     }
 }
 
-/// <summary>Panel nền gradient (dùng cho sidebar và màn hình đăng nhập).</summary>
+/// <summary>Panel nền gradient (dùng cho sidebar UTC Navy).</summary>
 public class GradientPanel : Panel
 {
     private Color _start = Palette.SidebarTop;
@@ -120,11 +120,9 @@ public class GradientPanel : Panel
 
         if (!_decorations) return;
 
-        using var halo = new SolidBrush(Color.FromArgb(16, 255, 255, 255));
-        g.FillEllipse(halo, -Width / 5, -Height / 3, (int)(Width * 0.9), (int)(Width * 0.9));
-        using var halo2 = new SolidBrush(Color.FromArgb(12, 78, 70, 229));
-        g.FillEllipse(halo2, Width - (int)(Width * 0.55), Height - (int)(Height * 0.35),
-            (int)(Width * 0.8), (int)(Width * 0.8));
+        // Hiệu ứng nhẹ: vầng sáng phía trên
+        using var halo = new SolidBrush(Color.FromArgb(18, 255, 255, 255));
+        g.FillEllipse(halo, -Width / 4, -Height / 4, (int)(Width * 0.8), (int)(Width * 0.8));
     }
 }
 
@@ -140,7 +138,7 @@ public enum ButtonVariant
     Dark
 }
 
-/// <summary>Nút phẳng bo góc tự vẽ, có hover / pressed / disabled.</summary>
+/// <summary>Nút phẳng bo góc tự vẽ, có hover / pressed / disabled. Màu UTC Blue.</summary>
 public class ModernButton : Button
 {
     private bool _hover;
@@ -148,7 +146,7 @@ public class ModernButton : Button
 
     public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
 
-    public int CornerRadius { get; set; } = 8;
+    public int CornerRadius { get; set; } = 6;
 
     public ModernButton()
     {
@@ -211,13 +209,38 @@ public class ModernButton : Button
 
         return Variant switch
         {
-            ButtonVariant.Primary => (_pressed ? Palette.PrimaryDarker : _hover ? Palette.PrimaryDark : Palette.Primary, Color.White, Color.Transparent),
-            ButtonVariant.Secondary => (_hover ? Palette.SurfaceAlt : Palette.Surface, Palette.TextSoft, Palette.Border),
-            ButtonVariant.Soft => (_hover ? ColorTranslator.FromHtml("#E3E7FD") : Palette.PrimarySoft, Palette.Primary, Color.Transparent),
-            ButtonVariant.Ghost => (_hover ? ColorTranslator.FromHtml("#EDF0F7") : Color.Transparent, Palette.Muted, Color.Transparent),
-            ButtonVariant.Danger => (_pressed ? ColorTranslator.FromHtml("#B91C1C") : _hover ? ColorTranslator.FromHtml("#DC2626") : Palette.Danger, Color.White, Color.Transparent),
-            ButtonVariant.Success => (_pressed ? ColorTranslator.FromHtml("#059669") : _hover ? ColorTranslator.FromHtml("#059669") : Palette.Success, Color.White, Color.Transparent),
-            ButtonVariant.Dark => (_hover ? ColorTranslator.FromHtml("#111827") : ColorTranslator.FromHtml("#1F2937"), Color.White, Color.Transparent),
+            // UTC Primary Blue
+            ButtonVariant.Primary => (
+                _pressed ? Palette.PrimaryDarker : _hover ? Palette.PrimaryDark : Palette.Primary,
+                Color.White,
+                Color.Transparent),
+            // Secondary: outline trắng
+            ButtonVariant.Secondary => (
+                _hover ? Palette.SurfaceAlt : Palette.Surface,
+                Palette.TextSoft,
+                Palette.Border),
+            // Soft: nền xanh nhạt
+            ButtonVariant.Soft => (
+                _hover ? Palette.PrimaryMid : Palette.PrimarySoft,
+                Palette.Primary,
+                Color.Transparent),
+            ButtonVariant.Ghost => (
+                _hover ? ColorTranslator.FromHtml("#EDF0F7") : Color.Transparent,
+                Palette.Muted,
+                Color.Transparent),
+            // Danger: đỏ
+            ButtonVariant.Danger => (
+                _pressed ? ColorTranslator.FromHtml("#B91C1C") : _hover ? ColorTranslator.FromHtml("#DC2626") : Palette.Danger,
+                Color.White,
+                Color.Transparent),
+            ButtonVariant.Success => (
+                _pressed ? ColorTranslator.FromHtml("#059669") : _hover ? ColorTranslator.FromHtml("#059669") : Palette.Success,
+                Color.White,
+                Color.Transparent),
+            ButtonVariant.Dark => (
+                _hover ? ColorTranslator.FromHtml("#1F2937") : ColorTranslator.FromHtml("#374151"),
+                Color.White,
+                Color.Transparent),
             _ => (Palette.Primary, Color.White, Color.Transparent),
         };
     }
@@ -239,7 +262,7 @@ public enum NavIcon
     Logout
 }
 
-/// <summary>Nút điều hướng trên sidebar: icon vector + nhãn + trạng thái active.</summary>
+/// <summary>Nút điều hướng trên sidebar UTC: icon vector + nhãn + trạng thái active (navy/blue).</summary>
 public class SidebarButton : Button
 {
     private bool _hover;
@@ -260,7 +283,7 @@ public class SidebarButton : Button
         SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer
                   | ControlStyles.ResizeRedraw | ControlStyles.UserPaint, true);
         FlatStyle = FlatStyle.Flat;
-        Font = Palette.FontSemiBold;
+        Font = Palette.FontBase;
         ForeColor = Palette.SidebarText;
         Cursor = Cursors.Hand;
         TextAlign = ContentAlignment.MiddleLeft;
@@ -281,15 +304,15 @@ public class SidebarButton : Button
         g.SmoothingMode = SmoothingMode.AntiAlias;
         g.Clear(Palette.SidebarBottom);
 
-        var rect = new Rectangle(0, 0, Width, Height);
-        var path = Shape.RoundedPath(rect, 10);
-
+        // Vẽ nền nút
         Color bg;
         Color fg;
+
         if (_active)
         {
-            bg = Palette.Primary;
-            fg = Palette.SidebarTextActive;
+            // Active: dải xanh Primary Blue bên phải, nền trái nhạt
+            bg = Palette.SidebarActive;
+            fg = Color.White;
         }
         else if (_hover)
         {
@@ -302,24 +325,121 @@ public class SidebarButton : Button
             fg = Palette.SidebarText;
         }
 
+        var rect = new Rectangle(4, 2, Width - 8, Height - 4);
+        using var path = Shape.RoundedPath(rect, 6);
+
         if (bg.A > 0)
         {
             using var brush = new SolidBrush(bg);
             g.FillPath(brush, path);
         }
 
-        var iconSize = 18;
-        var left = 16;
+        // Active indicator: dải dọc bên trái
+        if (_active)
+        {
+            using var accentBrush = new SolidBrush(Color.White);
+            g.FillRectangle(accentBrush, 4, 8, 3, Height - 16);
+        }
+
+        // Icon
+        var iconSize = 16;
+        var left = 20;
         if (ShowIcon)
         {
             var iconBox = new Rectangle(left, (Height - iconSize) / 2, iconSize, iconSize);
             NavIcons.Draw(g, Icon, iconBox, fg);
-            left += iconSize + 12;
+            left += iconSize + 10;
         }
 
-        var textRect = new Rectangle(left, 0, Width - left - 10, Height);
+        // Text
+        var textRect = new Rectangle(left, 0, Width - left - 8, Height);
         TextRenderer.DrawText(g, Text, Font, textRect, fg,
             TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis | TextFormatFlags.NoPrefix);
+    }
+}
+
+/// <summary>Thẻ thống kê Dashboard: hiển thị icon, nhãn, con số và màu nhấn.</summary>
+public class StatCard : Panel
+{
+    private string _label = "";
+    private string _value = "0";
+    private Color _accentColor = Palette.StatBlue;
+    private NavIcon _icon = NavIcon.Dashboard;
+
+    public string Label
+    {
+        get => _label;
+        set { _label = value; Invalidate(); }
+    }
+
+    public string Value
+    {
+        get => _value;
+        set { _value = value; Invalidate(); }
+    }
+
+    public Color AccentColor
+    {
+        get => _accentColor;
+        set { _accentColor = value; Invalidate(); }
+    }
+
+    public NavIcon CardIcon
+    {
+        get => _icon;
+        set { _icon = value; Invalidate(); }
+    }
+
+    public StatCard()
+    {
+        SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer
+                  | ControlStyles.ResizeRedraw | ControlStyles.UserPaint, true);
+        BackColor = Palette.Surface;
+        Size = new Size(240, 110);
+        Cursor = Cursors.Default;
+    }
+
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        if (DesignMode) { base.OnPaint(e); return; }
+        var g = e.Graphics;
+        g.SmoothingMode = SmoothingMode.AntiAlias;
+        g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+
+        // Nền trắng bo góc
+        using var bgBrush = new SolidBrush(Palette.Surface);
+        using var bgPath = Shape.RoundedPath(new Rectangle(0, 0, Width - 1, Height - 1), 8);
+        g.FillPath(bgBrush, bgPath);
+
+        // Viền mảnh
+        using var borderPen = new Pen(Palette.Border);
+        g.DrawPath(borderPen, bgPath);
+
+        // Dải màu bên trái
+        using var accentBrush = new SolidBrush(_accentColor);
+        using var accentPath = Shape.RoundedPath(new Rectangle(0, 0, 4, Height - 1), 2);
+        g.FillPath(accentBrush, accentPath);
+
+        // Icon background circle
+        var iconBg = Color.FromArgb(28, _accentColor);
+        var iconRect = new Rectangle(Width - 58, 18, 40, 40);
+        using var iconBgBrush = new SolidBrush(iconBg);
+        g.FillEllipse(iconBgBrush, iconRect);
+        NavIcons.Draw(g, _icon, new Rectangle(iconRect.X + 10, iconRect.Y + 10, 20, 20), _accentColor);
+
+        // Label
+        using var labelFont = new Font(Palette.FontFamily, 8.5F, FontStyle.Regular);
+        using var labelBrush = new SolidBrush(Palette.Muted);
+        g.DrawString(_label.ToUpperInvariant(), labelFont, labelBrush, new PointF(16, 18));
+
+        // Value
+        using var valFont = new Font(Palette.FontFamily, 26F, FontStyle.Bold);
+        using var valBrush = new SolidBrush(Palette.Text);
+        g.DrawString(_value, valFont, valBrush, new PointF(14, 40));
+
+        // Đường nhấn dưới cùng
+        using var accentLineBrush = new SolidBrush(Color.FromArgb(40, _accentColor));
+        g.FillRectangle(accentLineBrush, 0, Height - 5, Width, 5);
     }
 }
 

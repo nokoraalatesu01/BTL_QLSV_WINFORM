@@ -47,12 +47,15 @@ namespace QLDSV_HTC.Forms
             this.txtKhoaHoc = new System.Windows.Forms.TextBox();
             this.lblKhoa = new System.Windows.Forms.Label();
             this.cboKhoa = new System.Windows.Forms.ComboBox();
+
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.pnlTim.SuspendLayout();
             this.pnlNut.SuspendLayout();
             this.pnlNhap.SuspendLayout();
             this.SuspendLayout();
-            // dgv
+
+            // ---- dgv ----
             this.dgv.Name = "dgv";
             this.dgv.AllowUserToAddRows = false;
             this.dgv.AllowUserToDeleteRows = false;
@@ -60,195 +63,162 @@ namespace QLDSV_HTC.Forms
             this.dgv.AutoGenerateColumns = false;
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.dgv.MultiSelect = false;
             this.dgv.ReadOnly = true;
             this.dgv.RowHeadersVisible = false;
             this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv.TabIndex = 3;
             this.dgv.SelectionChanged += new System.EventHandler(this.dgv_SelectionChanged);
+            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+                this.colMaLop,
+                this.colTenLop,
+                this.colKhoaHoc,
+                this.colTenKhoa
+            });
+
             // colMaLop
             this.colMaLop.Name = "colMaLop";
             this.colMaLop.DataPropertyName = "MaLop";
             this.colMaLop.HeaderText = "Mã lớp";
             this.colMaLop.FillWeight = 20F;
+            this.colMaLop.MinimumWidth = 100;
             this.colMaLop.ReadOnly = true;
+
             // colTenLop
             this.colTenLop.Name = "colTenLop";
             this.colTenLop.DataPropertyName = "TenLop";
             this.colTenLop.HeaderText = "Tên lớp";
             this.colTenLop.FillWeight = 40F;
+            this.colTenLop.MinimumWidth = 200;
             this.colTenLop.ReadOnly = true;
+
             // colKhoaHoc
             this.colKhoaHoc.Name = "colKhoaHoc";
             this.colKhoaHoc.DataPropertyName = "KhoaHoc";
             this.colKhoaHoc.HeaderText = "Khóa học";
             this.colKhoaHoc.FillWeight = 15F;
+            this.colKhoaHoc.MinimumWidth = 100;
             this.colKhoaHoc.ReadOnly = true;
+
             // colTenKhoa
             this.colTenKhoa.Name = "colTenKhoa";
             this.colTenKhoa.DataPropertyName = "TenKhoa";
-            this.colTenKhoa.HeaderText = "Khoa";
+            this.colTenKhoa.HeaderText = "Khoa quản lý";
             this.colTenKhoa.FillWeight = 25F;
+            this.colTenKhoa.MinimumWidth = 150;
             this.colTenKhoa.ReadOnly = true;
-            // statusStrip
+
+            // ---- statusStrip ----
             this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.statusStrip.TabIndex = 4;
+            this.statusStrip.Items.Add(this.lblTrangThai);
+
             // lblTrangThai
             this.lblTrangThai.Name = "lblTrangThai";
             this.lblTrangThai.Text = "Sẵn sàng.";
-            // pnlTim
+
+            // ---- pnlTim ----
             this.pnlTim.Name = "pnlTim";
             this.pnlTim.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTim.Size = new System.Drawing.Size(1034, 44);
+            this.pnlTim.Height = 48;
             this.pnlTim.TabIndex = 2;
-            // lblTim
-            this.lblTim.Name = "lblTim";
-            this.lblTim.AutoSize = true;
-            this.lblTim.Location = new System.Drawing.Point(10, 13);
-            this.lblTim.Text = "Tìm kiếm:";
-            this.lblTim.TabIndex = 13;
-            // txtTim
-            this.txtTim.Name = "txtTim";
-            this.txtTim.Location = new System.Drawing.Point(90, 10);
-            this.txtTim.TabIndex = 14;
-            this.txtTim.Size = new System.Drawing.Size(240, 23);
-            this.txtTim.MaxLength = 100;
-            this.txtTim.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTim_KeyDown);
-            // btnTim
-            this.btnTim.Name = "btnTim";
-            this.btnTim.Location = new System.Drawing.Point(344, 6);
-            this.btnTim.Size = new System.Drawing.Size(100, 32);
-            this.btnTim.Text = "Tìm";
-            this.btnTim.TabIndex = 15;
-            this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
-            // pnlNut
-            this.pnlNut.Name = "pnlNut";
-            this.pnlNut.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNut.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.pnlNut.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
-            this.pnlNut.Size = new System.Drawing.Size(1034, 44);
-            this.pnlNut.TabIndex = 1;
-            // btnNhapMoi
-            this.btnNhapMoi.Name = "btnNhapMoi";
-            this.btnNhapMoi.Location = new System.Drawing.Point(10, 6);
-            this.btnNhapMoi.Size = new System.Drawing.Size(100, 32);
-            this.btnNhapMoi.Text = "Nhập mới";
-            this.btnNhapMoi.TabIndex = 8;
-            this.btnNhapMoi.Click += new System.EventHandler(this.btnNhapMoi_Click);
-            // btnThem
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Location = new System.Drawing.Point(118, 6);
-            this.btnThem.Size = new System.Drawing.Size(100, 32);
-            this.btnThem.Text = "Thêm";
-            this.btnThem.TabIndex = 9;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-            // btnSua
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Location = new System.Drawing.Point(226, 6);
-            this.btnSua.Size = new System.Drawing.Size(100, 32);
-            this.btnSua.Text = "Sửa";
-            this.btnSua.TabIndex = 10;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
-            // btnXoa
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Location = new System.Drawing.Point(334, 6);
-            this.btnXoa.Size = new System.Drawing.Size(100, 32);
-            this.btnXoa.Text = "Xóa";
-            this.btnXoa.TabIndex = 11;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
-            // btnTaiLai
-            this.btnTaiLai.Name = "btnTaiLai";
-            this.btnTaiLai.Location = new System.Drawing.Point(442, 6);
-            this.btnTaiLai.Size = new System.Drawing.Size(100, 32);
-            this.btnTaiLai.Text = "Tải lại";
-            this.btnTaiLai.TabIndex = 12;
-            this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
-            // pnlNhap
-            this.pnlNhap.Name = "pnlNhap";
-            this.pnlNhap.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNhap.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.pnlNhap.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
-            this.pnlNhap.Size = new System.Drawing.Size(1034, 86);
-            this.pnlNhap.TabIndex = 0;
-            // lblMaLop
-            this.lblMaLop.Name = "lblMaLop";
-            this.lblMaLop.AutoSize = true;
-            this.lblMaLop.Location = new System.Drawing.Point(10, 15);
-            this.lblMaLop.Text = "Mã lớp:";
-            this.lblMaLop.TabIndex = 0;
-            // txtMaLop
-            this.txtMaLop.Name = "txtMaLop";
-            this.txtMaLop.Location = new System.Drawing.Point(140, 12);
-            this.txtMaLop.TabIndex = 1;
-            this.txtMaLop.Size = new System.Drawing.Size(260, 23);
-            this.txtMaLop.MaxLength = 10;
-            // lblTenLop
-            this.lblTenLop.Name = "lblTenLop";
-            this.lblTenLop.AutoSize = true;
-            this.lblTenLop.Location = new System.Drawing.Point(440, 15);
-            this.lblTenLop.Text = "Tên lớp:";
-            this.lblTenLop.TabIndex = 2;
-            // txtTenLop
-            this.txtTenLop.Name = "txtTenLop";
-            this.txtTenLop.Location = new System.Drawing.Point(570, 12);
-            this.txtTenLop.TabIndex = 3;
-            this.txtTenLop.Size = new System.Drawing.Size(300, 23);
-            this.txtTenLop.MaxLength = 50;
-            // lblKhoaHoc
-            this.lblKhoaHoc.Name = "lblKhoaHoc";
-            this.lblKhoaHoc.AutoSize = true;
-            this.lblKhoaHoc.Location = new System.Drawing.Point(10, 49);
-            this.lblKhoaHoc.Text = "Khóa học (năm):";
-            this.lblKhoaHoc.TabIndex = 4;
-            // txtKhoaHoc
-            this.txtKhoaHoc.Name = "txtKhoaHoc";
-            this.txtKhoaHoc.Location = new System.Drawing.Point(140, 46);
-            this.txtKhoaHoc.TabIndex = 5;
-            this.txtKhoaHoc.Size = new System.Drawing.Size(260, 23);
-            this.txtKhoaHoc.MaxLength = 4;
-            // lblKhoa
-            this.lblKhoa.Name = "lblKhoa";
-            this.lblKhoa.AutoSize = true;
-            this.lblKhoa.Location = new System.Drawing.Point(440, 49);
-            this.lblKhoa.Text = "Khoa:";
-            this.lblKhoa.TabIndex = 6;
-            // cboKhoa
-            this.cboKhoa.Name = "cboKhoa";
-            this.cboKhoa.Location = new System.Drawing.Point(570, 46);
-            this.cboKhoa.TabIndex = 7;
-            this.cboKhoa.Size = new System.Drawing.Size(300, 23);
-            this.cboKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboKhoa.FormattingEnabled = true;
-            // this
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 621);
-            this.MinimumSize = new System.Drawing.Size(860, 520);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Quản lý lớp";
-            this.Padding = new System.Windows.Forms.Padding(16);
-            this.Name = "FrmLop";
-            this.Load += new System.EventHandler(this.FrmLop_Load);
-            this.Shown += new System.EventHandler(this.FrmLop_Shown);
-            this.Controls.Add(this.dgv);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.pnlTim);
-            this.Controls.Add(this.pnlNut);
-            this.Controls.Add(this.pnlNhap);
-            this.dgv.Columns.Add(this.colMaLop);
-            this.dgv.Columns.Add(this.colTenLop);
-            this.dgv.Columns.Add(this.colKhoaHoc);
-            this.dgv.Columns.Add(this.colTenKhoa);
-            this.statusStrip.Items.Add(this.lblTrangThai);
+            this.pnlTim.BackColor = QLDSV_HTC.UI.Palette.Surface;
+            this.pnlTim.Padding = new System.Windows.Forms.Padding(8);
             this.pnlTim.Controls.Add(this.lblTim);
             this.pnlTim.Controls.Add(this.txtTim);
             this.pnlTim.Controls.Add(this.btnTim);
+
+            // lblTim
+            this.lblTim.Name = "lblTim";
+            this.lblTim.AutoSize = true;
+            this.lblTim.Location = new System.Drawing.Point(12, 15);
+            this.lblTim.Text = "Tìm kiếm:";
+            this.lblTim.TabIndex = 0;
+
+            // txtTim
+            this.txtTim.Name = "txtTim";
+            this.txtTim.Location = new System.Drawing.Point(82, 12);
+            this.txtTim.Size = new System.Drawing.Size(260, 23);
+            this.txtTim.MaxLength = 100;
+            this.txtTim.TabIndex = 1;
+            this.txtTim.PlaceholderText = "Nhập mã lớp, tên lớp hoặc khóa học...";
+            this.txtTim.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTim_KeyDown);
+
+            // btnTim
+            this.btnTim.Name = "btnTim";
+            this.btnTim.Location = new System.Drawing.Point(352, 8);
+            this.btnTim.Size = new System.Drawing.Size(95, 32);
+            this.btnTim.TabIndex = 2;
+            this.btnTim.Text = "Tìm kiếm";
+            this.btnTim.Variant = QLDSV_HTC.UI.ButtonVariant.Soft;
+            this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
+
+            // ---- pnlNut ----
+            this.pnlNut.Name = "pnlNut";
+            this.pnlNut.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNut.Height = 48;
+            this.pnlNut.TabIndex = 1;
+            this.pnlNut.BackColor = QLDSV_HTC.UI.Palette.Surface;
             this.pnlNut.Controls.Add(this.btnNhapMoi);
             this.pnlNut.Controls.Add(this.btnThem);
             this.pnlNut.Controls.Add(this.btnSua);
             this.pnlNut.Controls.Add(this.btnXoa);
             this.pnlNut.Controls.Add(this.btnTaiLai);
+
+            // btnNhapMoi
+            this.btnNhapMoi.Name = "btnNhapMoi";
+            this.btnNhapMoi.Location = new System.Drawing.Point(8, 7);
+            this.btnNhapMoi.Size = new System.Drawing.Size(105, 34);
+            this.btnNhapMoi.TabIndex = 0;
+            this.btnNhapMoi.Text = "Nhập mới";
+            this.btnNhapMoi.Variant = QLDSV_HTC.UI.ButtonVariant.Secondary;
+            this.btnNhapMoi.Click += new System.EventHandler(this.btnNhapMoi_Click);
+
+            // btnThem
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Location = new System.Drawing.Point(121, 7);
+            this.btnThem.Size = new System.Drawing.Size(105, 34);
+            this.btnThem.TabIndex = 1;
+            this.btnThem.Text = "Thêm";
+            this.btnThem.Variant = QLDSV_HTC.UI.ButtonVariant.Primary;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+
+            // btnSua
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Location = new System.Drawing.Point(234, 7);
+            this.btnSua.Size = new System.Drawing.Size(105, 34);
+            this.btnSua.TabIndex = 2;
+            this.btnSua.Text = "Sửa";
+            this.btnSua.Variant = QLDSV_HTC.UI.ButtonVariant.Primary;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+
+            // btnXoa
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Location = new System.Drawing.Point(347, 7);
+            this.btnXoa.Size = new System.Drawing.Size(105, 34);
+            this.btnXoa.TabIndex = 3;
+            this.btnXoa.Text = "Xóa";
+            this.btnXoa.Variant = QLDSV_HTC.UI.ButtonVariant.Danger;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+
+            // btnTaiLai
+            this.btnTaiLai.Name = "btnTaiLai";
+            this.btnTaiLai.Location = new System.Drawing.Point(460, 7);
+            this.btnTaiLai.Size = new System.Drawing.Size(105, 34);
+            this.btnTaiLai.TabIndex = 4;
+            this.btnTaiLai.Text = "Tải lại";
+            this.btnTaiLai.Variant = QLDSV_HTC.UI.ButtonVariant.Ghost;
+            this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
+
+            // ---- pnlNhap ----
+            this.pnlNhap.Name = "pnlNhap";
+            this.pnlNhap.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNhap.Height = 88;
+            this.pnlNhap.TabIndex = 0;
+            this.pnlNhap.BackColor = QLDSV_HTC.UI.Palette.Surface;
+            this.pnlNhap.Padding = new System.Windows.Forms.Padding(12, 10, 12, 8);
             this.pnlNhap.Controls.Add(this.lblMaLop);
             this.pnlNhap.Controls.Add(this.txtMaLop);
             this.pnlNhap.Controls.Add(this.lblTenLop);
@@ -257,10 +227,87 @@ namespace QLDSV_HTC.Forms
             this.pnlNhap.Controls.Add(this.txtKhoaHoc);
             this.pnlNhap.Controls.Add(this.lblKhoa);
             this.pnlNhap.Controls.Add(this.cboKhoa);
+
+            // lblMaLop
+            this.lblMaLop.Name = "lblMaLop";
+            this.lblMaLop.AutoSize = true;
+            this.lblMaLop.Location = new System.Drawing.Point(12, 15);
+            this.lblMaLop.Text = "Mã lớp (*):";
+            this.lblMaLop.TabIndex = 0;
+
+            // txtMaLop
+            this.txtMaLop.Name = "txtMaLop";
+            this.txtMaLop.Location = new System.Drawing.Point(95, 12);
+            this.txtMaLop.Size = new System.Drawing.Size(170, 23);
+            this.txtMaLop.MaxLength = 10;
+            this.txtMaLop.TabIndex = 1;
+
+            // lblTenLop
+            this.lblTenLop.Name = "lblTenLop";
+            this.lblTenLop.AutoSize = true;
+            this.lblTenLop.Location = new System.Drawing.Point(290, 15);
+            this.lblTenLop.Text = "Tên lớp (*):";
+            this.lblTenLop.TabIndex = 2;
+
+            // txtTenLop
+            this.txtTenLop.Name = "txtTenLop";
+            this.txtTenLop.Location = new System.Drawing.Point(375, 12);
+            this.txtTenLop.Size = new System.Drawing.Size(280, 23);
+            this.txtTenLop.MaxLength = 50;
+            this.txtTenLop.TabIndex = 3;
+
+            // lblKhoaHoc
+            this.lblKhoaHoc.Name = "lblKhoaHoc";
+            this.lblKhoaHoc.AutoSize = true;
+            this.lblKhoaHoc.Location = new System.Drawing.Point(12, 51);
+            this.lblKhoaHoc.Text = "Khóa học:";
+            this.lblKhoaHoc.TabIndex = 4;
+
+            // txtKhoaHoc
+            this.txtKhoaHoc.Name = "txtKhoaHoc";
+            this.txtKhoaHoc.Location = new System.Drawing.Point(95, 48);
+            this.txtKhoaHoc.Size = new System.Drawing.Size(170, 23);
+            this.txtKhoaHoc.MaxLength = 9;
+            this.txtKhoaHoc.PlaceholderText = "VD: 2021-2025";
+            this.txtKhoaHoc.TabIndex = 5;
+
+            // lblKhoa
+            this.lblKhoa.Name = "lblKhoa";
+            this.lblKhoa.AutoSize = true;
+            this.lblKhoa.Location = new System.Drawing.Point(290, 51);
+            this.lblKhoa.Text = "Khoa (*):";
+            this.lblKhoa.TabIndex = 6;
+
+            // cboKhoa
+            this.cboKhoa.Name = "cboKhoa";
+            this.cboKhoa.Location = new System.Drawing.Point(375, 48);
+            this.cboKhoa.Size = new System.Drawing.Size(280, 23);
+            this.cboKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboKhoa.TabIndex = 7;
+
+            // ---- FrmLop ----
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.Name = "FrmLop";
+            this.Text = "Quản lý Lớp";
+            this.Load += new System.EventHandler(this.FrmLop_Load);
+            this.Shown += new System.EventHandler(this.FrmLop_Shown);
+
+            this.Controls.Add(this.dgv);
+            this.Controls.Add(this.pnlTim);
+            this.Controls.Add(this.pnlNut);
+            this.Controls.Add(this.pnlNhap);
+            this.Controls.Add(this.statusStrip);
+
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.pnlTim.ResumeLayout(false);
+            this.pnlTim.PerformLayout();
             this.pnlNut.ResumeLayout(false);
             this.pnlNhap.ResumeLayout(false);
+            this.pnlNhap.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }

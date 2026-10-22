@@ -4,7 +4,7 @@ using System.Windows.Forms;
 namespace QLDSV_HTC.UI;
 
 /// <summary>
-/// Trung tâm giao diện: áp bộ nhận diện chung (màu, font, kiểu bảng, kiểu nút, ô nhập)
+/// Trung tâm giao diện UTC Portal: áp bộ nhận diện chung (màu navy, font, kiểu bảng, kiểu nút, ô nhập)
 /// cho mọi form nên không phải chỉnh tay từng control trong Designer.
 /// </summary>
 public static class Theme
@@ -85,47 +85,57 @@ public static class Theme
                 gb.ForeColor = Palette.TextSoft;
                 gb.BackColor = Palette.Surface;
                 break;
+
+            case CheckBox chk:
+                chk.ForeColor = Palette.TextSoft;
+                chk.Font = Palette.FontBase;
+                break;
         }
 
         foreach (Control child in control.Controls)
             Style(child);
     }
 
+    /// <summary>Áp style DataGridView theo chuẩn UTC Portal: header navy, dòng xen kẽ nhẹ.</summary>
     public static void StyleGrid(DataGridView grid)
     {
         grid.EnableHeadersVisualStyles = false;
         grid.BackgroundColor = Palette.Surface;
         grid.BorderStyle = BorderStyle.None;
-        grid.GridColor = ColorTranslator.FromHtml("#EEF1F7");
+        grid.GridColor = ColorTranslator.FromHtml("#EBF0FA");
         grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
         grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
         grid.RowHeadersVisible = false;
         grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         grid.MultiSelect = false;
-        grid.RowTemplate.Height = 36;
+        grid.RowTemplate.Height = 40;
         grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-        grid.ColumnHeadersHeight = 40;
+        grid.ColumnHeadersHeight = 42;
+        grid.AllowUserToResizeRows = false;
 
+        // Header: Navy UTC
         var header = grid.ColumnHeadersDefaultCellStyle;
-        header.BackColor = Palette.Primary;
+        header.BackColor = Palette.Navy;
         header.ForeColor = Color.White;
         header.Font = Palette.FontSemiBold;
-        header.SelectionBackColor = Palette.Primary;
+        header.SelectionBackColor = Palette.Navy;
         header.SelectionForeColor = Color.White;
         header.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        header.Padding = new Padding(10, 0, 8, 0);
+        header.Padding = new Padding(12, 0, 8, 0);
         header.WrapMode = DataGridViewTriState.False;
 
+        // Cell style
         var cell = grid.DefaultCellStyle;
         cell.BackColor = Palette.Surface;
         cell.ForeColor = Palette.TextSoft;
         cell.SelectionBackColor = Palette.PrimarySoft;
         cell.SelectionForeColor = Palette.PrimaryDarker;
-        cell.Padding = new Padding(10, 0, 8, 0);
+        cell.Padding = new Padding(12, 0, 8, 0);
         cell.WrapMode = DataGridViewTriState.False;
 
+        // Alternating rows: rất nhẹ nhàng
         var alt = grid.AlternatingRowsDefaultCellStyle;
-        alt.BackColor = Palette.SurfaceAlt;
+        alt.BackColor = ColorTranslator.FromHtml("#F6F9FF");
         alt.ForeColor = Palette.TextSoft;
         alt.SelectionBackColor = Palette.PrimarySoft;
         alt.SelectionForeColor = Palette.PrimaryDarker;
@@ -222,7 +232,7 @@ public static class Theme
         {
             pnl.BackColor = Palette.Surface;
             pnl.BorderStyle = BorderStyle.FixedSingle;
-            pnl.Padding = new Padding(10, 6, 10, 6);
+            pnl.Padding = new Padding(12, 8, 12, 8);
         }
     }
 
@@ -234,6 +244,51 @@ public static class Theme
         menu.Renderer = new ThemeMenuRenderer();
         menu.Padding = new Padding(8, 4, 8, 4);
     }
+
+    /// <summary>Áp style UTC cho panel tiêu đề trang (pnlPageHeader).</summary>
+    public static void StylePageHeader(Panel pnl, string title, string subtitle = "")
+    {
+        pnl.BackColor = Palette.Surface;
+        pnl.Height = string.IsNullOrEmpty(subtitle) ? 56 : 72;
+
+        // Xóa control cũ nếu có
+        var oldTitle = pnl.Controls.Find("_pageTitle", false);
+        var oldSub = pnl.Controls.Find("_pageSubtitle", false);
+        foreach (var c in oldTitle) pnl.Controls.Remove(c);
+        foreach (var c in oldSub) pnl.Controls.Remove(c);
+
+        var lblTitle = new Label
+        {
+            Name = "_pageTitle",
+            Text = title,
+            Font = Palette.PageTitle,
+            ForeColor = Palette.Navy,
+            AutoSize = true,
+            Location = new Point(20, string.IsNullOrEmpty(subtitle) ? 14 : 10)
+        };
+        pnl.Controls.Add(lblTitle);
+
+        if (!string.IsNullOrEmpty(subtitle))
+        {
+            var lblSub = new Label
+            {
+                Name = "_pageSubtitle",
+                Text = subtitle,
+                Font = Palette.FontSmall,
+                ForeColor = Palette.Muted,
+                AutoSize = true,
+                Location = new Point(22, 38)
+            };
+            pnl.Controls.Add(lblSub);
+        }
+
+        // Đường viền dưới
+        pnl.Paint += (s, e) =>
+        {
+            using var pen = new System.Drawing.Pen(Palette.Border, 1);
+            e.Graphics.DrawLine(pen, 0, pnl.Height - 1, pnl.Width, pnl.Height - 1);
+        };
+    }
 }
 
 public class ThemeColorTable : ProfessionalColorTable
@@ -244,7 +299,7 @@ public class ThemeColorTable : ProfessionalColorTable
     public override Color MenuItemSelected => Palette.PrimarySoft;
     public override Color MenuItemSelectedGradientBegin => Palette.PrimarySoft;
     public override Color MenuItemSelectedGradientEnd => Palette.PrimarySoft;
-    public override Color MenuItemBorder => Palette.PrimarySoft;
+    public override Color MenuItemBorder => Palette.PrimaryMid;
     public override Color MenuBorder => Palette.Border;
     public override Color ImageMarginGradientBegin => Palette.Surface;
     public override Color ImageMarginGradientMiddle => Palette.Surface;

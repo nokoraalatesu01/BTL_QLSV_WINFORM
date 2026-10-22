@@ -280,7 +280,8 @@ namespace QLDSV_HTC.Forms
         private System.Windows.Forms.Panel pnlUserBox;
         private System.Windows.Forms.Label lblUserIcon;
         private System.Windows.Forms.TextBox txtTenDangNhap;
-        private System.Windows.Forms.Label lblMatKhau;
+        private System.Windows.Forms.Panel pnlPassBox;
+        private System.Windows.Forms.Label lblPassIcon;
         private System.Windows.Forms.TextBox txtMatKhau;
         private System.Windows.Forms.Button btnTogglePass;
         private System.Windows.Forms.LinkLabel lnkQuenMatKhau;

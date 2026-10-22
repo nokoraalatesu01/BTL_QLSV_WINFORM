@@ -38,6 +38,12 @@ public partial class FrmBangDiemSV : BaseForm
         this.dgv.DataSource = bangDiem;
         this.dgv.ClearSelection();
 
+        if (this.dgv.Columns["DiemTK"] != null)
+        {
+            this.dgv.Columns["DiemTK"].DefaultCellStyle.Font = Palette.FontSemiBold;
+            this.dgv.Columns["DiemTK"].DefaultCellStyle.ForeColor = Palette.Primary;
+        }
+
         var coDiem = bangDiem.Where(d => d.DiemTK.HasValue).ToList();
         if (coDiem.Count == 0)
         {

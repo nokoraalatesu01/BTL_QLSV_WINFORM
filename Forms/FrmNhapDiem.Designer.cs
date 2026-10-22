@@ -57,8 +57,6 @@ namespace QLDSV_HTC.Forms
             this.dgv.AllowUserToResizeRows = false;
             this.dgv.AutoGenerateColumns = false;
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv.BackgroundColor = System.Drawing.Color.White;
-            this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv.MultiSelect = false;
             this.dgv.ReadOnly = false;
@@ -113,8 +111,8 @@ namespace QLDSV_HTC.Forms
             this.colCK.ReadOnly = false;
             // colTongKet
             cellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            cellStyle4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            cellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
+            cellStyle4.Font = QLDSV_HTC.UI.Palette.FontSemiBold;
+            cellStyle4.ForeColor = QLDSV_HTC.UI.Palette.Primary;
             this.colTongKet.DefaultCellStyle = cellStyle4;
             this.colTongKet.Name = "colTongKet";
             this.colTongKet.DataPropertyName = "TongKet";

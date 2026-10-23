@@ -40,7 +40,7 @@ public static class HoSoSinhVienDAL
 
     private static SqlConnection MoKetNoi()
     {
-        var cn = new SqlConnection(DataBaseProcess.ChuoiKetNoi);
+        var cn = new SqlConnection(DataBaseProcess.strConnect);
         cn.Open();
         return cn;
     }

@@ -43,6 +43,7 @@ namespace QLDSV_HTC.Forms
             btnSua = new QLDSV_HTC.UI.ModernButton();
             btnXoa = new QLDSV_HTC.UI.ModernButton();
             btnTaiLai = new QLDSV_HTC.UI.ModernButton();
+            btnXuatExcel = new QLDSV_HTC.UI.ModernButton();
             pnlNhap = new Panel();
             lblMaSV = new Label();
             txtMaSV = new TextBox();
@@ -256,6 +257,7 @@ namespace QLDSV_HTC.Forms
             pnlNut.Controls.Add(btnSua);
             pnlNut.Controls.Add(btnXoa);
             pnlNut.Controls.Add(btnTaiLai);
+            pnlNut.Controls.Add(btnXuatExcel);
             pnlNut.Dock = DockStyle.Top;
             pnlNut.Location = new Point(0, 190);
             pnlNut.Margin = new Padding(4, 5, 4, 5);
@@ -337,6 +339,21 @@ namespace QLDSV_HTC.Forms
             btnTaiLai.UseVisualStyleBackColor = false;
             btnTaiLai.Variant = UI.ButtonVariant.Ghost;
             btnTaiLai.Click += btnTaiLai_Click;
+            // 
+            // btnXuatExcel
+            // 
+            btnXuatExcel.CornerRadius = 6;
+            btnXuatExcel.FlatStyle = FlatStyle.Flat;
+            btnXuatExcel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnXuatExcel.Location = new Point(736, 11);
+            btnXuatExcel.Margin = new Padding(4, 5, 4, 5);
+            btnXuatExcel.Name = "btnXuatExcel";
+            btnXuatExcel.Size = new Size(135, 52);
+            btnXuatExcel.TabIndex = 5;
+            btnXuatExcel.Text = "Xuất Excel";
+            btnXuatExcel.UseVisualStyleBackColor = false;
+            btnXuatExcel.Variant = UI.ButtonVariant.Success;
+            btnXuatExcel.Click += btnXuatExcel_Click;
             // 
             // pnlNhap
             // 
@@ -573,6 +590,7 @@ namespace QLDSV_HTC.Forms
         private QLDSV_HTC.UI.ModernButton btnSua;
         private QLDSV_HTC.UI.ModernButton btnXoa;
         private QLDSV_HTC.UI.ModernButton btnTaiLai;
+        private QLDSV_HTC.UI.ModernButton btnXuatExcel;
         private System.Windows.Forms.Panel pnlNhap;
         private System.Windows.Forms.Label lblMaSV;
         private System.Windows.Forms.TextBox txtMaSV;

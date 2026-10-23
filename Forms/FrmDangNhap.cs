@@ -12,6 +12,7 @@ namespace QLDSV_HTC.Forms
         public FrmDangNhap()
         {
             InitializeComponent();
+            this.btnThoat.DialogResult = DialogResult.None;
         }
 
         private void FrmDangNhap_Load(object sender, EventArgs e)
@@ -85,11 +86,7 @@ namespace QLDSV_HTC.Forms
                     Path.Combine(Application.StartupPath, "Resources", "img", tenTep),
                     Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "img", tenTep),
                     Path.Combine(Directory.GetCurrentDirectory(), "Resources", "img", tenTep),
-                    Path.Combine(Application.StartupPath, "..", "..", "..", "Resources", "img", tenTep),
-                    Path.Combine(Application.StartupPath, "GUIMage", tenTep),
-                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GUIMage", tenTep),
-                    Path.Combine(Directory.GetCurrentDirectory(), "GUIMage", tenTep),
-                    Path.Combine(Application.StartupPath, "..", "..", "..", "GUIMage", tenTep)
+                    Path.Combine(Application.StartupPath, "..", "..", "..", "Resources", "img", tenTep)
                 };
 
                 foreach (var duongDan in cacDuongDan)

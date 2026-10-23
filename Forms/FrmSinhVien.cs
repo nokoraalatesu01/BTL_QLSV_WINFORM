@@ -321,6 +321,28 @@ public partial class FrmSinhVien : BaseForm
 
     private void txtTen_TextChanged(object sender, EventArgs e)
     {
+    }
 
+    private void btnXuatExcel_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (this.dgv.DataSource is not List<SinhVien> data || data.Count == 0)
+            {
+                MessageBox.Show("Hiện không có sinh viên nào trong danh sách để xuất dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string tieuDe = "DANH SÁCH SINH VIÊN";
+            if (this.cboLocLop.SelectedItem is Lop lop && !string.IsNullOrEmpty(lop.MaLop))
+            {
+                tieuDe += " - " + lop.HienThi;
+            }
+            ExcelHelper.XuatSinhVien(data, tieuDe);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Lỗi xuất Excel: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

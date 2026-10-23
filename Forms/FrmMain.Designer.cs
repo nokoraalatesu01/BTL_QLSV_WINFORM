@@ -40,6 +40,8 @@ namespace QLDSV_HTC.Forms
             btnNavLopTinChi = new QLDSV_HTC.UI.SidebarButton();
             btnNavNhapDiem = new QLDSV_HTC.UI.SidebarButton();
             btnNavBangDiem = new QLDSV_HTC.UI.SidebarButton();
+            btnNavHoSo = new QLDSV_HTC.UI.SidebarButton();
+            picAvatar = new System.Windows.Forms.PictureBox();
             pnlSidebarFooter = new System.Windows.Forms.Panel();
             btnNavDoiMatKhau = new QLDSV_HTC.UI.SidebarButton();
             btnNavDangXuat = new QLDSV_HTC.UI.SidebarButton();
@@ -190,6 +192,16 @@ namespace QLDSV_HTC.Forms
             btnNavBangDiem.Font = QLDSV_HTC.UI.Palette.FontBase;
             btnNavBangDiem.Click += new System.EventHandler(this.btnNavBangDiem_Click);
 
+            // --- Hồ sơ cá nhân (chỉ sinh viên) ---
+            btnNavHoSo.Name = "btnNavHoSo";
+            btnNavHoSo.Text = "Hồ sơ cá nhân";
+            btnNavHoSo.Icon = QLDSV_HTC.UI.NavIcon.SinhVien;
+            btnNavHoSo.Dock = System.Windows.Forms.DockStyle.Top;
+            btnNavHoSo.Height = 42;
+            btnNavHoSo.Font = QLDSV_HTC.UI.Palette.FontBase;
+            btnNavHoSo.Visible = false;
+            btnNavHoSo.Click += new System.EventHandler(this.btnNavHoSo_Click);
+
             // Thứ tự Dock.Top: add theo thứ tự ngược
             pnlSidebarNav.Controls.Add(btnNavBangDiem);
             pnlSidebarNav.Controls.Add(btnNavNhapDiem);
@@ -199,6 +211,7 @@ namespace QLDSV_HTC.Forms
             pnlSidebarNav.Controls.Add(btnNavSinhVien);
             pnlSidebarNav.Controls.Add(btnNavLop);
             pnlSidebarNav.Controls.Add(btnNavKhoa);
+            pnlSidebarNav.Controls.Add(btnNavHoSo);
             pnlSidebarNav.Controls.Add(btnNavDashboard);
 
             // Sidebar Footer: đổi mật khẩu + đăng xuất
@@ -255,8 +268,16 @@ namespace QLDSV_HTC.Forms
             lblNguoiDung.AutoSize = false;
             lblNguoiDung.Size = new System.Drawing.Size(500, 56);
 
+            // Ảnh đại diện nhỏ trên thanh tài khoản (chỉ hiện với sinh viên)
+            picAvatar.Name = "picAvatar";
+            picAvatar.Size = new System.Drawing.Size(36, 36);
+            picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            picAvatar.BackColor = QLDSV_HTC.UI.Palette.PrimarySoft;
+            picAvatar.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            picAvatar.Visible = false;
             pnlHeader.Controls.Add(lblPageTitle);
             pnlHeader.Controls.Add(lblNguoiDung);
+            pnlHeader.Controls.Add(picAvatar);
             pnlHeader.Paint += PnlHeader_Paint;
 
             // ---- CONTENT ----
@@ -314,6 +335,8 @@ namespace QLDSV_HTC.Forms
         private QLDSV_HTC.UI.SidebarButton btnNavLopTinChi;
         private QLDSV_HTC.UI.SidebarButton btnNavNhapDiem;
         private QLDSV_HTC.UI.SidebarButton btnNavBangDiem;
+        private QLDSV_HTC.UI.SidebarButton btnNavHoSo;
+        private System.Windows.Forms.PictureBox picAvatar;
         private System.Windows.Forms.Panel pnlSidebarFooter;
         private QLDSV_HTC.UI.SidebarButton btnNavDoiMatKhau;
         private QLDSV_HTC.UI.SidebarButton btnNavDangXuat;

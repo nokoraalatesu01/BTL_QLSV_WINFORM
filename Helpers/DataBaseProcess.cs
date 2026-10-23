@@ -7,7 +7,9 @@ namespace QLDSV_HTC.Helpers
     public class DataBaseProcess
     {
         // Khai báo biến toàn cục, bạn phải thay đổi chuỗi kết nối phù hợp
-        string strConnect = "Data Source=.\\SQLEXPRESS06;Initial Catalog=QLDSV_HTC;Integrated Security=True;Encrypt=False;TrustServerCertificate=True;Connect Timeout=10";
+        // Chuỗi kết nối dùng chung: DAL viết truy vấn có tham số cần tự tạo SqlCommand nên cần dùng lại chuỗi này.
+        internal static readonly string ChuoiKetNoi = "Data Source=.\\SQLEXPRESS06;Initial Catalog=QLDSV_HTC;Integrated Security=True;Encrypt=False;TrustServerCertificate=True;Connect Timeout=10";
+        string strConnect = ChuoiKetNoi;
         SqlConnection sqlConnect = null!;
 
         // Phương thức mở kết nối

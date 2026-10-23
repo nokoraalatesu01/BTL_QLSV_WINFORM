@@ -131,7 +131,7 @@ namespace QLDSV_HTC.Forms
             btnNavThongBaoSV.Font = new Font("Segoe UI", 9.75F);
             btnNavThongBaoSV.ForeColor = Color.FromArgb(184, 201, 232);
             btnNavThongBaoSV.Icon = UI.NavIcon.DoiMatKhau;
-            btnNavThongBaoSV.Location = new Point(12, 1363);
+            btnNavThongBaoSV.Location = new Point(12, 1221);
             btnNavThongBaoSV.Margin = new Padding(5, 6, 5, 6);
             btnNavThongBaoSV.Name = "btnNavThongBaoSV";
             btnNavThongBaoSV.ShowIcon = true;
@@ -149,7 +149,7 @@ namespace QLDSV_HTC.Forms
             btnNavThongKeSV.Font = new Font("Segoe UI", 9.75F);
             btnNavThongKeSV.ForeColor = Color.FromArgb(184, 201, 232);
             btnNavThongKeSV.Icon = UI.NavIcon.BangDiem;
-            btnNavThongKeSV.Location = new Point(12, 1292);
+            btnNavThongKeSV.Location = new Point(12, 1150);
             btnNavThongKeSV.Margin = new Padding(5, 6, 5, 6);
             btnNavThongKeSV.Name = "btnNavThongKeSV";
             btnNavThongKeSV.ShowIcon = true;
@@ -167,7 +167,7 @@ namespace QLDSV_HTC.Forms
             btnNavDiemDanhSV.Font = new Font("Segoe UI", 9.75F);
             btnNavDiemDanhSV.ForeColor = Color.FromArgb(184, 201, 232);
             btnNavDiemDanhSV.Icon = UI.NavIcon.SinhVien;
-            btnNavDiemDanhSV.Location = new Point(12, 1221);
+            btnNavDiemDanhSV.Location = new Point(12, 1079);
             btnNavDiemDanhSV.Margin = new Padding(5, 6, 5, 6);
             btnNavDiemDanhSV.Name = "btnNavDiemDanhSV";
             btnNavDiemDanhSV.ShowIcon = true;
@@ -185,7 +185,7 @@ namespace QLDSV_HTC.Forms
             btnNavLichHoc.Font = new Font("Segoe UI", 9.75F);
             btnNavLichHoc.ForeColor = Color.FromArgb(184, 201, 232);
             btnNavLichHoc.Icon = UI.NavIcon.LopTinChi;
-            btnNavLichHoc.Location = new Point(12, 1150);
+            btnNavLichHoc.Location = new Point(12, 1008);
             btnNavLichHoc.Margin = new Padding(5, 6, 5, 6);
             btnNavLichHoc.Name = "btnNavLichHoc";
             btnNavLichHoc.ShowIcon = true;
@@ -203,7 +203,7 @@ namespace QLDSV_HTC.Forms
             btnNavThongBao.Font = new Font("Segoe UI", 9.75F);
             btnNavThongBao.ForeColor = Color.FromArgb(184, 201, 232);
             btnNavThongBao.Icon = UI.NavIcon.DoiMatKhau;
-            btnNavThongBao.Location = new Point(12, 1008);
+            btnNavThongBao.Location = new Point(12, 937);
             btnNavThongBao.Margin = new Padding(5, 6, 5, 6);
             btnNavThongBao.Name = "btnNavThongBao";
             btnNavThongBao.ShowIcon = true;
@@ -221,7 +221,7 @@ namespace QLDSV_HTC.Forms
             btnNavThongKe.Font = new Font("Segoe UI", 9.75F);
             btnNavThongKe.ForeColor = Color.FromArgb(184, 201, 232);
             btnNavThongKe.Icon = UI.NavIcon.BangDiem;
-            btnNavThongKe.Location = new Point(12, 937);
+            btnNavThongKe.Location = new Point(12, 866);
             btnNavThongKe.Margin = new Padding(4);
             btnNavThongKe.Name = "btnNavThongKe";
             btnNavThongKe.ShowIcon = true;
@@ -239,7 +239,7 @@ namespace QLDSV_HTC.Forms
             btnNavDiemDanh.Font = new Font("Segoe UI", 9.75F);
             btnNavDiemDanh.ForeColor = Color.FromArgb(184, 201, 232);
             btnNavDiemDanh.Icon = UI.NavIcon.SinhVien;
-            btnNavDiemDanh.Location = new Point(12, 866);
+            btnNavDiemDanh.Location = new Point(12, 795);
             btnNavDiemDanh.Margin = new Padding(5, 6, 5, 6);
             btnNavDiemDanh.Name = "btnNavDiemDanh";
             btnNavDiemDanh.ShowIcon = true;
@@ -257,7 +257,7 @@ namespace QLDSV_HTC.Forms
             btnNavLichDay.Font = new Font("Segoe UI", 9.75F);
             btnNavLichDay.ForeColor = Color.FromArgb(184, 201, 232);
             btnNavLichDay.Icon = UI.NavIcon.LopTinChi;
-            btnNavLichDay.Location = new Point(12, 795);
+            btnNavLichDay.Location = new Point(12, 724);
             btnNavLichDay.Margin = new Padding(5, 6, 5, 6);
             btnNavLichDay.Name = "btnNavLichDay";
             btnNavLichDay.ShowIcon = true;
@@ -593,12 +593,12 @@ namespace QLDSV_HTC.Forms
             // 
             lblNguoiDung.Anchor = AnchorStyles.None;
             lblNguoiDung.AutoSize = true;
-            lblNguoiDung.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+            lblNguoiDung.Font = new Font("Segoe UI", 9F);
             lblNguoiDung.ForeColor = Color.FromArgb(113, 128, 150);
             lblNguoiDung.Location = new Point(0, 0);
             lblNguoiDung.Margin = new Padding(4, 0, 4, 0);
             lblNguoiDung.Name = "lblNguoiDung";
-            lblNguoiDung.Size = new Size(0, 20);
+            lblNguoiDung.Size = new Size(0, 25);
             lblNguoiDung.TabIndex = 1;
             lblNguoiDung.TextAlign = ContentAlignment.MiddleLeft;
             // 

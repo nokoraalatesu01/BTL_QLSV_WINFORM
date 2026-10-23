@@ -73,7 +73,6 @@ namespace QLDSV_HTC.Forms
             }
             catch
             {
-                // Nếu không nạp được hình ảnh thì giao diện vẫn hiển thị đẹp mắt
             }
         }
 
@@ -169,6 +168,26 @@ namespace QLDSV_HTC.Forms
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }
+        }
+
+        private void lblPassIcon_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTenDangNhap_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMatKhau_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlUserBox_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

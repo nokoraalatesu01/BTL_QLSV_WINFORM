@@ -100,6 +100,7 @@ namespace QLDSV_HTC.Forms
             pnlUserBox.Name = "pnlUserBox";
             pnlUserBox.Size = new Size(520, 54);
             pnlUserBox.TabIndex = 2;
+            pnlUserBox.Paint += pnlUserBox_Paint;
             // 
             // lblUserIcon
             // 
@@ -125,6 +126,7 @@ namespace QLDSV_HTC.Forms
             txtTenDangNhap.PlaceholderText = "Tài khoản hoặc Email";
             txtTenDangNhap.Size = new Size(438, 29);
             txtTenDangNhap.TabIndex = 1;
+            txtTenDangNhap.TextChanged += txtTenDangNhap_TextChanged;
             // 
             // pnlPassBox
             // 
@@ -150,6 +152,7 @@ namespace QLDSV_HTC.Forms
             lblPassIcon.TabIndex = 0;
             lblPassIcon.Text = "🔒";
             lblPassIcon.TextAlign = ContentAlignment.MiddleCenter;
+            lblPassIcon.Click += lblPassIcon_Click;
             // 
             // txtMatKhau
             // 
@@ -163,6 +166,7 @@ namespace QLDSV_HTC.Forms
             txtMatKhau.Size = new Size(395, 29);
             txtMatKhau.TabIndex = 1;
             txtMatKhau.UseSystemPasswordChar = true;
+            txtMatKhau.TextChanged += txtMatKhau_TextChanged;
             // 
             // btnTogglePass
             // 

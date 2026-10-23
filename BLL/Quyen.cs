@@ -11,7 +11,10 @@ public enum ChucNang
     GiangVien,
     LopTinChi,
     NhapDiem,
-    DiemCaNhan
+    DiemCaNhan,
+
+    /// <summary>Sinh viên xem/cập nhật hồ sơ của chính mình.</summary>
+    HoSoCaNhan
 }
 
 public enum HanhDong
@@ -51,7 +54,7 @@ public static class Quyen
         {
             case VaiTro.PGV:
                 // Phòng giáo vụ: toàn quyền trên mọi khoa; không có "điểm cá nhân".
-                return chucNang != ChucNang.DiemCaNhan;
+                return chucNang != ChucNang.DiemCaNhan && chucNang != ChucNang.HoSoCaNhan;
 
             case VaiTro.KHOA:
                 switch (chucNang)
@@ -75,7 +78,9 @@ public static class Quyen
                 return chucNang == ChucNang.NhapDiem;
 
             case VaiTro.SV:
-                return chucNang == ChucNang.DiemCaNhan && hanhDong == HanhDong.Xem;
+                // Xem bảng điểm của mình; xem/cập nhật hồ sơ của mình (BLL luôn lấy MaSV từ phiên đăng nhập).
+                return (chucNang == ChucNang.DiemCaNhan && hanhDong == HanhDong.Xem)
+                       || chucNang == ChucNang.HoSoCaNhan;
 
             default:
                 return false;

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using QLDSV_HTC.BLL;
+using QLDSV_HTC.Helpers;
 using QLDSV_HTC.Models;
 using QLDSV_HTC.UI;
 
@@ -51,6 +52,7 @@ namespace QLDSV_HTC.Forms
                 bool coLopTinChi = Quyen.CoQuyen(ChucNang.LopTinChi, HanhDong.Xem);
                 bool coNhapDiem = Quyen.CoQuyen(ChucNang.NhapDiem, HanhDong.Xem);
                 bool coDiemCaNhan = Quyen.CoQuyen(ChucNang.DiemCaNhan, HanhDong.Xem);
+                bool coHoSo = Quyen.CoQuyen(ChucNang.HoSoCaNhan, HanhDong.Xem);
 
                 this.btnNavKhoa.Visible = coKhoa;
                 this.btnNavLop.Visible = coLop;
@@ -60,6 +62,9 @@ namespace QLDSV_HTC.Forms
                 this.btnNavLopTinChi.Visible = coLopTinChi;
                 this.btnNavNhapDiem.Visible = coNhapDiem;
                 this.btnNavBangDiem.Visible = coDiemCaNhan;
+                this.btnNavHoSo.Visible = coHoSo;
+
+                NapAnhHeader();
 
                 // Mở trang Tổng quan mặc định
                 if (Quyen.HienTai.VaiTro == VaiTro.GV)
@@ -179,6 +184,12 @@ namespace QLDSV_HTC.Forms
         private void btnNavNhapDiem_Click(object sender, EventArgs e) => DenTrangForm("Nhập điểm", this.btnNavNhapDiem, () => new FrmNhapDiem());
         private void btnNavBangDiem_Click(object sender, EventArgs e) => DenTrangForm("Bảng điểm cá nhân", this.btnNavBangDiem, () => new FrmBangDiemSV());
 
+        private void btnNavHoSo_Click(object sender, EventArgs e) => DenTrangForm("Hồ sơ cá nhân", this.btnNavHoSo, () =>
+        {
+            var f = new FrmHoSoCaNhan();
+            f.AnhDaiDienDaCapNhat += CapNhatAnhHeader;   // đồng bộ ảnh trên thanh tài khoản ngay khi lưu
+            return f;
+        });
         private void btnNavLichDay_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Lịch giảng dạy", this.btnNavLichDay);
         private void btnNavDiemDanh_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Điểm danh sinh viên", this.btnNavDiemDanh);
         private void btnNavThongKe_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thống kê kết quả", this.btnNavThongKe);
@@ -304,6 +315,39 @@ namespace QLDSV_HTC.Forms
             }
         }
 
+        // ── Ảnh đại diện trên thanh tài khoản (chỉ sinh viên) ───────────────
+        private void NapAnhHeader()
+        {
+            var nd = Quyen.HienTai;
+            bool laSinhVien = nd.VaiTro == VaiTro.SV && !string.IsNullOrWhiteSpace(nd.MaSV);
+            this.picAvatar.Visible = laSinhVien;
+            if (laSinhVien) AnhHelper.CatTron(this.picAvatar);   // ảnh tròn
+
+            if (laSinhVien)
+            {
+                Image anh;
+                try
+                {
+                    var data = HoSoSinhVienBLL.LayAnhDaiDien();
+                    anh = data != null ? AnhHelper.TuBytes(data) : AnhHelper.TaoAnhMacDinh(this.picAvatar.Width);
+                }
+                catch
+                {
+                    anh = AnhHelper.TaoAnhMacDinh(this.picAvatar.Width);
+                }
+                CapNhatAnhHeader(anh);
+            }
+            CenNguoiDung();
+        }
+
+        private void CapNhatAnhHeader(Image? anh)
+        {
+            var moi = anh ?? AnhHelper.TaoAnhMacDinh(this.picAvatar.Width);
+            var cu = this.picAvatar.Image;
+            this.picAvatar.Image = moi;
+            cu?.Dispose();
+        }
+
         private void DatActiveNut(SidebarButton nut)
         {
             if (_nutDangChon != null && !_nutDangChon.IsDisposed)
@@ -336,8 +380,15 @@ namespace QLDSV_HTC.Forms
         private void CenNguoiDung()
         {
             if (lblNguoiDung == null || pnlHeader == null) return;
+            int choAnh = 0;
+            if (picAvatar != null && picAvatar.Visible)
+            {
+                picAvatar.Location = new Point(
+                    pnlHeader.Width - picAvatar.Width - 20, (pnlHeader.Height - picAvatar.Height) / 2);
+                choAnh = picAvatar.Width + 12;
+            }
             lblNguoiDung.Location = new Point(
-                pnlHeader.Width - lblNguoiDung.Width - 16, 0);
+                pnlHeader.Width - lblNguoiDung.Width - 16 - choAnh, 0);
         }
 
         private void TaiLogo()

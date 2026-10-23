@@ -12,6 +12,7 @@ namespace QLDSV_HTC.Forms
         public FrmDangNhap()
         {
             InitializeComponent();
+            this.btnThoat.DialogResult = DialogResult.None;
         }
 
         private void FrmDangNhap_Load(object sender, EventArgs e)

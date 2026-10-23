@@ -136,6 +136,8 @@ namespace QLDSV_HTC.Forms
                 this.lblWelcomeSub.Text = "Hệ thống Quản trị đào tạo & Quản lý sinh viên theo tín chỉ — UTC Portal.";
                 this.lblWelcomeRole.Text = $"Tài khoản: {nd.TenDangNhap}   |   Vai trò: {nd.VaiTroText}";
                 this.lblWelcomeTip.Text = "💡 Hướng dẫn: Bạn có toàn quyền quản trị và thiết lập danh mục ở menu bên trái.";
+            }
+        }
         // ── Menu giao diện minh hoạ (chỉ dành cho giảng viên) ──────────────
         private void MoGiaoDienDangPhatTrien(string tieuDe, SidebarButton nut)
         {
@@ -145,8 +147,8 @@ namespace QLDSV_HTC.Forms
                 this.lblPageTitle.Text = tieuDe;
 
                 XoaControlHienTai(giu: false);
-                if (_dashboard != null && !_dashboard.IsDisposed)
-                    _dashboard.Visible = false;
+                if (this.pnlWelcome != null)
+                    this.pnlWelcome.Visible = false;
 
                 var lbl = new Label
                 {

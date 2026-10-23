@@ -27,12 +27,10 @@ namespace QLDSV_HTC.Forms
             btnNavThongKeSV = new QLDSV_HTC.UI.SidebarButton();
             btnNavDiemDanhSV = new QLDSV_HTC.UI.SidebarButton();
             btnNavLichHoc = new QLDSV_HTC.UI.SidebarButton();
-            btnNavThongTinCaNhan = new QLDSV_HTC.UI.SidebarButton();
             btnNavThongBao = new QLDSV_HTC.UI.SidebarButton();
             btnNavThongKe = new QLDSV_HTC.UI.SidebarButton();
             btnNavDiemDanh = new QLDSV_HTC.UI.SidebarButton();
             btnNavLichDay = new QLDSV_HTC.UI.SidebarButton();
-            btnNavThongTinCaNhanSV = new QLDSV_HTC.UI.SidebarButton();
             btnNavBangDiem = new QLDSV_HTC.UI.SidebarButton();
             btnNavNhapDiem = new QLDSV_HTC.UI.SidebarButton();
             btnNavLopTinChi = new QLDSV_HTC.UI.SidebarButton();
@@ -103,12 +101,10 @@ namespace QLDSV_HTC.Forms
             pnlSidebarNav.Controls.Add(btnNavThongKeSV);
             pnlSidebarNav.Controls.Add(btnNavDiemDanhSV);
             pnlSidebarNav.Controls.Add(btnNavLichHoc);
-            pnlSidebarNav.Controls.Add(btnNavThongTinCaNhan);
             pnlSidebarNav.Controls.Add(btnNavThongBao);
             pnlSidebarNav.Controls.Add(btnNavThongKe);
             pnlSidebarNav.Controls.Add(btnNavDiemDanh);
             pnlSidebarNav.Controls.Add(btnNavLichDay);
-            pnlSidebarNav.Controls.Add(btnNavThongTinCaNhanSV);
             pnlSidebarNav.Controls.Add(btnNavBangDiem);
             pnlSidebarNav.Controls.Add(btnNavNhapDiem);
             pnlSidebarNav.Controls.Add(btnNavLopTinChi);
@@ -199,24 +195,6 @@ namespace QLDSV_HTC.Forms
             btnNavLichHoc.TextAlign = ContentAlignment.MiddleLeft;
             btnNavLichHoc.Click += btnNavLichHoc_Click;
             // 
-            // btnNavThongTinCaNhan
-            // 
-            btnNavThongTinCaNhan.Active = false;
-            btnNavThongTinCaNhan.Dock = DockStyle.Top;
-            btnNavThongTinCaNhan.FlatStyle = FlatStyle.Flat;
-            btnNavThongTinCaNhan.Font = new Font("Segoe UI", 9.75F);
-            btnNavThongTinCaNhan.ForeColor = Color.FromArgb(184, 201, 232);
-            btnNavThongTinCaNhan.Icon = UI.NavIcon.Dashboard;
-            btnNavThongTinCaNhan.Location = new Point(10, 858);
-            btnNavThongTinCaNhan.Margin = new Padding(4, 5, 4, 5);
-            btnNavThongTinCaNhan.Name = "btnNavThongTinCaNhan";
-            btnNavThongTinCaNhan.ShowIcon = true;
-            btnNavThongTinCaNhan.Size = new Size(276, 58);
-            btnNavThongTinCaNhan.TabIndex = 5;
-            btnNavThongTinCaNhan.Text = "Thông tin cá nhân";
-            btnNavThongTinCaNhan.TextAlign = ContentAlignment.MiddleLeft;
-            btnNavThongTinCaNhan.Click += btnNavThongTinCaNhan_Click;
-            // 
             // btnNavThongBao
             // 
             btnNavThongBao.Active = false;
@@ -287,24 +265,6 @@ namespace QLDSV_HTC.Forms
             btnNavLichDay.Text = "Lịch giảng dạy";
             btnNavLichDay.TextAlign = ContentAlignment.MiddleLeft;
             btnNavLichDay.Click += btnNavLichDay_Click;
-            // 
-            // btnNavThongTinCaNhanSV
-            // 
-            btnNavThongTinCaNhanSV.Active = false;
-            btnNavThongTinCaNhanSV.Dock = DockStyle.Top;
-            btnNavThongTinCaNhanSV.FlatStyle = FlatStyle.Flat;
-            btnNavThongTinCaNhanSV.Font = new Font("Segoe UI", 9.75F);
-            btnNavThongTinCaNhanSV.ForeColor = Color.FromArgb(184, 201, 232);
-            btnNavThongTinCaNhanSV.Icon = UI.NavIcon.Dashboard;
-            btnNavThongTinCaNhanSV.Location = new Point(10, 568);
-            btnNavThongTinCaNhanSV.Margin = new Padding(4, 5, 4, 5);
-            btnNavThongTinCaNhanSV.Name = "btnNavThongTinCaNhanSV";
-            btnNavThongTinCaNhanSV.ShowIcon = true;
-            btnNavThongTinCaNhanSV.Size = new Size(276, 58);
-            btnNavThongTinCaNhanSV.TabIndex = 0;
-            btnNavThongTinCaNhanSV.Text = "Thông tin cá nhân";
-            btnNavThongTinCaNhanSV.TextAlign = ContentAlignment.MiddleLeft;
-            btnNavThongTinCaNhanSV.Click += btnNavThongTinCaNhanSV_Click;
             // 
             // btnNavBangDiem
             // 
@@ -587,12 +547,13 @@ namespace QLDSV_HTC.Forms
             // 
             // picAvatar
             // 
-            picAvatar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            picAvatar.Anchor = AnchorStyles.None;
             picAvatar.BackColor = Color.FromArgb(232, 239, 253);
-            picAvatar.Location = new Point(-28, 0);
+            picAvatar.Cursor = Cursors.Hand;
+            picAvatar.Location = new Point(0, 0);
             picAvatar.Margin = new Padding(2);
             picAvatar.Name = "picAvatar";
-            picAvatar.Size = new Size(29, 30);
+            picAvatar.Size = new Size(34, 34);
             picAvatar.SizeMode = PictureBoxSizeMode.Zoom;
             picAvatar.TabIndex = 2;
             picAvatar.TabStop = false;
@@ -629,15 +590,16 @@ namespace QLDSV_HTC.Forms
             // 
             // lblNguoiDung
             // 
-            lblNguoiDung.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblNguoiDung.Font = new Font("Segoe UI", 8.75F);
+            lblNguoiDung.Anchor = AnchorStyles.None;
+            lblNguoiDung.AutoSize = true;
+            lblNguoiDung.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
             lblNguoiDung.ForeColor = Color.FromArgb(113, 128, 150);
-            lblNguoiDung.Location = new Point(1021, 0);
+            lblNguoiDung.Location = new Point(0, 0);
             lblNguoiDung.Margin = new Padding(4, 0, 4, 0);
             lblNguoiDung.Name = "lblNguoiDung";
-            lblNguoiDung.Size = new Size(643, 86);
+            lblNguoiDung.Size = new Size(0, 20);
             lblNguoiDung.TabIndex = 1;
-            lblNguoiDung.TextAlign = ContentAlignment.MiddleRight;
+            lblNguoiDung.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlContent
             // 
@@ -854,12 +816,10 @@ namespace QLDSV_HTC.Forms
         private QLDSV_HTC.UI.SidebarButton btnNavDiemDanh;
         private QLDSV_HTC.UI.SidebarButton btnNavThongKe;
         private QLDSV_HTC.UI.SidebarButton btnNavThongBao;
-        private QLDSV_HTC.UI.SidebarButton btnNavThongTinCaNhan;
         private QLDSV_HTC.UI.SidebarButton btnNavLichHoc;
         private QLDSV_HTC.UI.SidebarButton btnNavDiemDanhSV;
         private QLDSV_HTC.UI.SidebarButton btnNavThongKeSV;
         private QLDSV_HTC.UI.SidebarButton btnNavThongBaoSV;
-        private QLDSV_HTC.UI.SidebarButton btnNavThongTinCaNhanSV;
         private System.Windows.Forms.Panel pnlSidebarFooter;
         private QLDSV_HTC.UI.SidebarButton btnNavDoiMatKhau;
         private QLDSV_HTC.UI.SidebarButton btnNavDangXuat;

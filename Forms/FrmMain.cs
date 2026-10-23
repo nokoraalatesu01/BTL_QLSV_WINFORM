@@ -28,6 +28,18 @@ namespace QLDSV_HTC.Forms
             {
                 this.pnlWelcome.Resize += (s, e) => CanChinhLayoutWelcome();
             }
+            if (this.pnlHeader != null)
+            {
+                this.pnlHeader.Resize += (s, e) => CenNguoiDung();
+            }
+            if (this.picAvatar != null)
+            {
+                this.picAvatar.Click += (s, e) =>
+                {
+                    if (this.btnNavHoSo.Visible)
+                        this.btnNavHoSo.PerformClick();
+                };
+            }
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -37,7 +49,7 @@ namespace QLDSV_HTC.Forms
                 TaiLogo();
 
                 var nd = Quyen.HienTai;
-                this.lblNguoiDung.Text = "  " + nd.TenHienThi + "   |   " + nd.VaiTroText + "  ";
+                this.lblNguoiDung.Text = nd.TenHienThi + "   |   " + nd.VaiTroText;
                 CenNguoiDung();
 
                 // Cập nhật lời chào mừng tương ứng với từng tài khoản/vai trò
@@ -73,7 +85,6 @@ namespace QLDSV_HTC.Forms
                     this.btnNavDiemDanh.Visible = true;
                     this.btnNavThongKe.Visible = true;
                     this.btnNavThongBao.Visible = true;
-                    this.btnNavThongTinCaNhan.Visible = true;
                 }
                 else
                 {
@@ -81,7 +92,6 @@ namespace QLDSV_HTC.Forms
                     this.btnNavDiemDanh.Visible = false;
                     this.btnNavThongKe.Visible = false;
                     this.btnNavThongBao.Visible = false;
-                    this.btnNavThongTinCaNhan.Visible = false;
                 }
 
                 if (Quyen.HienTai.VaiTro == VaiTro.SV)
@@ -90,7 +100,6 @@ namespace QLDSV_HTC.Forms
                     this.btnNavDiemDanhSV.Visible = true;
                     this.btnNavThongKeSV.Visible = true;
                     this.btnNavThongBaoSV.Visible = true;
-                    this.btnNavThongTinCaNhanSV.Visible = true;
                 }
                 else
                 {
@@ -98,7 +107,6 @@ namespace QLDSV_HTC.Forms
                     this.btnNavDiemDanhSV.Visible = false;
                     this.btnNavThongKeSV.Visible = false;
                     this.btnNavThongBaoSV.Visible = false;
-                    this.btnNavThongTinCaNhanSV.Visible = false;
                 }
 
                 // Mở Dashboard mặc định
@@ -194,13 +202,11 @@ namespace QLDSV_HTC.Forms
         private void btnNavDiemDanh_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Điểm danh sinh viên", this.btnNavDiemDanh);
         private void btnNavThongKe_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thống kê kết quả", this.btnNavThongKe);
         private void btnNavThongBao_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thông báo", this.btnNavThongBao);
-        private void btnNavThongTinCaNhan_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thông tin cá nhân", this.btnNavThongTinCaNhan);
 
         private void btnNavLichHoc_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Lịch học", this.btnNavLichHoc);
         private void btnNavDiemDanhSV_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Điểm danh", this.btnNavDiemDanhSV);
         private void btnNavThongKeSV_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thống kê kết quả", this.btnNavThongKeSV);
         private void btnNavThongBaoSV_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thông báo", this.btnNavThongBaoSV);
-        private void btnNavThongTinCaNhanSV_Click(object sender, EventArgs e) => MoGiaoDienDangPhatTrien("Thông tin cá nhân", this.btnNavThongTinCaNhanSV);
 
         private void btnNavDoiMatKhau_Click(object sender, EventArgs e)
         {
@@ -346,6 +352,8 @@ namespace QLDSV_HTC.Forms
             var cu = this.picAvatar.Image;
             this.picAvatar.Image = moi;
             cu?.Dispose();
+            if (this.picAvatar.Visible) AnhHelper.CatTron(this.picAvatar);
+            CenNguoiDung();
         }
 
         private void DatActiveNut(SidebarButton nut)
@@ -371,6 +379,12 @@ namespace QLDSV_HTC.Forms
             XoaControlHienTai(giu: false);
         }
 
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            CenNguoiDung();
+        }
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -380,15 +394,20 @@ namespace QLDSV_HTC.Forms
         private void CenNguoiDung()
         {
             if (lblNguoiDung == null || pnlHeader == null) return;
-            int choAnh = 0;
+
+            int rightPadding = 26;
+            int lblY = Math.Max(0, (pnlHeader.Height - lblNguoiDung.Height) / 2);
+            int lblX = pnlHeader.Width - lblNguoiDung.Width - rightPadding;
+            lblNguoiDung.Location = new Point(lblX, lblY);
+
             if (picAvatar != null && picAvatar.Visible)
             {
-                picAvatar.Location = new Point(
-                    pnlHeader.Width - picAvatar.Width - 20, (pnlHeader.Height - picAvatar.Height) / 2);
-                choAnh = picAvatar.Width + 12;
+                int gap = 10;
+                int picX = lblNguoiDung.Left - picAvatar.Width - gap;
+                int picY = Math.Max(0, (pnlHeader.Height - picAvatar.Height) / 2);
+                picAvatar.Location = new Point(picX, picY);
+                picAvatar.BringToFront();
             }
-            lblNguoiDung.Location = new Point(
-                pnlHeader.Width - lblNguoiDung.Width - 16 - choAnh, 0);
         }
 
         private void TaiLogo()
